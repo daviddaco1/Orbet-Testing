@@ -11685,6 +11685,32 @@ app.post('/tasks', authenticate, (req, res) => {
     console.log('Server running on port 3000');
   });
 
+app.post('/api/friends/decline_request', async (req, res) => {
+    const { request_id } = req.body;
+
+    if (!request_id) {
+        return res.status(400).json({ message: 'request_id is required.' });
+    }
+
+    try {
+        // Update the status to 'declined'
+        const [updateResult] = await conexionOrbet.query(`
+            UPDATE user_friends
+            SET status = 'declined', updated_at = NOW()
+            WHERE request_id = ? AND status = 'pending'
+        `, [request_id]);
+
+        if (updateResult.affectedRows === 0) {
+            return res.status(404).json({ message: 'Friend request not found or already processed.' });
+        }
+
+        res.status(200).json({ message: 'Friend request declined successfully.' });
+    } catch (error) {
+        console.error('Error declining friend request:', error);
+        res.status(500).json({ message: 'Internal server error.' });
+    }
+});
+
 //#endregion API
 
 //#region cron jobs
