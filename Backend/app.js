@@ -30,6 +30,8 @@ const useragent = require('user-agent');
 const axios = require('axios');
 const { createApplicant, getAccessTokenForApplicant, generateUrlForApplicant, getDocumentsInfo_kyc, GetDocumentFromApplicant, GetApplicantData } = require('./models/sumsub');
 
+const cron = require('node-cron');
+
 const geoip = require('geoip-lite');
 
 const getCoordinates = (ip) => {
@@ -719,6 +721,11 @@ io.on('connection', async (socket) => {
                 }
                 connectedClients.set(_user.user_id, socket); // Guardar la conexión en el almacén
 
+                // Reactivar si el usuario está inactivo
+                if (_user.status === 'inactive') {
+                    await reactivateUser(_user.user_id, 'login');
+                }
+
                 // 2. Actualizar el estado del usuario en la base de datos
                 updateUserStatus(_user.user_id, 'online', {
                     ip: socket.handshake.address,
@@ -1275,7 +1282,8 @@ async function updateUserStatus(userId, status, sessionData = {}) {
 
 //#endregion
 
-//APIS 
+//#region APIS
+
 app.get("/Users", ReturnUserList);
 app.get("/Users/:id*", ReturnUserData);
 app.post("/login", LoginAdmin);
@@ -1477,8 +1485,6 @@ app.get("/logout", (req, res) => {
 
 app.get("/logs", getSystemLogs);
 
-
-
 //The 404 Route (ALWAYS Keep this as the last route)
 /*
 app.get('*', function (req, res) {
@@ -1486,15 +1492,10 @@ app.get('*', function (req, res) {
     res.sendFile("/public/404.html");
 });
 */
-//End of API's
-//----------------------------------------
-//----------------------------------------
 
+// #endregion
 
-//--------------------------------------------
-//--------------------------------------------
-//Funciones
-
+// #region Funciones
 
 //Crear log en el server
 async function SaveServerLog(msg, tittle) {
@@ -3161,10 +3162,6 @@ async function getTransactionUser(req, res) {
     }
 }
 
-async function generateChart(doc, data) {
-
-}
-
 //Inicia sesion con usuario administrador
 async function LoginAdmin(req, res) {
     const { hashAccess, username, password, ip, device } = req.body;
@@ -3284,6 +3281,8 @@ function GetGamesList(req, res) {
         return res.status(403).send('You have not access to this zone!');
     }
 }
+
+//#endregion
 
 //#region CDN
 
@@ -4254,6 +4253,21 @@ app.get('/secure-endpoint', async (req, res) => {
 
 //#region Admin sessions
 
+/**
+ * @api {post} /admin/login Admin Login
+ * @description Authenticates an admin user and returns a JWT token upon successful login.
+ * 
+ * @body {string} email - Admin's email (required).
+ * @body {string} password - Admin's password (required).
+ * 
+ * @success {200} { message: "Login successful", token: "JWT_TOKEN" }
+ * @error {400} Email and password are required.
+ * @error {401} Invalid password.
+ * @error {404} Admin not found.
+ * @error {500} Internal server error.
+ * @status Documented ✅
+ * @notion https://www.notion.so/Admin-Login-18c7ea735ace81c6aedacdbb0f015f02?pvs=4
+ */
 app.post('/admin/login', async (req, res) => {
     const { email, password } = req.body;
 
@@ -5029,6 +5043,204 @@ app.get('/documents/:filename', (req, res) => {
     }
 });
 
+/**
+ * @api {get} /api/admin/documents Get User Documents
+ * @description Retrieves a list of user documents with optional filtering by status and user_id.
+ * 
+ * @query {string} [status] - Filter documents by status (optional).
+ * @query {number} [user_id] - Filter documents by user ID (optional).
+ * 
+ * @success {200} { documents: [{ document_id, user_id, file_path, type, status, updated_at }] }
+ * @error {500} Internal server error.
+ * @status Documented ✅
+ * @notion https://www.notion.so/Get-User-Documents-18c7ea735ace817aa7e1f1dc60946a17?pvs=4
+ */
+app.get('/api/admin/documents', async (req, res) => {
+    const { status, user_id } = req.query;
+
+    let query = `
+        SELECT 
+            document_id, user_id, file_path, type, status, updated_at
+        FROM user_documents
+        WHERE 1=1
+    `; // where is always true to avoid checking if there are more conditions
+    let params = [];
+
+    if (status) {
+        query += ` AND status = ?`;
+        params.push(status);
+    }
+    if (user_id) {
+        query += ` AND user_id = ?`;
+        params.push(user_id);
+    }
+
+    try {
+        const [documents] = await conexionOrbet.query(query, params);
+        res.status(200).json({ documents });
+    } catch (error) {
+        console.error('Error retrieving documents:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+/**
+ * @api {get} /api/admin/documents/:doc_id Get Specific Document
+ * @description Retrieves a specific document's details along with a secure download link.
+ * 
+ * @param {number} doc_id - Document ID (required).
+ * 
+ * @success {200} { document_id, user_id, file_name, file_type, status, upload_date, secure_url }
+ * @error {404} Document not found.
+ * @error {500} Internal server error.
+ * @status Documented ✅
+ * @notion https://www.notion.so/Get-Specific-Document-18c7ea735ace81c3befbd23516eb12d6?pvs=4
+ */
+app.get('/api/admin/documents/:doc_id', async (req, res) => {
+    const { doc_id } = req.params;
+
+    try {
+        const [document] = await conexionOrbet.query(`
+            SELECT document_id, user_id, description, type, status, created_at, file_path
+            FROM user_documents
+            WHERE document_id = ?
+        `, [doc_id]);
+
+        if (document.length === 0) {
+            return res.status(404).json({ message: 'Document not found.' });
+        }
+
+        const doc = document[0];
+        const secureLink = generateSecureLink(doc.file_path);
+
+        res.status(200).json({
+            document_id: doc.document_id,
+            user_id: doc.user_id,
+            file_name: doc.description,
+            file_type: doc.file_type,
+            status: doc.status,
+            upload_date: doc.created_at,
+            secure_url: secureLink
+        });
+    } catch (error) {
+        console.error('Error retrieving document:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+/**
+ * @api {put} /api/admin/documents/:doc_id/status Update Document Status
+ * @description Updates the status of a document.
+ * 
+ * @param {number} doc_id - Document ID (required).
+ * @body {string} status - New status of the document ("pending", "approved", "not approved").
+ * 
+ * @success {200} { message: "Document status updated to {status}." }
+ * @error {400} Invalid status value.
+ * @error {500} Internal server error.
+ * @status Documented ✅
+ * @notion https://www.notion.so/Update-Document-Status-18c7ea735ace81a38b72ff615eb22889?pvs=4
+ */
+app.put('/api/admin/documents/:doc_id/status', async (req, res) => {
+    const { doc_id } = req.params;
+    const { status } = req.body;
+    const validStatuses = ['pending', 'approved', 'not approved'];
+
+    if (!validStatuses.includes(status)) {
+        return res.status(400).json({ message: 'Invalid status value.' });
+    }
+
+    try {
+        await conexionOrbet.query(`
+            UPDATE user_documents 
+            SET status = ?, updated_at = NOW(), is_approved = ?
+            WHERE document_id = ?
+        `, [status, status === 'approved' ? 'YES' : 'NO', doc_id]);
+
+        res.status(200).json({ message: `Document status updated to ${status}.` });
+    } catch (error) {
+        console.error('Error updating document status:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+function generateSecureLink(filePath) {
+    const baseUrl = process.env.FILE_STORAGE_URL || 'http://localhost:3004/cdn_orbet';
+    const secretKey = process.env.JWT_SECRET;
+    const expiresIn = process.env.EXPIRE_TIME || '5m'; // Link expiration time
+    filePath = encrypt(filePath);
+    // Generate JWT token with file path and expiration
+    const token = jwt.sign({ filePath }, secretKey, { expiresIn });
+
+    return `${baseUrl}/${token}`;
+}
+
+/**
+ * @api {get} /cdn_orbet/:token Retrieve Secure File
+ * @description Provides secure access to files stored in the CDN by verifying a signed JWT token.
+ *
+ * @param {string} token - The JWT token containing the file path (required).
+ *
+ * @success {200} The requested file is sent for download.
+ * @example Success Response:
+ * (File download is triggered for the requested document)
+ *
+ * @error {403} Invalid or expired link.
+ * @error {500} Internal server error.
+ * @status Documented ✅
+ * @notion https://www.notion.so/Retrieve-Secure-File-18c7ea735ace814bb882c3a5ad8e5d93?pvs=4
+ */
+app.get('/cdn_orbet/:token', async (req, res) => {
+    const { token } = req.params;
+    const secretKey = process.env.JWT_SECRET;
+
+    try {
+        // Verify the token
+        const decoded = jwt.verify(token, secretKey);
+        let filePath = decoded.filePath;
+        filePath = decrypt(filePath);
+        // Send the file if the token is valid
+        try {
+            res.setHeader('Content-Disposition', `attachment; filename="${path.basename(filePath)}"`);
+            res.sendFile(filePath, { root: storageDir });
+        } catch (error) {
+            console.error('Error sending file:', error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    } catch (error) {
+        console.error('Error verifying token:', error);
+        res.status(403).json({ message: 'Invalid or expired link' });
+    }
+});
+
+/**
+ * @api {get} /api/admin/compliance_logs Retrieve Compliance Logs
+ * @description Fetches a list of compliance log entries, including user and admin information.
+ *
+ * @auth Requires authentication with an admin role.
+ *
+ * @success {200} { logs: [{ log_id, user_id, admin_id, action_taken, timestamp, admin_name, user_name }] }
+ * @error {500} Internal server error.
+ * @status Documented ✅
+ * @notion https://www.notion.so/Retrieve-Compliance-Logs-18c7ea735ace81529a30fb2c7c11a155?pvs=4
+ */
+app.get('/api/admin/compliance_logs', verifyAuth({ useJWT: true, ReqRole: 'admin' }), async (req, res) => {
+    try {
+        const logs = await conexionOrbet.query(`
+            SELECT cl.*, a.name AS admin_name, u.name AS user_name
+            FROM compliance_logs cl
+            JOIN admins a ON cl.admin_id = a.admin_id
+            JOIN users u ON cl.user_id = u.user_id
+            ORDER BY cl.timestamp DESC
+        `);
+
+        res.status(200).json({ logs });
+    } catch (error) {
+        console.error('Error fetching compliance logs:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
 //#endregion
 
 //#region TestEncryption
@@ -5591,7 +5803,6 @@ app.get('/backend_preferences', async (req, res) => {
  * @status Documented ✅
  * @notion https://www.notion.so/Get-All-Admins-17a7ea735ace8198b8c1d526b6d69034?pvs=4
  */
-
 app.get('/admins', async (req, res) => {
     try {
         const query = `
@@ -5629,7 +5840,6 @@ app.get('/admins', async (req, res) => {
  * @status Documented ✅
  * @notion https://www.notion.so/Get-Admin-by-ID-17a7ea735ace815589b4fe57296a2f39?pvs=4
  */
-
 app.get('/admins/:admin_id', async (req, res) => {
     try {
         const { admin_id } = req.params;
@@ -6455,9 +6665,6 @@ app.delete('/promotions/:promotion_id/feature-game', async (req, res) => {
     }
 });
 
-
-
-
 //#endregion
 
 //#region SocketAPI -> RestAPI
@@ -6719,7 +6926,6 @@ app.post('/api/user/:id/suspicious', async (req, res) => {
  * @status Documented ✅
  * @notion https://www.notion.so/Change-User-Balance-17b7ea735ace8141ae43c9703ed80396?pvs=4
  */
-
 app.post('/api/balance/change', async (req, res) => {
     const { type, data } = req.body;
 
@@ -6762,8 +6968,7 @@ app.post('/api/user/login', async (req, res) => {
     const { email, pass } = req.body;
 
     try {
-        const [results] = await executeQueryFromPoolAsync(conexionOrbet, 'SELECT * FROM users WHERE email = ? LIMIT 1', [email]);
-
+        const results = await executeQueryFromPoolAsync(conexionOrbet, 'SELECT * FROM users WHERE email = ? LIMIT 1', [email]);
         if (results.length === 0) {
             return res.status(404).json({ message: 'User not found' });
         }
@@ -6777,7 +6982,13 @@ app.post('/api/user/login', async (req, res) => {
         const hashedPassword = await verifyPassword(pass, user.password_hash);
 
         if (hashedPassword) {
-            const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
+            const token = jwt.sign({ id: user.user_id, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+            // Reactivar si el usuario está inactivo
+            if (user.status === 'inactive') {
+                await reactivateUser(user.user_id, 'login');
+            }
+
             return res.status(200).json({ message: 'Login successful', token });
         } else {
             return res.status(401).json({ message: 'Incorrect password' });
@@ -6802,7 +7013,6 @@ app.post('/api/user/login', async (req, res) => {
  * @status Documented ✅
  * @notion https://www.notion.so/User-Registration-17b7ea735ace812fb61cff21c7a05006?pvs=4
  */
-
 app.post('/api/user/register', async (req, res) => {
     const { email, username, inputName, pass } = req.body;
 
@@ -6843,7 +7053,6 @@ app.post('/api/user/register', async (req, res) => {
  * @status Documented ✅
  * @notion https://www.notion.so/Set-User-Duplications-17b7ea735ace81e690cedabb4a7bcaf5?pvs=4
  */
-
 app.post('/api/user/duplications', async (req, res) => {
     const { userId, otherUserId, reasonUuid } = req.body;
 
@@ -6885,7 +7094,6 @@ app.post('/api/user/duplications', async (req, res) => {
  * @status Documented ✅
  * @notion https://www.notion.so/Assign-Affiliate-URL-17b7ea735ace814a84d8d39ea4a16544?pvs=4
  */
-
 app.post('/api/user/affiliate', async (req, res) => {
     const { userId, affiliateUrl } = req.body;
 
@@ -7795,15 +8003,17 @@ app.get('/affiliate/metrics/:user_id', async (req, res) => {
 //#region User preferences
 
 /**
- * @api {get} /api/user/preferences/:userId Get User Preferences
- * @description Retrieves a user's preferences in the form of key-value pairs.
- * @param {string} userId - ID of the user whose preferences you want to get.
- * @success {200} { 
- * message: "Preferences retrieved successfully.", 
- * preferences: { theme: "dark", notifications: "enabled", language: "en" } 
- * }
- * @error {404} No preferences found for the user.
+ * @api {get} /api/user/preferences/:userId Retrieve User Preferences
+ * @description Fetches the preference settings for a specific user.
+ *
+ * @param {string} userId - The ID of the user (required).
+ *
+ * @success {200} { message: "User preferences retrieved successfully.", preferences: [{ preference_key, preference_value }] }
+ * @error {400} User ID is required.
  * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Retrieve-User-Preferences-18c7ea735ace8195a010d57f49d729b2?pvs=4
  */
 app.get('/api/user/preferences/:userId', async (req, res) => {
     const { userId } = req.params;
@@ -7835,15 +8045,21 @@ app.get('/api/user/preferences/:userId', async (req, res) => {
 
 /**
  * @api {put} /api/user/preferences/:userId Update User Preferences
- * @description Allows you to add or update a user's preferences.
- * @param {string} userId - ID of the user whose preferences you want to update or add.
- * @body {object} preferences - Object with the keys and values of the preferences to update or add.
- * @body {string} preferences.theme - Preferred theme (e.g. "light" or "dark").
- * @body {string} preferences.notifications - Status of notifications (e.g. "enabled" or "disabled").
- * @body {string} preferences.language - Preferred language (e.g., "en", "is").
- * @success {200} { message: "Preferences updated successfully." }
- * @error {400} Invalid request. Preferences must be provided.
+ * @description Updates or inserts the user's preferences in the system.
+ *
+ * @param {string} userId - The ID of the user (required).
+ * @body {array} preferences - An array of objects containing key-value pairs for preferences. Example:
+ *   [
+ *     { "key": "currency", "value": "USD" },
+ *     { "key": "dark_mode", "value": "true" }
+ *   ]
+ *
+ * @success {200} { message: "User preferences updated successfully." }
+ * @error {400} User ID and preferences array are required.
  * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Update-User-Preferences-18c7ea735ace81b5bbc2f2228958b1cd?pvs=4
  */
 app.put('/api/user/preferences/:userId', async (req, res) => {
     const { userId } = req.params;
@@ -7884,6 +8100,19 @@ app.put('/api/user/preferences/:userId', async (req, res) => {
 
 //#region User ignore
 
+/**
+ * @api {get} /api/user/ignored/:userId Retrieve Ignored Users
+ * @description Fetches a list of user IDs that the specified user has ignored.
+ *
+ * @param {string} userId - The ID of the user (required).
+ *
+ * @success {200} { message: "Ignored users retrieved successfully.", ignored_users: [1, 2, 3] }
+ * @error {400} User ID is required.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Retrieve-Ignored-Users-18c7ea735ace81d994e8fbe120df2056?pvs=4
+ */
 app.get('/api/user/ignored/:userId', async (req, res) => {
     const { userId } = req.params;
 
@@ -7916,6 +8145,21 @@ app.get('/api/user/ignored/:userId', async (req, res) => {
     }
 });
 
+/**
+ * @api {post} /api/user/ignore/:userId Ignore a User
+ * @description Allows a user to ignore another user, preventing interactions.
+ *
+ * @param {string} userId - The ID of the user initiating the ignore action (required).
+ * @body {string} ignored_user_id - The ID of the user to be ignored (required).
+ *
+ * @success {201} { message: "User ignored successfully." }
+ * @error {400} ignored_user_id is required.
+ * @error {400} User cannot ignore themselves.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Ignore-a-User-18c7ea735ace8123ac3cd12372b08984?pvs=4
+ */
 app.post('/api/user/ignore/:userId', async (req, res) => {
     const { userId } = req.params;
     const { ignored_user_id } = req.body;
@@ -7967,6 +8211,20 @@ app.post('/api/user/ignore/:userId', async (req, res) => {
     }
 });
 
+/**
+ * @api {delete} /api/user/ignore/:userId Unignore a User
+ * @description Allows a user to remove another user from their ignored list.
+ *
+ * @param {string} userId - The ID of the user initiating the unignore action (required).
+ * @body {string} ignored_user_id - The ID of the user to be removed from the ignored list (required).
+ *
+ * @success {200} { message: "User unignored successfully." }
+ * @error {400} ignored_user_id is required.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Unignore-a-User-18c7ea735ace81a086ece8cbfb539874?pvs=4
+ */
 app.delete('/api/user/ignore/:userId', async (req, res) => {
     const { userId } = req.params;
     const { ignored_user_id } = req.body;
@@ -7989,6 +8247,22 @@ app.delete('/api/user/ignore/:userId', async (req, res) => {
     }
 });
 
+/**
+ * @api {post} /api/messages/send/:senderId Send a Message
+ * @description Allows a user to send a message to another user. If the receiver has ignored the sender, the message will not be sent.
+ *
+ * @param {string} senderId - The ID of the sender (retrieved from the authentication token).
+ * @body {string} receiver_id - The ID of the recipient (required).
+ * @body {string} message_content - The message content (required).
+ *
+ * @success {201} { message: "Message sent successfully." }
+ * @error {400} receiver_id and message_content are required.
+ * @error {403} You cannot send messages to this user.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Send-a-Message-18c7ea735ace81e98779e36d701b3794?pvs=4
+ */
 app.post('/api/messages/send/:senderId', async (req, res) => {
     const senderId = req.userId;
     const { receiver_id, message_content } = req.body;
@@ -8025,7 +8299,19 @@ app.post('/api/messages/send/:senderId', async (req, res) => {
 
 //#region User profile
 
-// Obtener perfil de usuario
+/**
+ * @api {get} /api/user/profile/:userId Retrieve User Profile
+ * @description Fetches the profile information of a specified user.
+ *
+ * @param {string} userId - The ID of the user (required).
+ *
+ * @success {200} { profile: { user_id, name, email, username, country, currency, language, created_at } }
+ * @error {404} User profile not found.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Retrieve-User-Profile-18c7ea735ace81599bbac0c7a3ece250?pvs=4
+ */
 app.get('/api/user/profile/:userId', async (req, res) => {
     const { userId } = req.params;
 
@@ -8048,7 +8334,25 @@ app.get('/api/user/profile/:userId', async (req, res) => {
     }
 });
 
-// Actualizar o añadir perfil de usuario
+/**
+ * @api {put} /api/user/profile/:userId Update or Create User Profile
+ * @description Updates an existing user profile or creates one if the user does not exist.
+ *
+ * @param {string} userId - The ID of the user (required).
+ * @body {string} [name] - Updated name.
+ * @body {string} [email] - Updated email.
+ * @body {string} [username] - Updated username.
+ * @body {string} [country] - Updated country.
+ * @body {string} [currency] - Updated currency.
+ * @body {string} [language] - Updated language.
+ *
+ * @success {200} { message: "User profile updated successfully." }
+ * @success {201} { message: "User profile created successfully." }
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Update-or-Create-User-Profile-18c7ea735ace8170af45cc2886e89da2?pvs=4
+ */
 app.put('/api/user/profile/:userId', encryptMiddleware, async (req, res) => {
     const { userId } = req.params;
     const { name, email, username, country, currency, language } = req.body;
@@ -9499,6 +9803,19 @@ async function hasBattlePassLevel(userId, level) {
 
 //#region Email preferences
 
+/**
+ * @api {get} /api/email/preferences/:userId Retrieve Email Preferences
+ * @description Fetches the email marketing preferences of a specified user.
+ *
+ * @param {string} userId - The ID of the user (required).
+ *
+ * @success {200} { preferences: [{ campaign_id, campaign_name, subscribed, updated_at }] }
+ * @error {404} No email preferences found for this user.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Retrieve-Email-Preferences-18c7ea735ace81348035c984bfd2f075?pvs=4
+ */
 app.get('/api/email/preferences/:userId', async (req, res) => {
     const { userId } = req.params;
 
@@ -9521,6 +9838,21 @@ app.get('/api/email/preferences/:userId', async (req, res) => {
     }
 });
 
+/**
+ * @api {put} /api/email/preferences/:userId Update Email Preference
+ * @description Updates the subscription status of a user for a specific email marketing campaign.
+ *
+ * @param {string} userId - The ID of the user (required).
+ * @body {integer} campaign_id - The ID of the campaign (required).
+ * @body {boolean} subscribed - Subscription status (true for subscribed, false for unsubscribed).
+ *
+ * @success {200} { message: "Email preference updated successfully." }
+ * @error {400} campaign_id and subscribed status are required.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Update-Email-Preference-18c7ea735ace811ea556fa223c1f9369?pvs=4
+ */
 app.put('/api/email/preferences/:userId', async (req, res) => {
     const { userId } = req.params;
     const { campaign_id, subscribed } = req.body;
@@ -9569,6 +9901,19 @@ app.put('/api/email/preferences/:userId', async (req, res) => {
     }
 });
 
+/**
+ * @api {post} /api/email/preferences/:userId/subscribe-all Subscribe to All Email Campaigns
+ * @description Subscribes a user to all available email marketing campaigns.
+ *
+ * @param {string} userId - The ID of the user (required).
+ *
+ * @success {200} { message: "User subscribed to all campaigns." }
+ * @error {404} No campaigns available.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Subscribe-to-All-Email-Campaigns-18c7ea735ace81d2bca2cee792757927?pvs=4
+ */
 app.post('/api/email/preferences/:userId/subscribe-all', async (req, res) => {
     const { userId } = req.params;
 
@@ -9601,6 +9946,18 @@ app.post('/api/email/preferences/:userId/subscribe-all', async (req, res) => {
     }
 });
 
+/**
+ * @api {post} /api/email/preferences/:userId/unsubscribe-all Unsubscribe from All Email Campaigns
+ * @description Unsubscribes a user from all email marketing campaigns.
+ *
+ * @param {string} userId - The ID of the user (required).
+ *
+ * @success {200} { message: "User unsubscribed from all campaigns." }
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Unsubscribe-from-All-Email-Campaigns-18c7ea735ace81c79be2d76fe9e80b74?pvs=4
+ */
 app.post('/api/email/preferences/:userId/unsubscribe-all', async (req, res) => {
     const { userId } = req.params;
 
@@ -9633,6 +9990,23 @@ app.post('/api/email/preferences/:userId/unsubscribe-all', async (req, res) => {
 
 //#region user transactions
 
+/**
+ * @api {get} /api/user/transactions/:user_id Retrieve User Transaction History
+ * @description Fetches a user's transaction history with optional filters for date range and pagination.
+ *
+ * @param {string} user_id - The ID of the user (required).
+ * @query {string} [start_date] - Filter transactions starting from this date.
+ * @query {string} [end_date] - Filter transactions up to this date.
+ * @query {integer} [page=1] - Page number for pagination.
+ * @query {integer} [limit=10] - Number of transactions per page.
+ *
+ * @success {200} { transactions: [...], pagination: { current_page, total_pages, total_transactions } }
+ * @error {400} User ID is required.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Retrieve-User-Transaction-History-18c7ea735ace81f2bf5adeb43b945581?pvs=4
+ */
 app.get('/api/user/transactions/:user_id', async (req, res) => {
     const { user_id } = req.params;
     const { start_date, end_date, page = 1, limit = 10 } = req.query;
@@ -9708,6 +10082,19 @@ app.get('/api/user/transactions/:user_id', async (req, res) => {
 
 //#region user Wallet
 
+/**
+ * @api {get} /api/user/wallet-visibility/:userId Retrieve Wallet Visibility
+ * @description Fetches the wallet visibility setting of a specific user.
+ *
+ * @param {string} userId - The ID of the user (required).
+ *
+ * @success {200} { userId, is_visible }
+ * @error {404} User not found or visibility setting not set.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Retrieve-Wallet-Visibility-18c7ea735ace817b9c23fcca8ff2da78?pvs=4
+ */
 app.get('/api/user/wallet-visibility/:userId', async (req, res) => {
     const { userId } = req.params;
 
@@ -9729,6 +10116,21 @@ app.get('/api/user/wallet-visibility/:userId', async (req, res) => {
     }
 });
 
+/**
+ * @api {put} /api/user/wallet-visibility/:userId Update Wallet Visibility
+ * @description Updates a user's wallet visibility and optionally updates currency-specific balances.
+ *
+ * @param {string} userId - The ID of the user (required).
+ * @body {boolean} is_visible - Visibility status (true = visible, false = hidden).
+ * @body {string} [currency] - Currency to update (optional, updates all if not provided).
+ *
+ * @success {200} { message: "Wallet and balances visibility updated successfully.", userId, is_visible }
+ * @error {400} is_visible must be a boolean.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Update-Wallet-Visibility-18c7ea735ace814a858dd096ad57dc21?pvs=4
+ */
 app.put('/api/user/wallet-visibility/:userId', async (req, res) => {
     const { userId } = req.params;
     const { is_visible, currency } = req.body;
@@ -9794,6 +10196,19 @@ app.put('/api/user/wallet-visibility/:userId', async (req, res) => {
 
 //#region user privacy mode
 
+/**
+ * @api {get} /api/user/modes/:userId Retrieve User Modes
+ * @description Fetches privacy and streamer mode settings for a user.
+ *
+ * @param {string} userId - The ID of the user (required).
+ *
+ * @success {200} { userId, privacy_mode, streamer_mode }
+ * @error {404} User modes not found.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Retrieve-User-Modes-18c7ea735ace81549336d70d3bd6c8cc?pvs=4
+ */
 app.get('/api/user/modes/:userId', async (req, res) => {
     const { userId } = req.params;
 
@@ -9819,6 +10234,21 @@ app.get('/api/user/modes/:userId', async (req, res) => {
     }
 });
 
+/**
+ * @api {put} /api/user/modes/:userId Update User Modes
+ * @description Updates the privacy mode and/or streamer mode settings of a user.
+ *
+ * @param {string} userId - The ID of the user (required).
+ * @body {boolean} [privacy_mode] - Toggle for privacy mode.
+ * @body {boolean} [streamer_mode] - Toggle for streamer mode.
+ *
+ * @success {200} { message: "User modes updated successfully.", userId, privacy_mode, streamer_mode }
+ * @error {400} At least one mode (privacy_mode or streamer_mode) must be a boolean.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Update-User-Modes-18c7ea735ace81bea7ddfe4877930133?pvs=4
+ */
 app.put('/api/user/modes/:userId', async (req, res) => {
     const { userId } = req.params;
     const { privacy_mode, streamer_mode } = req.body;
@@ -9855,11 +10285,23 @@ app.put('/api/user/modes/:userId', async (req, res) => {
     }
 });
 
-
 //#endregion
 
 //#region user currency preference
 
+/**
+ * @api {get} /api/user/currency-preferences/:userId Retrieve User Currency Preferences
+ * @description Fetches the preferred currency of a user.
+ *
+ * @param {string} userId - The ID of the user (required).
+ *
+ * @success {200} { user_id, preferred_currency }
+ * @error {404} Currency preferences not found.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Retrieve-User-Currency-Preferences-18c7ea735ace8124a501cfd1d49ab397?pvs=4
+ */
 app.get('/api/user/currency-preferences/:userId', async (req, res) => {
     const { userId } = req.params;
 
@@ -9884,6 +10326,20 @@ app.get('/api/user/currency-preferences/:userId', async (req, res) => {
     }
 });
 
+/**
+ * @api {put} /api/user/currency-preferences/:userId Update User Currency Preferences
+ * @description Updates the preferred currency of a user.
+ *
+ * @param {string} userId - The ID of the user (required).
+ * @body {string} preferred_currency - The new preferred currency (required).
+ *
+ * @success {200} { message: "Currency preferences updated successfully.", user_id, preferred_currency }
+ * @error {400} preferred_currency is required.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Update-User-Currency-Preferences-18c7ea735ace81c1b837c022a3d0798a?pvs=4
+ */
 app.put('/api/user/currency-preferences/:userId', async (req, res) => {
     const { userId } = req.params;
     const { preferred_currency } = req.body;
@@ -9916,6 +10372,19 @@ app.put('/api/user/currency-preferences/:userId', async (req, res) => {
 
 //#region user balance
 
+/**
+ * @api {get} /api/user/balances/:userId Retrieve User Balances
+ * @description Fetches the balances of a user that are marked as visible.
+ *
+ * @param {string} userId - The ID of the user (required).
+ *
+ * @success {200} { user_id, balances: [...] }
+ * @error {404} No visible balances found for this user.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Retrieve-User-Balances-18c7ea735ace81988a2dcb1d8ca19278?pvs=4
+ */
 app.get('/api/user/balances/:userId', async (req, res) => {
     const { userId } = req.params;
 
@@ -9944,6 +10413,19 @@ app.get('/api/user/balances/:userId', async (req, res) => {
 
 //#region user presences
 
+/**
+ * @api {get} /user/presence/:userId Retrieve User Presence
+ * @description Fetches the online/offline presence status of a user.
+ *
+ * @param {string} userId - The ID of the user (required).
+ *
+ * @success {200} { userId, status, last_active }
+ * @error {404} User not found.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Retrieve-User-Presence-18c7ea735ace8129a073f312861232d3?pvs=4
+ */
 app.get('/user/presence/:userId', async (req, res) => {
     const { userId } = req.params;
 
@@ -9964,6 +10446,19 @@ app.get('/user/presence/:userId', async (req, res) => {
     }
 });
 
+/**
+ * @api {get} /user/presence Retrieve Multiple Users' Presence
+ * @description Fetches the online/offline presence of multiple users.
+ *
+ * @query {string} userIds - Comma-separated list of user IDs.
+ *
+ * @success {200} { users: [{ user_id, status, last_active }, ...] }
+ * @error {400} userIds query parameter is required.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Retrieve-Multiple-Users-Presence-18c7ea735ace81a284f7d01fd7f0802e?pvs=4
+ */
 app.get('/user/presence', async (req, res) => {
     const { userIds } = req.query; // Esperar una lista de IDs como: ?userIds=1,2,3
 
@@ -9986,11 +10481,22 @@ app.get('/user/presence', async (req, res) => {
     }
 });
 
-
 //#endregion
 
 //#region chat messages
 
+/**
+ * @api {delete} /api/chat/messages/:userId Delete User Chat Messages
+ * @description Deletes all messages sent or received by a user.
+ *
+ * @param {string} userId - The ID of the user (required).
+ *
+ * @success {200} { message: "Messages deleted successfully." }
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Delete-User-Chat-Messages-18c7ea735ace81f9a32fd5a422dfd721?pvs=4
+ */
 app.delete('/api/chat/messages/:userId', async (req, res) => {
     const { userId } = req.params;
 
@@ -10006,6 +10512,19 @@ app.delete('/api/chat/messages/:userId', async (req, res) => {
     }
 });
 
+/**
+ * @api {put} /api/user/chat-consent/:userId Update Chat Consent Preferences
+ * @description Updates a user's preferences related to chat consent.
+ *
+ * @param {string} userId - The ID of the user (required).
+ * @body {Array} preferences - Array of objects [{ key, value }] containing preference settings.
+ *
+ * @success {200} { message: "Chat consent updated successfully" }
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Update-Chat-Consent-Preferences-18c7ea735ace8198a37bc5c6a49a6c22?pvs=4
+ */
 app.put('/api/user/chat-consent/:userId', async (req, res) => {
     const { userId } = req.params;
     const { preferences } = req.body; // Array de objetos [{ key, value }]
@@ -10029,6 +10548,16 @@ app.put('/api/user/chat-consent/:userId', async (req, res) => {
     }
 });
 
+/**
+ * @api {get} /api/chat/risk-events Retrieve Chat Risk Events
+ * @description Fetches a list of chat-related risk events.
+ *
+ * @success {200} Array of chat risk events.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Retrieve-Chat-Risk-Events-18c7ea735ace8106855ed33f2db66bd2?pvs=4
+ */
 app.get('/api/chat/risk-events', async (req, res) => {
     try {
         const [events] = await conexionOrbet.query(`
@@ -10047,6 +10576,24 @@ app.get('/api/chat/risk-events', async (req, res) => {
 
 //#region User Friends
 
+/**
+ * @api {post} /api/friends/send_request Send Friend Request
+ * @description Sends a friend request to another user.
+ *
+ * @body {number} sender_id - The ID of the user sending the request.
+ * @body {number} receiver_id - The ID of the user receiving the request.
+ *
+ * @success {201} { message: "Friend request sent successfully." }
+ * @error {400} sender_id and receiver_id are required.
+ * @error {400} You cannot send a friend request to yourself.
+ * @error {400} Friend request already sent.
+ * @error {400} You are already friends.
+ * @error {403} You cannot send a friend request to this user.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Send-Friend-Request-18c7ea735ace818e986cd47e1912fc38?pvs=4
+ */
 app.post('/api/friends/send_request', async (req, res) => {
     const { sender_id, receiver_id } = req.body;
 
@@ -10121,6 +10668,20 @@ app.post('/api/friends/send_request', async (req, res) => {
     }
 });
 
+/**
+ * @api {post} /api/friends/accept_request Accept Friend Request
+ * @description Accepts a pending friend request.
+ *
+ * @body {number} request_id - The ID of the friend request to accept.
+ *
+ * @success {200} { message: "Friend request accepted successfully." }
+ * @error {400} request_id is required.
+ * @error {404} Friend request not found or already processed.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Accept-Friend-Request-18c7ea735ace819397ced9d47a786203?pvs=4
+ */
 app.post('/api/friends/accept_request', async (req, res) => {
     const { request_id } = req.body;
 
@@ -10160,6 +10721,20 @@ app.post('/api/friends/accept_request', async (req, res) => {
     }
 });
 
+/**
+ * @api {post} /api/friends/decline_request Decline Friend Request
+ * @description Declines a pending friend request.
+ *
+ * @body {number} request_id - The ID of the friend request to decline.
+ *
+ * @success {200} { message: "Friend request declined successfully." }
+ * @error {400} request_id is required.
+ * @error {404} Friend request not found or already processed.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Decline-Friend-Request-18c7ea735ace811896e5d7cf81670a3c?pvs=4
+ */
 app.post('/api/friends/decline_request', async (req, res) => {
     const { request_id } = req.body;
 
@@ -10186,6 +10761,19 @@ app.post('/api/friends/decline_request', async (req, res) => {
     }
 });
 
+/**
+ * @api {get} /api/user/friends/presence/:userId Retrieve Friends' Presence
+ * @description Retrieves the online/offline presence status of a user's friends.
+ *
+ * @param {string} userId - The ID of the user (required).
+ *
+ * @success {200} { friends: [{ friend_id, name, username, status, last_active }] }
+ * @error {404} No friends found.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Retrieve-Friends-Presence-18c7ea735ace8197b0e4ff6582d1b5dc?pvs=4
+ */
 app.get('/api/user/friends/presence/:userId', async (req, res) => {
     const { userId } = req.params;
 
@@ -10233,6 +10821,18 @@ app.get('/api/user/friends/presence/:userId', async (req, res) => {
 
 //#region notifications API
 
+/**
+ * @api {get} /api/notifications/:userId Retrieve User Notifications
+ * @description Fetches notifications for a specific user.
+ *
+ * @param {string} userId - The ID of the user (required).
+ *
+ * @success {200} { notifications: [{ notification_id, type, message, status, created_at }] }
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Retrieve-User-Notifications-18c7ea735ace818398b6c924ebc3ec60?pvs=4
+ */
 app.get('/api/notifications/:userId', async (req, res) => {
     const { userId } = req.params;
 
@@ -10251,6 +10851,18 @@ app.get('/api/notifications/:userId', async (req, res) => {
     }
 });
 
+/**
+ * @api {put} /api/notifications/read/:notificationId Mark Notification as Read
+ * @description Marks a notification as read.
+ *
+ * @param {string} notificationId - The ID of the notification to mark as read.
+ *
+ * @success {200} { message: "Notification marked as read." }
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Mark-Notification-as-Read-18c7ea735ace8176b8fcc543965af173?pvs=4
+ */
 app.put('/api/notifications/read/:notificationId', async (req, res) => {
     const { notificationId } = req.params;
 
@@ -10262,7 +10874,6 @@ app.put('/api/notifications/read/:notificationId', async (req, res) => {
         res.status(500).json({ message: 'Internal server error.' });
     }
 });
-
 
 //#endregion
 
@@ -10341,11 +10952,11 @@ app.post('/api/friends/respond_invitation', async (req, res) => {
             //     return res.status(403).json({ message: 'The game session is full or does not exist.' });
             // }
 
-            await conexionOrbet.query(`
-                UPDATE game_sessions
-                SET current_players = current_players + 1
-                WHERE game_id = ?
-            `, [game_id]);
+            // await conexionOrbet.query(`
+            //     UPDATE game_sessions
+            //     SET current_players = current_players + 1
+            //     WHERE game_id = ?
+            // `, [game_id]);
 
             // Notify receiver about a friend request
             await notificationsService.notify(inviter_id,
@@ -10375,7 +10986,692 @@ app.post('/api/friends/respond_invitation', async (req, res) => {
 
 //#endregion
 
+//#region Bills affilates
+
+/**
+ * @api {post} /api/admin/bills/generate_from_unbilled Generate Bills from Unbilled Balances
+ * @description Generates billing records for affiliates with unbilled balances.
+ *
+ * @body {array} [affiliate_ids] - Optional array of affiliate IDs to generate bills for specific affiliates.
+ *
+ * @success {201} { message: "Bills generated successfully.", generatedBills: [...] }
+ * @error {404} No unbilled affiliates found.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Generate-Bills-from-Unbilled-Balances-18c7ea735ace8187b786cf7c4ec07033?pvs=4
+ */
+app.post('/api/admin/bills/generate_from_unbilled', async (req, res) => {
+    const { affiliate_ids } = req.body; // IDs de afiliados opcionales
+    let connection;
+
+    try {
+        connection = await conexionOrbet.getConnection();
+        await connection.beginTransaction();
+
+        // Filtrar afiliados si se especifican `affiliate_ids`
+        const affiliateFilter = affiliate_ids && affiliate_ids.length > 0
+            ? `WHERE al.affiliate_id IN (${affiliate_ids.map(() => '?').join(',')})`
+            : '';
+
+        // Obtener afiliados con saldo no facturado
+        const [affiliates] = await connection.query(
+            `
+            SELECT al.affiliate_id, al.user_id, 
+                   COALESCE(SUM(ab.amount), 0) AS total_billed, 
+                   COUNT(ab.bill_id) AS bill_count
+            FROM affiliate_links al
+            LEFT JOIN affiliate_bills ab ON al.affiliate_id = ab.affiliate_id
+            ${affiliateFilter}
+            GROUP BY al.affiliate_id, al.user_id
+            HAVING total_billed < 1000
+            `,
+            affiliate_ids || []
+        );
+
+        if (affiliates.length === 0) {
+            return res.status(404).json({ message: 'No unbilled affiliates found.' });
+        }
+
+        // Crear facturas para los afiliados seleccionados
+        const generatedBills = [];
+        for (const affiliate of affiliates) {
+            const billAmount = 1000 - affiliate.total_billed;
+
+            await connection.query(
+                `INSERT INTO affiliate_bills (affiliate_id, user_id, amount, generated_at, status)
+                 VALUES (?, ?, ?, NOW(), 'pending')`,
+                [affiliate.affiliate_id, affiliate.user_id, billAmount]
+            );
+
+            generatedBills.push({
+                affiliate_id: affiliate.affiliate_id,
+                user_id: affiliate.user_id,
+                amount: billAmount,
+            });
+
+            // Registrar la acción en `billing_audit`
+            await connection.query(
+                `INSERT INTO billing_audit (affiliate_id, user_id, action, timestamp, details)
+                 VALUES (?, ?, 'generated', NOW(), ?)`,
+                [
+                    affiliate.affiliate_id,
+                    affiliate.user_id,
+                    `Generated bill for $${billAmount.toFixed(2)}.`,
+                ]
+            );
+        }
+
+        await connection.commit();
+        res.status(201).json({
+            message: 'Bills generated successfully.',
+            generatedBills,
+        });
+    } catch (error) {
+        if (connection) await connection.rollback();
+        console.error('Error generating bills:', error);
+        res.status(500).json({ message: 'Internal server error.' });
+    } finally {
+        if (connection) connection.release();
+    }
+});
+
+/**
+ * @api {post} /api/admin/bills/generate_from_unbilled_affiliate Generate Bill for Specific Affiliate
+ * @description Generates a billing record for a single affiliate based on their unbilled balance.
+ *
+ * @body {number} affiliate_id - The ID of the affiliate to generate the bill for.
+ *
+ * @success {201} { message: "Bill generated successfully.", amount: unbilledBalance }
+ * @error {400} No unbilled balance available.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Generate-Bill-for-Specific-Affiliate-18c7ea735ace814cac23dac9c11e7051?pvs=4
+ */
+app.post('/api/admin/bills/generate_from_unbilled_affiliate', async (req, res) => {
+    const { affiliate_id } = req.body;
+
+    try {
+        const [result] = await conexionOrbet.query(`
+            SELECT unbilled_balance FROM affiliate_links WHERE affiliate_id = ?
+        `, [affiliate_id]);
+
+        const unbilledBalance = result[0]?.unbilled_balance || 0;
+
+        if (unbilledBalance <= 0) {
+            return res.status(400).json({ message: 'No unbilled balance available.' });
+        }
+
+        // Crear factura
+        await conexionOrbet.query(`
+            INSERT INTO affiliate_bills (affiliate_id, amount, generated_at, status)
+            VALUES (?, ?, NOW(), 'pending')
+        `, [affiliate_id, unbilledBalance]);
+
+        // Resetear el balance no facturado
+        await conexionOrbet.query(`
+            UPDATE affiliate_links SET unbilled_balance = 0 WHERE affiliate_id = ?
+        `, [affiliate_id]);
+
+        return res.status(201).json({ message: 'Bill generated successfully.', amount: unbilledBalance });
+    } catch (error) {
+        console.error('Error generating manual bill:', error);
+        return res.status(500).json({ message: 'Internal server error.' });
+    }
+});
+
+/**
+ * @api {get} /api/admin/bills/:affiliate_id Retrieve Affiliate Bills
+ * @description Fetches all bills for a specific affiliate.
+ *
+ * @param {number} affiliate_id - The ID of the affiliate.
+ *
+ * @success {200} { bills: [...] }
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Retrieve-Affiliate-Bills-18c7ea735ace81e4b1d4fd57abdf4463?pvs=4
+ */
+app.get('/api/admin/bills/:affiliate_id', async (req, res) => {
+    const { affiliate_id } = req.params;
+
+    try {
+        const [bills] = await conexionOrbet.query(`
+            SELECT * FROM affiliate_bills
+            WHERE affiliate_id = ?
+        `, [affiliate_id]);
+
+        res.status(200).json({ bills });
+    } catch (error) {
+        console.error('Error fetching bills:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+/**
+ * @api {get} /api/admin/affiliates/not_billed Retrieve Affiliates with Unbilled Balances
+ * @description Fetches affiliates with remaining unbilled balances.
+ *
+ * @query {string} [start_date] - Optional start date filter.
+ * @query {string} [end_date] - Optional end date filter.
+ * @query {number} [affiliate_id] - Optional affiliate ID filter.
+ *
+ * @success {200} { message: "Affiliates with unbilled balance retrieved successfully.", affiliates: [...] }
+ * @error {404} No affiliates with unbilled balance found.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Retrieve-Affiliates-with-Unbilled-Balances-18c7ea735ace8154bd17d62139487773?pvs=4
+ */
+app.get('/api/admin/affiliates/not_billed', async (req, res) => {
+    const { start_date, end_date, affiliate_id } = req.query;
+
+    try {
+        // Construir el filtro opcional para fechas y afiliados
+        let filters = '';
+        const params = [];
+
+        if (start_date) {
+            filters += ' AND ab.generated_at >= ?';
+            params.push(start_date);
+        }
+
+        if (end_date) {
+            filters += ' AND ab.generated_at <= ?';
+            params.push(end_date);
+        }
+
+        if (affiliate_id) {
+            filters += ' AND al.affiliate_id = ?';
+            params.push(affiliate_id);
+        }
+
+        // Consulta para obtener afiliados con saldo no facturado
+        const [results] = await conexionOrbet.query(
+            `
+            SELECT 
+                al.affiliate_id,
+                al.user_id,
+                COALESCE(SUM(ab.amount), 0) AS total_billed,
+                COUNT(ab.bill_id) AS bill_count,
+                (1000 - COALESCE(SUM(ab.amount), 0)) AS unbilled_balance
+            FROM affiliate_links al
+            LEFT JOIN affiliate_bills ab ON al.affiliate_id = ab.affiliate_id
+            WHERE al.status = 'active' ${filters}
+            GROUP BY al.affiliate_id, al.user_id
+            HAVING unbilled_balance > 0
+            `
+            , params
+        );
+
+        if (results.length === 0) {
+            return res.status(404).json({ message: 'No affiliates with unbilled balance found.' });
+        }
+
+        // Devolver la respuesta en formato JSON
+        res.status(200).json({
+            message: 'Affiliates with unbilled balance retrieved successfully.',
+            affiliates: results.map((row) => ({
+                affiliate_id: row.affiliate_id,
+                user_id: row.user_id,
+                total_billed: row.total_billed,
+                unbilled_balance: row.unbilled_balance,
+                bill_count: row.bill_count,
+            })),
+        });
+    } catch (error) {
+        console.error('Error fetching unbilled affiliates:', error);
+        res.status(500).json({ message: 'Internal server error.' });
+    }
+});
+
+async function calculateUnbilledBalances() {
+    try {
+        // Obtener estadísticas de afiliados y facturas generadas
+        const [results] = await conexionOrbet.query(`
+            SELECT 
+                af.affiliate_id,
+                af.user_id,
+                COALESCE(SUM(ab.amount), 0) AS total_billed,
+                COALESCE(asub.total_earnings, 0) AS total_earned
+            FROM affiliate_links af
+            LEFT JOIN affiliate_bills ab 
+                ON af.affiliate_id = ab.affiliate_id
+            LEFT JOIN (
+                SELECT user_id, SUM(total_earnings) AS total_earnings
+                FROM affiliate_statistics
+                GROUP BY user_id
+            ) as asub ON asub.user_id = af.user_id
+            WHERE af.status = 'active'
+            GROUP BY af.affiliate_id, af.user_id, asub.total_earnings
+        `);
+
+        // Actualizar `unbilled_balance` en `affiliate_links`
+        for (const affiliate of results) {
+            const unbilledBalance = affiliate.total_earned - affiliate.total_billed;
+
+            await conexionOrbet.query(`
+                UPDATE affiliate_links
+                SET unbilled_balance = ?
+                WHERE affiliate_id = ?
+            `, [unbilledBalance, affiliate.affiliate_id]);
+        }
+
+        console.log('Unbilled balances updated successfully.');
+    } catch (error) {
+        console.error('Error updating unbilled balances:', error);
+    }
+}
+
+async function updateUnbilledBalance(affiliate_id, amount) {
+    try {
+        await conexionOrbet.query(`
+            UPDATE affiliate_links
+            SET unbilled_balance = unbilled_balance + ?
+            WHERE affiliate_id = ?
+        `, [amount, affiliate_id]);
+
+        console.log(`Updated unbilled balance for affiliate ${affiliate_id}`);
+    } catch (error) {
+        console.error('Error updating unbilled balance:', error);
+    }
+}
+
+const BILL_THRESHOLD = 500; // Facturar automáticamente si supera $500
+
+async function checkAndGenerateBill(affiliate_id) {
+    try {
+        const [result] = await conexionOrbet.query(`
+            SELECT unbilled_balance FROM affiliate_links WHERE affiliate_id = ?
+        `, [affiliate_id]);
+
+        const unbilledBalance = result[0]?.unbilled_balance || 0;
+
+        if (unbilledBalance >= BILL_THRESHOLD) {
+            console.log(`Generating auto-bill for affiliate ${affiliate_id}`);
+
+            await conexionOrbet.query(`
+                INSERT INTO affiliate_bills (affiliate_id, amount, generated_at, status)
+                VALUES (?, ?, NOW(), 'pending')
+            `, [affiliate_id, unbilledBalance]);
+
+            // Resetear balance no facturado
+            await conexionOrbet.query(`
+                UPDATE affiliate_links SET unbilled_balance = 0 WHERE affiliate_id = ?
+            `, [affiliate_id]);
+
+            console.log(`Auto-bill created for ${affiliate_id} with amount ${unbilledBalance}`);
+        }
+    } catch (error) {
+        console.error('Error generating auto-bill:', error);
+    }
+}
+
+//#region Test functions
+
+//await updateUnbilledBalance(affiliate_id, commission_amount);
+//await checkAndGenerateBill(affiliate_id);
+
+//updateUnbilledBalance(14, 250.00); // Suma $250 al afiliado 14
+//updateUnbilledBalance(15, 100.00); // Suma $100 al afiliado 15
+//updateUnbilledBalance(16, 50.00);  // Suma $50 al afiliado 16
+
+//checkAndGenerateBill(14);
+//checkAndGenerateBill(15);
+//checkAndGenerateBill(16);
+
+//#endregion
+
+/**
+ * @api {post} /api/admin/affiliates/calculate_unbilled Calculate Unbilled Balances
+ * @description Calculates and updates the unbilled balances for affiliates.
+ *
+ * @success {200} { message: "Unbilled balances updated successfully." }
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Calculate-Unbilled-Balances-ONLY-TEST-18c7ea735ace8179827dcd9e723cf97d?pvs=4
+ */
+app.post('/api/admin/affiliates/calculate_unbilled', async (req, res) => {
+    try {
+        await calculateUnbilledBalances();
+        res.status(200).json({ message: 'Unbilled balances updated successfully.' });
+    } catch (error) {
+        console.error('Error calculating unbilled balances:', error);
+        res.status(500).json({ message: 'Internal server error.' });
+    }
+});
+
+/**
+ * @api {get} /api/admin/affiliate_commissions Retrieve Affiliate Commissions
+ * @description Fetches affiliate commission records with optional filters.
+ *
+ * @query {number} [affiliate_id] - Optional affiliate ID filter.
+ * @query {string} [start_date] - Optional start date filter.
+ * @query {string} [end_date] - Optional end date filter.
+ *
+ * @success {200} { success: true, commissions: [...] }
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Retrieve-Affiliate-Commissions-ONLY-TEST-18c7ea735ace816d8cb0c0165472de62?pvs=4
+ */
+app.get('/api/admin/affiliate_commissions', async (req, res) => {
+    const { affiliate_id, start_date, end_date } = req.query;
+
+    let query = `SELECT * FROM affiliate_commissions WHERE 1=1`; // where is for adding conditions or filters
+    const params = [];
+
+    if (affiliate_id) {
+        query += ` AND affiliate_id = ?`;
+        params.push(affiliate_id);
+    }
+
+    if (start_date) {
+        query += ` AND created_at >= ?`;
+        params.push(start_date);
+    }
+
+    if (end_date) {
+        query += ` AND created_at <= ?`;
+        params.push(end_date);
+    }
+
+    try {
+        const [results] = await conexionOrbet.query(query, params);
+        res.status(200).json({ success: true, commissions: results });
+    } catch (error) {
+        console.error('Error fetching commissions:', error);
+        res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+});
+
+/**
+ * @api {put} /api/admin/affiliate_commissions/:commission_id Update Affiliate Commission
+ * @description Updates the status or amount of an affiliate commission.
+ *
+ * @param {number} commission_id - The ID of the commission to update.
+ * @body {string} status - New status ('pending', 'approved', 'adjusted').
+ * @body {number} [amount] - Optional new commission amount.
+ *
+ * @success {200} { message: "Commission updated successfully." }
+ * @error {400} Invalid status value.
+ * @error {404} Commission not found.
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Update-Affiliate-Commission-18c7ea735ace81bd8444d6435a47521a?pvs=4
+ */
+app.put('/api/admin/affiliate_commissions/:commission_id', async (req, res) => {
+    const { commission_id } = req.params;
+    const { status, amount } = req.body;
+
+    if (!['pending', 'approved', 'adjusted'].includes(status)) {
+        return res.status(400).json({ message: 'Invalid status value' });
+    }
+
+    try {
+        const [existingCommission] = await conexionOrbet.query(
+            `SELECT * FROM affiliate_commissions WHERE commission_id = ?`,
+            [commission_id]
+        );
+
+        if (existingCommission.length === 0) {
+            return res.status(404).json({ message: 'Commission not found' });
+        }
+
+        await conexionOrbet.query(
+            `UPDATE affiliate_commissions SET status = ?, amount = ?, updated_at = NOW() WHERE commission_id = ?`,
+            [status, amount || existingCommission[0].amount, commission_id]
+        );
+
+        res.status(200).json({ message: 'Commission updated successfully' });
+    } catch (error) {
+        console.error('Error updating commission:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+async function calculateAffiliateCommissions(period = 'daily') {
+    try {
+        console.log(`Calculating ${period} affiliate commissions...`);
+
+        // Obtener la lista de afiliados con sus referidos y apuestas
+        const [affiliates] = await conexionOrbet.query(`
+            SELECT 
+                af.affiliate_id,
+                af.user_id,
+                stats.total_wagered,
+                stats.total_earnings,
+                stats.last_commissioned_at,
+                COALESCE(ac.commission_type, 'rev_share') AS commission_type
+            FROM affiliate_links af
+            JOIN affiliate_statistics stats ON af.user_id = stats.user_id
+            LEFT JOIN affiliate_commissions ac ON af.affiliate_id = ac.affiliate_id
+            WHERE af.status = 'active'
+        `);
+
+        if (affiliates.length === 0) {
+            console.log(`No affiliates found for ${period} period.`);
+            return;
+        }
+
+        const commissionRecords = [];
+
+        for (const affiliate of affiliates) {
+            let commissionAmount = 0;
+
+            // Prevenir cálculo repetido: Solo calcular si no se ha hecho en este periodo
+            const lastCommissioned = affiliate.last_commissioned_at ? new Date(affiliate.last_commissioned_at) : null;
+            const today = new Date();
+
+            if (lastCommissioned && lastCommissioned.toDateString() === today.toDateString()) {
+                console.log(`Skipping user ${affiliate.user_id}, already commissioned today.`);
+                continue; // Saltar este usuario si ya se calculó hoy
+            }
+
+            if (affiliate.commission_type === 'rev_share') {
+                // Rev Share: Aplicar el 20% de las ganancias generadas como ejemplo
+                const revenueSharePercentage = 20;
+                commissionAmount = (affiliate.total_earnings * revenueSharePercentage) / 100;
+            } else if (affiliate.commission_type === 'cpa') {
+                // CPA: Contar referidos que aún no han sido contabilizados
+                const [referredUsers] = await conexionOrbet.query(`
+                    SELECT COUNT(*) AS referred_count
+                    FROM referrals
+                    WHERE user_id = ? AND created_at > COALESCE(?, '2000-01-01');
+                `, [affiliate.user_id, lastCommissioned]);
+
+                const cpaFixedAmount = 100; // Ejemplo de CPA fijo por usuario referido
+                commissionAmount = referredUsers[0].referred_count * cpaFixedAmount;
+            }
+
+            // Agregar comisión solo si es mayor a 0
+            if (commissionAmount > 0) {
+                commissionRecords.push([
+                    affiliate.affiliate_id,
+                    affiliate.user_id,
+                    commissionAmount,
+                    affiliate.commission_type,
+                    'pending',  // Estado inicial
+                    new Date(), // created_at
+                    new Date()  // updated_at
+                ]);
+            }
+        }
+
+        // Insertar las comisiones en la base de datos
+        if (commissionRecords.length > 0) {
+            await conexionOrbet.query(`
+                INSERT INTO affiliate_commissions (affiliate_id, user_id, amount, commission_type, status, created_at, updated_at)
+                VALUES ?
+            `, [commissionRecords]);
+
+            console.log(`Inserted ${commissionRecords.length} new affiliate commissions.`);
+
+            // **Actualizar la fecha de la última comisión para cada afiliado**
+            await conexionOrbet.query(`
+                UPDATE affiliate_statistics 
+                SET last_commissioned_at = NOW()
+                WHERE user_id IN (${commissionRecords.map(c => c[1]).join(",")});
+            `);
+        } else {
+            console.log("No commissions to insert.");
+        }
+    } catch (error) {
+        console.error("Error calculating affiliate commissions:", error);
+    }
+}
+
+/**
+ * @api {post} /api/admin/affiliate_commissions/calculate Calculate Affiliate Commissions
+ * @description Triggers commission calculation for affiliates.
+ *
+ * @success {200} { message: "Commissions calculated successfully." }
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Calculate-Affiliate-Commissions-18c7ea735ace817498fac7d3372a2a4d?pvs=4
+ */
+app.post('/api/admin/affiliate_commissions/calculate', async (req, res) => {
+    try {
+        await calculateAffiliateCommissions('daily');
+        res.status(200).json({ message: 'Commissions calculated successfully' });
+    } catch (error) {
+        console.error('Error calculating commissions:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+//#endregion
+
+//#region user Dormant
+
+async function reactivateUser(userId, reason) {
+    try {
+        // Verificar si el usuario está inactivo o marcado como dormido
+        const [user] = await conexionOrbet.query(`
+            SELECT status FROM users WHERE user_id = ? LIMIT 1
+        `, [userId]);
+
+        if (!user || user.length === 0) {
+            console.log(`User ${userId} not found.`);
+            return;
+        }
+
+        if (user[0].status !== 'inactive') {
+            console.log(`User ${userId} is already active.`);
+            return;
+        }
+
+        // Actualizar el estado del usuario a activo
+        await conexionOrbet.query(`
+            UPDATE users SET status = 'active', updated_at = NOW() WHERE user_id = ?
+        `, [userId]);
+
+        // Registrar la reactivación en la base de datos
+        await conexionOrbet.query(`
+            INSERT INTO user_reactivations (user_id, reactivated_at, reason)
+            VALUES (?, NOW(), ?)
+        `, [userId, reason]);
+
+        console.log(`User ${userId} reactivated due to ${reason}.`);
+    } catch (error) {
+        console.error("Error reactivating user:", error);
+    }
+}
+
+async function markDormantUsers(inactiveMonths = 12) {
+    try {
+        const thresholdDate = new Date();
+        thresholdDate.setMonth(thresholdDate.getMonth() - inactiveMonths);
+
+        await conexionOrbet.query(`
+            UPDATE users 
+            SET status = 'inactive', dormant_since = NOW()
+            WHERE last_login < ? AND status != 'inactive'
+        `, [thresholdDate]);
+
+        console.log(`Marked users inactive for ${inactiveMonths} months as dormant.`);
+    } catch (error) {
+        console.error("Error marking dormant users:", error);
+    }
+}
+
+/**
+ * @api {get} /api/admin/dormant_players Retrieve Dormant Players
+ * @description Fetches users flagged as inactive.
+ *
+ * @query {number} [inactive_for] - Optional inactivity period in months.
+ * @query {string} [country] - Optional country filter.
+ *
+ * @success {200} { success: true, count: number, dormant_players: [...] }
+ * @error {500} Internal server error.
+ *
+ * @status Documented ✅
+ * @notion https://www.notion.so/Retrieve-Dormant-Players-18c7ea735ace8132997fe2e6517d6774?pvs=4
+ */
+app.get('/api/admin/dormant_players', async (req, res) => {
+    const { inactive_for, country } = req.query;
+
+    let query = `
+        SELECT user_id, name, email, country, last_login, status
+        FROM users
+        WHERE status = 'inactive'
+    `;
+    const params = [];
+
+    if (inactive_for) {
+        const thresholdDate = new Date();
+        thresholdDate.setMonth(thresholdDate.getMonth() - parseInt(inactive_for));
+        query += ` AND last_login < ?`;
+        params.push(thresholdDate);
+    }
+
+    if (country) {
+        query += ` AND country = ?`;
+        params.push(country);
+    }
+
+    try {
+        const [results] = await conexionOrbet.query(query, params);
+
+        res.status(200).json({
+            success: true,
+            count: results.length,
+            dormant_players: results
+        });
+    } catch (error) {
+        console.error("Error fetching dormant players:", error);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+});
+
+//#endregion
+
 //#endregion API
+
+//#region cron jobs
+
+cron.schedule('0 0 * * *', async () => {
+    console.log('Running daily dormant user check...');
+    await markDormantUsers(1);
+});
+
+// Ejecutar cálculo de comisiones todos los días a la medianoche
+cron.schedule('0 0 * * *', async () => {
+    console.log('Daily affiliate commissions calculated.');
+    await calculateAffiliateCommissions('daily');
+});
+
+// Schedule the task to run daily at midnight
+cron.schedule('0 0 * * *', async () => {
+    console.log('Running daily unbilled balance update...');
+    await calculateUnbilledBalances();
+});
+
+//#endregion
 
 //#region Security Documentation
 
