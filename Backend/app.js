@@ -11650,6 +11650,41 @@ app.get('/api/admin/dormant_players', async (req, res) => {
 
 //#endregion
 
+// CRUD de Tareas
+app.post('/tasks', authenticate, (req, res) => {
+    const { title, description } = req.body;
+    db.query('INSERT INTO tasks (user_id, title, description) VALUES (?, ?, ?)', [req.user.id, title, description], (err) => {
+      if (err) return res.status(500).send(err);
+      res.send({ message: 'Task created' });
+    });
+  });
+  
+  app.get('/tasks', authenticate, (req, res) => {
+    db.query('SELECT * FROM tasks WHERE user_id = ?', [req.user.id], (err, results) => {
+      if (err) return res.status(500).send(err);
+      res.send(results);
+    });
+  });
+  
+  app.put('/tasks/:id', authenticate, (req, res) => {
+    const { title, description } = req.body;
+    db.query('UPDATE tasks SET title = ?, description = ? WHERE id = ? AND user_id = ?', [title, description, req.params.id, req.user.id], (err) => {
+      if (err) return res.status(500).send(err);
+      res.send({ message: 'Task updated' });
+    });
+  });
+  
+  app.delete('/tasks/:id', authenticate, (req, res) => {
+    db.query('DELETE FROM tasks WHERE id = ? AND user_id = ?', [req.params.id, req.user.id], (err) => {
+      if (err) return res.status(500).send(err);
+      res.send({ message: 'Task deleted' });
+    });
+  });
+  
+  app.listen(3000, () => {
+    console.log('Server running on port 3000');
+  });
+
 //#endregion API
 
 //#region cron jobs
