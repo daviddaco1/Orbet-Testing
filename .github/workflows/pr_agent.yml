@@ -16,5 +16,5 @@ jobs:
         id: pragent
         uses: qodo-ai/pr-agent@main
         env:
-          OPENAI_KEY: ${{ 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 }}
-          GITHUB_TOKEN: ${{ testing_key }}
+          OPENAI_KEY: ${{ secrets.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 }}
+          GITHUB_TOKEN: ${{ secrets.testing_key }}
