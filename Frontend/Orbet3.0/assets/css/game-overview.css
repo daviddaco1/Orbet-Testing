@@ -1,0 +1,15 @@
+.gameOverviewSec{display:flex;position:relative;height:calc(100vh - 5.5rem);transition:all .1s ease-out;width:100%}
+.overviewCardBg{border-radius:30px;background:rgba(255,255,255,0.03);backdrop-filter:blur(100px);height:100%;width:100%;overflow:hidden;padding:15px}
+.overviewCardBg .overviewCardHead{border-radius:20px;background:rgba(255,255,255,0.05);backdrop-filter:blur(114.9000015258789px);height:70px;overflow:hidden;display:flex;padding:10px 30px;align-items:center}
+.overviewCardHead .overViewTitle{display:flex;align-items:center;gap:15px}
+.overviewCardHead .overViewTitle h3{text-transform:uppercase;font-size:1.3rem;font-weight:500;font-family:var(--yapari-font);color:var(--white-color);line-height:1.3rem}
+.overviewCardHead .overViewTitle span{font-size:.8rem;font-family:var(--gotham-font);font-weight:400;line-height:.8rem}
+.overviewCardHead .overviewActions{margin-left:auto;display:flex;align-items:center;gap:15px}
+.overviewCardHead .overviewActions .overviewActionDemo{display:flex;align-items:center;gap:10px}
+.overviewCardHead .overviewActions .overviewActionDemo > span{color:var(--white-color);font-family:var(--gotham-font);font-size:.8rem;font-weight:400}
+.overviewCardHead .overviewActions .overviewActionBtn{width:30px;height:30px;background:transparent;border:0;font-size:22px;color:#ffffff7a;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.overviewCardBg .overviewCardBody{margin-top:15px;border-radius:20px;background:rgba(255,255,255,0.05);backdrop-filter:blur(114.9000015258789px);padding:12px;width:100%;height:calc(100% - 85px)}
+.overviewCardBody .overviewGameFrame{width:100%;height:100%;overflow:hidden;border-radius:15px}
+.overviewCardBody .overviewGameFrame figure{display:block;width:100%;height:100%}
+.overviewCardBody .overviewGameFrame figure img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.gameOverviewSec.scaleBox{position:fixed;left:5px;top:5px;height:calc(100vh - 10px);width:calc(100vw - 10px);z-index:10;transition:all .1s ease-out}

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Management Admin</title>
+
+    <link rel="icon" href="img/mini_logo.png" type="image/png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <!-- themefy CSS -->
+    <link rel="stylesheet" href="vendors/themefy_icon/themify-icons.css" />
+    <!-- select2 CSS -->
+    <link rel="stylesheet" href="vendors/niceselect/css/nice-select.css" />
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="vendors/owl_carousel/css/owl.carousel.css" />
+    <!-- gijgo css -->
+    <link rel="stylesheet" href="vendors/gijgo/gijgo.min.css" />
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="vendors/font_awesome/css/all.min.css" />
+    <link rel="stylesheet" href="vendors/tagsinput/tagsinput.css" />
+
+    <!-- date picker -->
+    <link rel="stylesheet" href="vendors/datepicker/date-picker.css" />
+
+    <link rel="stylesheet" href="vendors/vectormap-home/vectormap-2.0.2.css" />
+
+    <!-- scrollabe  -->
+    <link rel="stylesheet" href="vendors/scroll/scrollable.css" />
+    <!-- datatable CSS -->
+    <link rel="stylesheet" href="vendors/datatable/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="vendors/datatable/css/responsive.dataTables.min.css" />
+    <link rel="stylesheet" href="vendors/datatable/css/buttons.dataTables.min.css" />
+    <!-- text editor css -->
+    <link rel="stylesheet" href="vendors/text_editor/summernote-bs4.css" />
+    <!-- morris css -->
+    <link rel="stylesheet" href="vendors/morris/morris.css">
+    <!-- metarial icon css -->
+    <link rel="stylesheet" href="vendors/material_icon/material-icons.css" />
+
+    <!-- menu css  -->
+    <link rel="stylesheet" href="css/metisMenu.css">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/colors/default.css" id="colorSkinCSS">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"
+        integrity="sha512-7IDZ+mHVoc7nSziUi72L5rGojJDtveVWHOjb+Eu8QSnguy5FitNnFyEoLoL3v1u18DNm4E30elDfkhZvVADw6Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <script src="js/socket_mgr.js"></script>
+</head>
+
+<body class="crm_body_bg">
+    <!-- main content part here -->
+
+    <div id="sidebar-container"></div> <!-- Aquí se cargará el sidebar -->
+    <script src="js/sidebar.js"></script>
+
+    <section class="main_content dashboard_part large_header_bg">
+        <!-- menu  -->
+        <div class="container-fluid g-0">
+            <div class="row">
+                <div class="col-lg-12 p-0 ">
+                    <div class="header_iner d-flex justify-content-between align-items-center">
+                        <div class="sidebar_icon d-lg-none">
+                            <i class="ti-menu"></i>
+                        </div>
+                        <div class="line_icon open_miniSide d-none d-lg-block">
+                            <img src="img/line_img.png" alt="">
+                        </div>
+                        <div class="serach_field-area d-flex align-items-center">
+                            <div class="search_inner">
+                                <form action="#">
+                                    <div class="search_field">
+                                        <input type="text" placeholder="Search">
+                                    </div>
+                                    <button type="submit"> <img src="img/icon/icon_search.svg" alt=""> </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="header_right d-flex justify-content-between align-items-center">
+                            <div class="header_notification_warp d-flex align-items-center">
+                                <li>
+                                    <a class="bell_notification_clicker" href="#"> <img src="img/icon/bell.svg" alt="">
+                                        <span>2</span>
+                                    </a>
+                                    <!-- Menu_NOtification_Wrap  -->
+                                    <div class="Menu_NOtification_Wrap">
+                                        <div class="notification_Header">
+                                            <h4>Notifications</h4>
+                                        </div>
+                                        <div class="Notification_body">
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_thumb">
+                                                    <a href="#"><img src="img/staf/2.png" alt=""></a>
+                                                </div>
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>Cool Marketing </h5>
+                                                    </a>
+                                                    <p>Lorem ipsum dolor sit amet</p>
+                                                </div>
+                                            </div>
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_thumb">
+                                                    <a href="#"><img src="img/staf/4.png" alt=""></a>
+                                                </div>
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>Awesome packages</h5>
+                                                    </a>
+                                                    <p>Lorem ipsum dolor sit amet</p>
+                                                </div>
+                                            </div>
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_thumb">
+                                                    <a href="#"><img src="img/staf/3.png" alt=""></a>
+                                                </div>
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>what a packages</h5>
+                                                    </a>
+                                                    <p>Lorem ipsum dolor sit amet</p>
+                                                </div>
+                                            </div>
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_thumb">
+                                                    <a href="#"><img src="img/staf/2.png" alt=""></a>
+                                                </div>
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>Cool Marketing </h5>
+                                                    </a>
+                                                    <p>Lorem ipsum dolor sit amet</p>
+                                                </div>
+                                            </div>
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_thumb">
+                                                    <a href="#"><img src="img/staf/4.png" alt=""></a>
+                                                </div>
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>Awesome packages</h5>
+                                                    </a>
+                                                    <p>Lorem ipsum dolor sit amet</p>
+                                                </div>
+                                            </div>
+                                            <!-- single_notify  -->
+                                            <div class="single_notify d-flex align-items-center">
+                                                <div class="notify_thumb">
+                                                    <a href="#"><img src="img/staf/3.png" alt=""></a>
+                                                </div>
+                                                <div class="notify_content">
+                                                    <a href="#">
+                                                        <h5>what a packages</h5>
+                                                    </a>
+                                                    <p>Lorem ipsum dolor sit amet</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="nofity_footer">
+                                            <div class="submit_button text-center pt_20">
+                                                <a href="#" class="btn_1">See More</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/ Menu_NOtification_Wrap  -->
+                                </li>
+                                <li>
+                                    <a class="CHATBOX_open" href="#"> <img src="img/icon/msg.svg" alt=""> <span>2</span>
+                                    </a>
+                                </li>
+                            </div>
+                            <div class="profile_info">
+                                <img src="img/client_img.png" alt="#">
+                                <div class="profile_info_iner">
+                                    <div class="profile_author_name">
+                                        <p>Neurologist </p>
+                                        <h5>Dr. Robar Smith</h5>
+                                    </div>
+                                    <div class="profile_info_details">
+                                        <a href="#">My Profile </a>
+                                        <a href="#">Settings</a>
+                                        <a href="#">Log Out </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/ menu  -->
+        <div class="main_content_iner overly_inner">
+            <div class="container-fluid p-0">
+                <!-- Título de la página -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                                    <div class="page_title_left d-flex align-items-center">
+                                        <h3 class="f_s_25 f_w_700 dark_text mr_30">Player Tab</h3>
+                                        <ol class="breadcrumb page_bradcam mb-0">
+                                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                            <li class="breadcrumb-item active">Player List</li>
+                                        </ol>
+                                    </div>
+                                    <div class="page_title_right">
+                                        <div class="page_date_button d-flex align-items-center">
+                                            <img src="img/icon/calender_icon.svg" alt="">
+                                            August 1, 2020 - August 31, 2020
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Tabla de Usuarios -->
+                            <div class="col-lg-9">
+                                <div class="white_card mb_30 shadow p-4">
+                                    <div class="white_card_body">
+                                        <div class="QA_section">
+                                            <div
+                                                class="white_box_tittle list_header d-flex justify-content-between align-items-center mb-4">
+                                                <h4>Player List</h4>
+                                                <div class="d-flex">
+                                                    <form id="searchForm" class="d-flex">
+                                                        <div class="search_field mr-2">
+                                                            <input type="text" id="searchInput" class="form-control"
+                                                                placeholder="Search...">
+                                                        </div>
+                                                        <button type="submit" id="searchButton" class="btn btn-primary">
+                                                            <i class="ti-search"></i> Search
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div id="resultContainer"></div>
+                                            <div class="QA_table mb_10">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover lms_table_active">
+                                                        <thead class="thead-dark">
+                                                            <tr>
+                                                                <th scope="col">ID</th>
+                                                                <th scope="col">Email</th>
+                                                                <th scope="col">Full Name</th>
+                                                                <th scope="col">Language</th>
+                                                                <th scope="col">Country</th>
+                                                                <th scope="col">Sign Up</th>
+                                                                <th scope="col">Status</th>
+                                                                <th scope="col">Balance</th>
+                                                                <th scope="col">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="user-table-body">
+                                                            <!-- Usuarios -->
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Ventana de Filtros -->
+                            <div class="col-lg-3">
+                                <div class="white_card mb_30 shadow p-4">
+                                    <div class="white_card_body">
+                                        <h4 class="mb-4">Filters</h4>
+                                        <form id="filterForm">
+                                            <div class="filter_group mb-3">
+                                                <label for="nameFilter">Name</label>
+                                                <input type="text" id="nameFilter" class="form-control"
+                                                    placeholder="Filter by name">
+                                            </div>
+                                            <div class="filter_group mb-3">
+                                                <label for="emailFilter">Email</label>
+                                                <input type="email" id="emailFilter" class="form-control"
+                                                    placeholder="Filter by email">
+                                            </div>
+                                            <div class="filter_group mb-3">
+                                                <label for="currencyFilter">Currency</label>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                        id="currencyDropdown" data-bs-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        Select Currency
+                                                    </button>
+                                                    <div class="dropdown-menu" id="currencyDropdownMenu"
+                                                        aria-labelledby="currencyDropdown">
+                                                        <!-- Las opciones se llenarán aquí -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="filter_group mb-3">
+                                                <label for="countryFilter">Country</label>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                        id="countryDropdown" data-bs-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        Select Country
+                                                    </button>
+                                                    <div class="dropdown-menu" id="countryDropdownMenu"
+                                                        aria-labelledby="countryDropdown">
+                                                        <!-- Las opciones se llenarán aquí -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-success w-100">
+                                                <i class="fas fa-filter"></i> Apply Filters
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- End Row -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- footer part -->
+        <div class="footer_part">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer_iner text-center">
+                            <p>2020 © Influence - Designed by <a href="#"> <i class="ti-heart"></i> </a><a href="#">
+                                    Dashboard</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- main content part end -->
+
+    <div id="back-top" style="display: none;">
+        <a title="Go to Top" href="#">
+            <i class="ti-angle-up"></i>
+        </a>
+    </div>
+
+    <!-- footer  -->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <!-- popper js -->
+    <script src="js/popper.min.js"></script>
+    <!-- bootstarp js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- sidebar menu  -->
+    <script src="js/metisMenu.js"></script>
+    <!-- waypoints js -->
+    <script src="vendors/count_up/jquery.waypoints.min.js"></script>
+    <!-- waypoints js -->
+    <script src="vendors/chartlist/Chart.min.js"></script>
+    <!-- counterup js -->
+    <script src="vendors/count_up/jquery.counterup.min.js"></script>
+
+    <!-- nice select -->
+    <script src="vendors/niceselect/js/jquery.nice-select.min.js"></script>
+    <!-- owl carousel -->
+    <script src="vendors/owl_carousel/js/owl.carousel.min.js"></script>
+
+    <script src="js/player_list.js"></script>
+
+    <!-- responsive table -->
+    <script src="vendors/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="vendors/datatable/js/dataTables.responsive.min.js"></script>
+    <script src="vendors/datatable/js/dataTables.buttons.min.js"></script>
+    <script src="vendors/datatable/js/buttons.flash.min.js"></script>
+    <script src="vendors/datatable/js/jszip.min.js"></script>
+    <script src="vendors/datatable/js/pdfmake.min.js"></script>
+    <script src="vendors/datatable/js/vfs_fonts.js"></script>
+    <script src="vendors/datatable/js/buttons.html5.min.js"></script>
+    <script src="vendors/datatable/js/buttons.print.min.js"></script>
+
+    <!-- datepicker  -->
+    <script src="vendors/datepicker/datepicker.js"></script>
+    <script src="vendors/datepicker/datepicker.en.js"></script>
+    <script src="vendors/datepicker/datepicker.custom.js"></script>
+
+    <script src="js/chart.min.js"></script>
+    <script src="vendors/chartjs/roundedBar.min.js"></script>
+
+    <!-- progressbar js -->
+    <script src="vendors/progressbar/jquery.barfiller.js"></script>
+    <!-- tag input -->
+    <script src="vendors/tagsinput/tagsinput.js"></script>
+    <!-- text editor js -->
+
+    <script src="js/custom.js"></script>
+</body>
+
+</html>

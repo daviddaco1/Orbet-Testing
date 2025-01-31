@@ -1,0 +1,243 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('icomoon.eot?7a9ff1');
+  src:  url('icomoon.eot?7a9ff1#iefix') format('embedded-opentype'),
+    url('icomoon.ttf?7a9ff1') format('truetype'),
+    url('icomoon.woff?7a9ff1') format('woff'),
+    url('icomoon.svg?7a9ff1#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-like-fill:before {
+  content: "\e93f";
+}
+.icon-like:before {
+  content: "\e940";
+}
+.icon-maximize:before {
+  content: "\e941";
+}
+.icon-minimize:before {
+  content: "\e942";
+}
+.icon-youtube:before {
+  content: "\e943";
+}
+.icon-linkedin:before {
+  content: "\e944";
+}
+.icon-instagram:before {
+  content: "\e945";
+}
+.icon-facebook:before {
+  content: "\e946";
+}
+.icon-password-view:before {
+  content: "\e93e";
+}
+.icon-arrow-up:before {
+  content: "\e900";
+}
+.icon-bitcoin-currency:before {
+  content: "\e901";
+}
+.icon-litecoin-currency:before {
+  content: "\e902";
+}
+.icon-doge-currency:before {
+  content: "\e903";
+}
+.icon-usdt-currency:before {
+  content: "\e904";
+}
+.icon-info:before {
+  content: "\e905";
+}
+.icon-dollar .path1:before {
+  content: "\e906";
+  color: rgb(80, 175, 0);
+}
+.icon-dollar .path2:before {
+  content: "\e907";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-ethereum:before {
+  content: "\e908";
+}
+.icon-ethereum-currency:before {
+  content: "\e909";
+}
+.icon-litecoin:before {
+  content: "\e90a";
+}
+.icon-solana:before {
+  content: "\e90b";
+}
+.icon-bitcoin:before {
+  content: "\e90c";
+}
+.icon-verification-email:before {
+  content: "\e937";
+}
+.icon-casino:before {
+  content: "\e90d";
+}
+.icon-categories:before {
+  content: "\e90e";
+}
+.icon-close:before {
+  content: "\e90f";
+}
+.icon-disabled:before {
+  content: "\e910";
+}
+.icon-vip-crown:before {
+  content: "\e911";
+}
+.icon-copy:before {
+  content: "\e912";
+}
+.icon-edit:before {
+  content: "\e913";
+}
+.icon-email-verified:before {
+  content: "\e914";
+}
+.icon-game-pass:before {
+  content: "\e915";
+}
+.icon-info-octagon:before {
+  content: "\e916";
+}
+.icon-key-copy:before {
+  content: "\e917";
+}
+.icon-live-support:before {
+  content: "\e918";
+}
+.icon-logout-sessions:before {
+  content: "\e919";
+}
+.icon-mail-otp:before {
+  content: "\e91a";
+}
+.icon-messages:before {
+  content: "\e91b";
+}
+.icon-sound:before {
+  content: "\e93b";
+}
+.icon-mode:before {
+  content: "\e91c";
+}
+.icon-my-wallet:before {
+  content: "\e91d";
+}
+.icon-password:before {
+  content: "\e91e";
+}
+.icon-ranks:before {
+  content: "\e91f";
+}
+.icon-redeem-code:before {
+  content: "\e920";
+}
+.icon-referral:before {
+  content: "\e921";
+}
+.icon-refresh:before {
+  content: "\e922";
+}
+.icon-search:before {
+  content: "\e923";
+}
+.icon-send:before {
+  content: "\e924";
+}
+.icon-settings:before {
+  content: "\e925";
+}
+.icon-stickers:before {
+  content: "\e926";
+}
+.icon-transaction:before {
+  content: "\e927";
+}
+.icon-vault:before {
+  content: "\e928";
+}
+.icon-wallet-check:before {
+  content: "\e929";
+}
+.icon-windows:before {
+  content: "\e92a";
+}
+.icon-ipad:before {
+  content: "\e93c";
+}
+.icon-mobile:before {
+  content: "\e93d";
+}
+.icon-withdraw:before {
+  content: "\e92b";
+}
+.icon-coupon:before {
+  content: "\e92c";
+}
+.icon-affiliate-program:before {
+  content: "\e92d";
+}
+.icon-game-shows:before {
+  content: "\e92e";
+}
+.icon-roulette:before {
+  content: "\e92f";
+}
+.icon-blackjack:before {
+  content: "\e930";
+}
+.icon-live-casino:before {
+  content: "\e931";
+}
+.icon-slots:before {
+  content: "\e932";
+}
+.icon-originals:before {
+  content: "\e933";
+}
+.icon-weekly-race:before {
+  content: "\e934";
+}
+.icon-promotions:before {
+  content: "\e935";
+}
+.icon-challenges:before {
+  content: "\e936";
+}
+.icon-releases:before {
+  content: "\e938";
+}
+.icon-favorite:before {
+  content: "\e939";
+}
+.icon-home:before {
+  content: "\e93a";
+}

@@ -1,0 +1,22 @@
+.allRanksSection{display:flex;position:relative;height:calc(100vh - 5.5rem);flex-direction:column}
+.allRanksSection .ranksBg{position:absolute;top:-3.2rem;left:0;width:100%;height:100%}
+.allRanksSection .ranksBg img{width:110%;height:110%;object-fit:contain;max-width:initial;max-height:initial}
+.allRanksSection .levelsBox{margin-top:2.5rem;font-family:'Yapari';font-size:.8rem;color:var(--primary-color);text-transform:uppercase;display:block;font-weight:400;line-height:normal;text-align:center}
+.allRanksSection h1{margin-top:.3rem;font-size:3.5rem;color:var(--white-color);text-transform:uppercase;display:block;font-weight:400;line-height:normal;text-align:center}
+.allRanksSliderBox{margin-top:5%;position:relative;display:flex}
+.allRanksSliderBox .rankItemBox{height:350px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;transform:scale(0.95)!important;transition:.3s}
+.allRanksSliderBox .rankItemBox h2{font-family:'Yapari';font-size:1.1rem;font-weight:400;line-height:normal;text-transform:uppercase;transition:.3s;height:30px;overflow:hidden;opacity:1}
+.allRanksSliderBox .rankItemBox p{font-size:.6rem;color:#b0b3b3;font-weight:300;text-align:center;line-height:16px;transition:.3s;height:0;overflow:hidden;opacity:0}
+.allRanksSliderBox .swiper-container{padding:0 50px;margin:0 auto;height:425px;width:100%;/*max-width:1133px*/}
+.allRanksSliderBox .swiper-slide{display:flex;align-items:center;justify-content:center;box-sizing:border-box;opacity:0}
+.allRanksSliderBox .swiper-slide.swiper-slide-prev{opacity:1;position:relative;right:1%}
+.allRanksSliderBox .swiper-slide.swiper-slide-next{opacity:1;position:relative;left:1%}
+.allRanksSliderBox .swiper-slide.swiper-slide-active{opacity:1;position:relative}
+.allRanksSliderBox .swiper-slide.swiper-slide-next + .swiper-slide{opacity:1;transform:scale(0.8)!important}
+.allRanksSliderBox .swiper-slide:has(+ .swiper-slide-prev){opacity:1;transform:scale(0.8)!important}
+.allRanksSliderBox .swiper-button-next,.allRanksSliderBox .swiper-button-prev{width:60px;height:30px;display:flex;align-items:center;justify-content:center;background:none}
+.allRanksSliderBox .swiper-button-prev::after,.allRanksSliderBox .swiper-button-next::after{content:'';width:100%;height:100%;background:url(../images/slider-arrow.svg) no-repeat center center;display:flex;align-items:center;justify-content:center}
+.swiper-button-next::after{transform:rotate(180deg)}
+.allRanksSliderBox .swiper-slide.swiper-slide-active .rankItemBox{transform:scale(1)!important;transition:.3s}
+.allRanksSliderBox .swiper-slide.swiper-slide-active .rankItemBox h2{height:0;transition:.3s;opacity:0}
+.allRanksSliderBox .swiper-slide.swiper-slide-active .rankItemBox p{height:100px;transition:.3s;opacity:1}

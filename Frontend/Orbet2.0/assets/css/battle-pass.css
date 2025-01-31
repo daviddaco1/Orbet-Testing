@@ -1,0 +1,39 @@
+.sectionHeading{display:flex;align-items:center;justify-content:space-between;position:relative}
+.sectionHeading h2{font-family:var(--yapari-font);font-size:2rem;color:var(--white-color);text-transform:uppercase;font-weight:400;display:flex;white-space:nowrap;align-items:center;width:calc(100% - 325px)}
+.sectionHeading h2 span{margin-top:.5rem;display:block;font-size:.8rem;color:var(--white-color);opacity:.5;text-transform:none}
+.sectionHeading figure{position:relative;top:-10px;left:-50px;width:500px}
+.battlePassDetails{ display: block}
+.battlePassDetails p{margin-top:2rem;display:block;font-size:.9rem;color:var(--white-color);text-transform:none}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

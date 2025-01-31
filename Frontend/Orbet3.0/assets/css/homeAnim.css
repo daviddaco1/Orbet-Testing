@@ -1,0 +1,34 @@
+.sectionHeading{display:flex;align-items:center;justify-content:space-between;position:relative}
+.sectionHeading h2{font-family:var(--yapari-font);font-size:2rem;color:var(--white-color);text-transform:uppercase;font-weight:400}
+.sectionHeading h2 span{margin-top:.5rem;display:block;font-size:.8rem;color:var(--white-color);opacity:.5;text-transform:none;font-weight:300}
+.appSearchBox{display:flex;align-items:center;border-radius:13px;border:1px solid var(--primary-color-dark);background:#073a4121}
+.appSearchBox .form-control{background:none;border:0;width:280px;color:#838788;font-size:.9rem;border-radius:10px 0 0 10px;backdrop-filter:none}
+.appSearchBox em{padding:14px;font-size:.9rem;background:none;cursor:pointer}
+.topGamesSection{padding-right:27%;margin-top:50px;width:100%}
+.topGamesBox{margin-top:1rem;display:flex;gap:.8rem;flex-wrap:wrap}
+.topGamesBox .topGamesItem{display:flex;width:calc(33.3% - .52rem);max-width:267.6px;background:url(../images/top-tile-border.svg) no-repeat left top;background-size:contain;position:relative;transition:.5s;top:0}
+.topGamesBox .topGamesItem::after{content:'';position:absolute;top:0;left:0;width:99%;height:99%;border-radius:45px 15px 37px 15px;transition:.5s}
+.topGamesBox .topGamesItem a{padding:.38rem .4rem;position:relative;overflow:hidden}
+.topGamesBox .topGamesItem figure{display:inline-block;mask-image:url(../images/top-game.png);mask-size:100% 100%}
+.topGamesBox .topGamesItem a:after{content:'';margin:.4rem;position:absolute;bottom:4px;left:0;width:calc(100% - .8rem);height:100%;background:linear-gradient(180deg,#00000000 21.01%,#000000e6 67.39%);clip-path:polygon(0 0,calc(100% - 50px) 0,130% 40px,93% 100%,0px 100%,0 calc(100% - 50px));border-radius:3px}
+.topGamesBox .topGamesItem .captionbox{padding:1rem;position:absolute;bottom:0;left:0;width:100%;z-index:1}
+.topGamesBox .topGamesItem .captionbox strong{font-family:var(--yapari-font);font-size:.8rem;text-transform:uppercase;font-weight:600;line-height:18px;display:block}
+.topGamesBox .topGamesItem .captionbox span{margin-top:10px;font-size:.7rem;display:block}
+.topGamesBox .topGamesItem:hover{background:url(../images/top-tile-border-hover.svg) no-repeat left top;background-size:contain;top:-10px;transition:.5s}
+.categoriesSection{padding-right:27%;margin-top:2rem;width:100%}
+.categoriesSection ul{display:flex;overflow:hidden;gap:.8rem}
+.categoriesSection ul li{padding:.5px;display:flex;align-items:center;justify-content:center;border-radius:.5rem;position:relative;overflow:hidden;cursor:pointer;width:100%;background:linear-gradient(#00000000 0 0) padding-box,linear-gradient(to right,#204d56,#204d56,#204d5600,#204d56,#204d56,#204d5600,#204d56,#204d56) border-box}
+.categoriesSection ul li span{padding:.397rem 1.38rem;display:flex;align-items:center;justify-content:center;color:#6a6e6f;font-size:.8rem;white-space:nowrap;position:relative;z-index:2;font-weight:500;border-radius:8px;border:#0e181a solid 4px;width:100%;height:100%;background:linear-gradient(357deg,#172528 17.35%,#24393e 96.46%)}
+.categoriesSection ul li:hover,.categoriesSection ul li.active{background:linear-gradient(#00000000 0 0) padding-box,linear-gradient(to right,#00E0FF,#00E0FF,#204d5600,#00E0FF,#00E0FF,#204d5600,#00E0FF,#00E0FF) border-box}
+.categoriesSection ul li:hover span,.categoriesSection ul li.active span{border:#0e181a solid 4px;background:linear-gradient(357deg,#003036 17.35%,#008799 96.46%);color:#fff}
+.onlineGamesSection{padding-right:27%;margin-top:3rem;width:100%}
+.onlineGamesBox{padding-bottom:2rem;margin-top:1.5rem;display:flex;gap:1.28rem;flex-wrap:wrap}
+.onlineGamesBox .gameItem{display:flex;width:calc(16.6% - 16.6px);max-width:120.94px;background:url(../images/border.svg) no-repeat left top;background-size:contain;position:relative;transition:.5s;top:0;cursor:pointer}
+.onlineGamesBox .gameItem::after{content:'';position:absolute;top:0;left:0;width:99%;height:99%;border-radius:26px 15px;transition:.5s}
+.onlineGamesBox .gameItem a{padding:.4rem;border-radius:2.4rem 1.6rem 2.4rem 1.7rem;overflow:hidden}
+.onlineGamesBox .gameItem img{float:left}
+.onlineGamesBox .gameItem:hover{background:url(../images/border-hover.svg) no-repeat left top;background-size:contain;top:-10px;transition:.5s}
+.onlineGamesBox .gameItem:hover::after{box-shadow:0 4px 10px -1px #00E0FF,0 -2px 5px -2px #00E0FF;transition:.5s}
+@media screen and (min-width:1442px) {
+.onlineGamesBox{gap:1.03rem}
+}

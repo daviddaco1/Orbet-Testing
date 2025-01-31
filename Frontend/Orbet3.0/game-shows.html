@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Game Overview</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no" />
+<link rel="stylesheet" href="assets/fonts/fonts.css" type="text/css"/>
+<link rel="stylesheet" href="assets/fonts/icomoon.css" type="text/css"/>
+<link rel="stylesheet" href="assets/css/global.css" type="text/css"/>
+<link rel="stylesheet" href="assets/css/game-overview.css" type="text/css"/>
+</head>
+<body>
+<div class="layoutBox">
+  <div class="layoutBg"><img class="img-responsive" src="assets/images/game-overview/overview-bg-1.jpg" alt="orbet"/></div>
+  <div class="loadPartial" data-page="include/sideBar.html"></div>
+  <div class="container">
+    <div class="loadPartial" data-page="include/header.html"></div>
+    <div class="gameOverviewSec">
+      <div class="overviewCardBg">
+        <div class="overviewCardHead">
+          <div class="overViewTitle">
+            <h3>Waifu tower</h3> <span>Orbet Originals</span>
+          </div>
+          <div class="overviewActions">
+            <div class="overviewActionDemo">
+              <span>Demo Mode </span>
+              <div class="radioToggleOne">
+                <label class="switch" for="Google">
+                  <input type="checkbox" id="Google" hidden="">
+                  <span class="slider round"></span>
+                </label>
+              </div>
+            </div>
+            <button class="overviewActionBtn changeIcon"><em class="icon-like" data-active="icon-like-fill" data-icon="icon-like"></em></button>
+            <button class="overviewActionBtn" id="scaleGameOption"><em class="icon-maximize" data-active="icon-minimize" data-icon="icon-maximize"></em></button>
+          </div>
+        </div>
+        <div class="overviewCardBody">
+          <div class="overviewGameFrame">
+            <figure>
+              <img src="assets/images/game-overview/game-1.png" alt="game-1" />
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="loadPartial" data-page="include/footer.html"></div>
+  </div>
+</div>
+<div class="loadPartial" data-page="include/global-popup.html"></div>
+<script src="assets/js/jquery-3.7.1.min.js"></script> 
+<script src="assets/js/select-dropdown.js"></script> 
+<script src="assets/js/global-function.js"></script>
+</body>
+</html>

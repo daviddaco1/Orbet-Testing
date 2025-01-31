@@ -1,0 +1,149 @@
+.settingsSection{margin-top:3rem;width:100%}
+.settingsBox{padding-top:30px;margin-bottom:15px;width:100%;height:calc(100vh - 280px);overflow:hidden;overflow-y:auto}
+.userInformationSection{padding:20px;border-radius:20px;border:1px solid var(--primary-color);min-height:200px;display:none;flex-direction:column}
+.userInformationSection.active{display:flex}
+.userInformationSection label{margin:25px 0 10px;display:block}
+.userInformationSection .form-group{margin:0;display:flex;gap:15px;width:45%}
+.userInformationSection .form-group .form-control{border-radius:10px;border:1px solid #005F6C;color:var(--white-color);height:46px}
+.accountsDetails{margin-top:15px;display:flex;gap:15px}
+.accountsDetails .accItem{padding:15px;border-radius:10px;background:linear-gradient(90deg,#ffffff0d 5.16%,#ffffff08 119.94%);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);min-height:120px;width:100%;display:flex;align-items:center;position:relative}
+.accountsDetails .accItem:first-child{padding:20px;gap:15px}
+.accountsDetails .accItem figure{padding:7px;border-radius:100px;border:1.219px solid #ffffff4d;background:#ffffff08;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);width:76px;height:76px;flex-shrink:0;position:relative;display:flex;align-items:center;justify-content:center}
+.accountsDetails .accItem figure .profilePic{width:100%;height:100%;border-radius:100px}
+.accountsDetails .accItem figure .tag{position:absolute;left:0;display:flex;align-items:center;justify-content:center;width:100%;bottom:-8px;z-index:1}
+.accountsDetails .accItem figcaption{display:flex;flex-direction:column;gap:10px}
+.accountsDetails .accItem figcaption strong{color:var(--white-color);font-size:1.2rem;font-weight:500}
+.accountsDetails .accItem figcaption span{font-family:'Yapari';font-size:.65rem;color:#F7704B;text-transform:uppercase;display:block;line-height:10px;font-weight:500}
+.accountsDetails .accItem ul{display:flex;align-items:center;width:100%}
+.accountsDetails .accItem ul li{padding:0 25px;display:flex;flex-direction:column;width:100%;gap:8px}
+.accountsDetails .accItem ul li + li{border-left:1px solid #005F6C}
+.accountsDetails .accItem ul li span{color:#A7A7A7;font-size:1rem;font-weight:300}
+.accountsDetails .accItem ul li strong{color:var(--white-color);font-size:1.2rem;font-weight:500}
+.accountsDetails .accItem em{position:absolute;right:20px;cursor:pointer}
+.accountVerificationSection{display:none;flex-direction:column}
+.accountVerificationSection.active{display:flex}
+.accountVerificationSection h2{display:block;font-size:1.5rem;color:var(--white-color)}
+.accountVerificationBox{margin-top:1.5rem;display:flex;gap:15px}
+.accountVerificationBox .leftBox{width:calc(100% - 380px);gap:15px;display:flex;flex-direction:column}
+.accountVerificationBox .leftBox .itemBox{padding:20px;border-radius:10px;border:1px solid #005F6C;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.accountVerificationBox .leftBox .itemBox .itemInfo{display:flex;align-items:center;gap:10px}
+.accountVerificationBox .leftBox .itemBox label{display:block;font-size:1.1rem;line-height:26px}
+.accountVerificationBox .leftBox .itemBox span{margin-top:.3rem;display:block;font-size:.8rem;font-weight:300}
+.accountVerificationBox .leftBox .itemBox tag{padding:7px 10px;margin-left:10px;border-radius:8px;background:linear-gradient(90deg,#ffffff0d 5.16%,#ffffff08 119.94%);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);font-size:.9rem}
+.accountVerificationBox .leftBox .itemBox tag.requestedTag{color:#FF7373}
+.accountVerificationBox .leftBox .itemBox tag.incompleteTag{color:#707070}
+.accountVerificationBox .leftBox .itemBox.withInputBox{padding-bottom:75px;position:relative}
+.accountVerificationBox .leftBox .itemBox.withInputBox .form-control{position:absolute;left:60px;bottom:15px;width:400px;border-radius:10px;border:1px solid #005F6C;color:var(--white-color)}
+.accountVerificationBox .leftBox .itemBox .btn{height:45px}
+.accountVerificationBox .rightBox{padding:20px;border-radius:10px;border:1px solid #005F6C;display:flex;align-items:center;justify-content:center;gap:15px;flex-direction:column;width:360px;max-height:fit-content}
+.accountVerificationBox .rightBox figure{margin-top:10px}
+.accountVerificationBox .rightBox strong{font-size:1.3rem;color:var(--white-color)}
+.accountVerificationBox .rightBox p{font-size:.9rem;color:var(--white-color);line-height:22px;display:block;text-align:center}
+.accountVerificationBox .rightBox .btn{width:100%;height:45px}
+.changePasswordSection{display:none;flex-direction:column;}
+.changePasswordSection.active{display:flex}
+.changePasswordSection h2{display:block;font-size:1.5rem;color:var(--white-color)}
+.changePasswordBox{margin-top:1.5rem;display:flex;gap:15px;flex-wrap:wrap}
+.changePasswordBox .itemBox{padding:20px;border-radius:10px;border:1px solid #005F6C;display:flex;width:calc(50% - 8px);flex-direction:column}
+.changePasswordBox .itemBox h3{display:block;font-size:1.1rem;color:var(--white-color);font-weight:500}
+.changePasswordBox .itemBox span{margin-top:.5rem;display:block;font-size:.9rem;color:var(--white-color);font-weight:300;min-height:40px}
+.changePasswordBox .changePasswordDiv{padding:10px 15px;margin-top:.9rem;display:flex;align-items:center;border-radius:10px;background:linear-gradient(90deg,#ffffff0d 5.16%,#ffffff08 119.94%);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);cursor:pointer;position:relative;justify-content:space-between;min-height:60px}
+.changePasswordBox .changePasswordDiv:after{content:'\e900';position:absolute;top:20px;right:12px;color:var(--white-color);font-family:var(--icon-font);font-size:.8rem;transform:rotate(90deg);pointer-events:none}
+.changePasswordBox .changePasswordDiv strong{display:flex;align-items:center;gap:15px}
+.changePasswordBox .twoFactorAuthentication{padding:10px 15px;margin-top:.9rem;display:flex;align-items:center;border-radius:10px;background:linear-gradient(90deg,#ffffff0d 5.16%,#ffffff08 119.94%);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);cursor:pointer;position:relative;justify-content:space-between;min-height:60px}
+.changePasswordBox .twoFactorAuthentication strong{display:flex;align-items:center;gap:15px}
+.changePasswordBox .linkAccounts{padding:10px 15px;display:flex;align-items:center;border-radius:10px;background:linear-gradient(90deg,#ffffff0d 5.16%,#ffffff08 119.94%);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);cursor:pointer;position:relative;justify-content:space-between;min-height:60px}
+.changePasswordBox .linkAccounts + .linkAccounts{margin-top:.9rem}
+.changePasswordBox .linkAccounts strong{display:flex;align-items:center;gap:15px}
+.changePasswordBox .linkAccountText{display:flex;gap:10px}
+.preferencesSection{padding:20px;border-radius:10px;border:1px solid #005F6C;display:none;flex-direction:column}
+.preferencesSection.active{display:flex}
+.preferencesSection h2{display:block;font-size:1.5rem;color:var(--white-color)}
+.preferencesSection .preferencesBox{margin-top:20px;display:block}
+.preferencesSection .preferencesBox .listItem{padding:10px 15px;display:flex;min-height:50px}
+.preferencesSection .preferencesBox .listItem + .listItem{border-top:1px solid #005F6C}
+.preferencesSection .preferencesBox .listItem.toggleListItem{gap:40px}
+.preferencesSection .preferencesBox .listItem .toggleInfoBox{display:flex;flex-direction:column}
+.preferencesSection .preferencesBox .listItem.currencyItem{padding:10px 15px 15px 0;gap:20px}
+.preferencesSection .preferencesBox .listItem .currencyInfoBox strong{display:block;font-size:1rem;line-height:26px;color:var(--white-color);font-weight:500}
+.preferencesSection .preferencesBox .listItem .currencyInfoBox p{display:block;font-size:.8rem;font-weight:300;color:#D2D2D2}
+.preferencesSection .preferencesBox .listItem.oddsPreferenceItem{padding:15px 10px 15px 0;gap:20px;justify-content:space-between}
+.preferencesSection .preferencesBox .listItem .oddsPreferenceInfoBox strong{display:block;font-size:1.1rem;line-height:26px;color:var(--white-color);font-weight:500}
+.preferencesSection .preferencesBox .listItem .oddsPreferenceInfoBox p{display:block;font-size:1rem;font-weight:300;color:#D2D2D2}
+.preferencesSection .preferencesBox .listItem .toggleInfoBox strong{display:block;font-size:1rem;line-height:26px;color:var(--white-color);font-weight:500}
+.preferencesSection .preferencesBox .listItem .toggleInfoBox p{display:block;font-size:.8rem;font-weight:300;color:#D2D2D2}
+.sessionsSection{display:none;flex-direction:column}
+.sessionsSection.active{display:flex}
+.sessionsSection .sessionsBox{margin-bottom:20px;display:flex;align-items:center;gap:15px}
+.sessionsSection .sessionsBox strong{font-size:1rem;color:var(--white-color);font-weight:500}
+.sessionsSection .sessionsBox .btn{margin-left:1.6rem;height:45px}
+.sessionsTableBox{max-height:calc(100vh - 365px);}
+.ignoredUsersSection{display:none;flex-direction:column}
+.ignoredUsersSection.active{display:flex}
+.ignoredUsersSection h2{display:block;font-size:1.5rem;color:var(--white-color)}
+.ignoredUsersSection p{margin:10px 0;display:block;font-size:.8rem;color:#D2D2D2}
+.ignoredUsersTableBox{max-height:calc(100vh - 365px);}
+
+
+/*popup css start*/
+.popupBg{position:relative;}
+.popupBg::before{content:'';height:100%;position:absolute;background:linear-gradient(145deg,#008ca2 0%,#7271711c 40%);width:100%;pointer-events:none;opacity:.7}
+.popupBg::after{content:'';width:100%;height:100%;position:absolute;border-radius:12px;box-shadow:inset 200px 30px 200px #00000096;top:1px;left:1px;pointer-events:none}
+
+.verificationEmailPopupBox{padding:50px 40px;width:500px;height:370px;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;z-index:1}
+/*.verificationEmailPopupBox.active{display:flex}*/
+.verificationEmailPopupBox figure{margin:50px 0 15px}
+.verificationEmailPopupBox .subHeading{margin-top:.5rem;font-size:1.2rem;color:#fff;line-height:1rem;display:block;text-align:left}
+.verificationEmailPopupBox p{margin-top:.5rem;font-size:.8rem;color:#D2D2D2;text-align:center}
+.verificationEmailPopupBox .btnBox{width:100%}
+.verificationEmailPopupBox .btn{margin-top:30px;width:100%}
+.emailVerifiedPopupBox{padding:50px 40px;width:500px;height:330px;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;z-index:1}
+/*.emailVerifiedPopupBox.active{display:flex}*/
+.emailVerifiedPopupBox figure{margin:50px 0 15px}
+.emailVerifiedPopupBox .subHeading{margin-top:.5rem;font-size:1.2rem;color:#fff;line-height:1rem;display:block;text-align:left}
+.emailVerifiedPopupBox p{margin-top:.5rem;font-size:.8rem;color:#D2D2D2;text-align:center}
+.emailVerifiedPopupBox .btnBox{width:100%}
+.emailVerifiedPopupBox .btn{margin-top:30px;width:100%}
+
+.changePasswordPopupBox{padding:50px 40px;width:500px;display:flex;position:relative;z-index:1}
+/*.changePasswordPopupBox.active{display:flex}*/
+.changePasswordPopupBox .subHeading{margin-top:.5rem;font-size:1.2rem;color:#fff;line-height:1rem;display:block;text-align:left}
+.changePasswordPopupBox p{margin-top:.5rem;font-size:.8rem;color:#D2D2D2}
+.changePasswordPopupBox .formBox{display:flex;flex-direction:column;justify-content:center;width:100%}
+.changePasswordPopupBox .form-group label{padding-bottom:.5rem;color:#fff;text-transform:inherit}
+.changePasswordPopupBox .inputPassword{padding:10px;position:absolute;top:27px;right:2px;cursor:pointer;color:#707070}
+.changePasswordPopupBox .forgotPasswordLink{display:block;text-align:right;font-size:.8rem}
+.changePasswordPopupBox .forgotPasswordLink span{cursor:pointer;text-decoration:underline}
+.changePasswordPopupBox .forgotPasswordLink span:hover{text-decoration:none}
+.changePasswordPopupBox .btn{width:100%}
+.passwordResetPopupBox{padding:50px 40px;width:500px;height:400px;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;z-index:1}
+/*.passwordResetPopupBox.active{display:flex}*/
+.passwordResetPopupBox figure{margin-bottom:15px}
+.passwordResetPopupBox .subHeading{margin-top:.5rem;font-size:1.2rem;color:#fff;line-height:1rem;display:block;text-align:left}
+.passwordResetPopupBox p{margin-top:.5rem;font-size:.8rem;color:#D2D2D2}
+.passwordResetPopupBox .btnBox{width:100%}
+.passwordResetPopupBox .btn{margin-top:30px;width:100%}
+.twoStepVerificationPopupBox{padding:50px 40px;width:500px;height:400px;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;z-index:1}
+/*.twoStepVerificationPopupBox.active{display:flex}*/
+.twoStepVerificationPopupBox figure{margin-bottom:15px}
+.twoStepVerificationPopupBox .subHeading{margin-top:.5rem;font-size:1.2rem;color:#fff;line-height:1rem;display:block;text-align:left}
+.twoStepVerificationPopupBox p{margin-top:.5rem;font-size:.8rem;color:#D2D2D2}
+.twoStepVerificationPopupBox .btnBox{width:100%}
+.twoStepVerificationPopupBox .btn{margin-top:30px;width:100%}
+.twoStepVerificationPopupBox span{margin-top:1.5rem;font-size:.8rem;color:#D2D2D2}
+.twoStepVerificationPopupBox .otpInputBox{margin-top:20px;display:flex;gap:10px}
+.twoStepVerificationPopupBox .otpInputBox input{width:40px;height:40px;color:#fff;border-radius:8px;border:1px solid #FFF;background:none;text-align:center;outline:none}
+.twoFactorAuthenticationPopupBox{padding:50px 40px;width:500px;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;z-index:1}
+/*.twoFactorAuthenticationPopupBox.active{display:flex}*/
+.twoFactorAuthenticationPopupBox .subHeading{margin-top:.5rem;font-size:1.2rem;color:#fff;line-height:1rem;display:block;text-align:left}
+.twoFactorAuthenticationPopupBox figure{margin:15px 0;height:100px}
+.twoFactorAuthenticationPopupBox p{margin-top:.5rem;font-size:.8rem;color:#D2D2D2;text-align:center;line-height:1rem}
+.twoFactorAuthenticationPopupBox form{display:flex;flex-direction:column;justify-content:center;width:100%}
+.twoFactorAuthenticationPopupBox .form-group label{padding-bottom:.5rem;color:#fff;text-transform:inherit}
+.twoFactorAuthenticationPopupBox .inputPassword{padding:10px;position:absolute;top:27px;right:42px;cursor:pointer;color:#707070}
+.twoFactorAuthenticationPopupBox .inputValueCopy{padding:10px;position:absolute;top:27px;right:2px;cursor:pointer;color:#707070}
+.twoFactorAuthenticationPopupBox .btn{width:100%}
+.twoFactorAuthenticationPopupBox .authenticatorDiv{margin:.5rem 0 .6rem;font-size:.7rem;color:#D2D2D2;line-height:1rem;display:flex;gap:10px}
+/*popup css end*/
+
+

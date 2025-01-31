@@ -1,0 +1,143 @@
+<!--Verification email sent Popup Start-->
+<div class="modal blurOverlayBg" data-modal="verificationEmailPopup">
+  <div class="popupBox popupBg">
+    <div class="popupBoxClose"><em class="icon-close"></em></div>
+    <div class="verificationEmailPopupBox">
+      <figure><img class="img-responsive" src="assets/images/verification-email.svg" alt="verification-email"/></figure>
+      <div class="subHeading">Verification email sent</div>
+      <p>Please verify your email by clicking the link we just sent to michelleotaiza@gmail.com</p>
+      <div class="btnBox">
+        <button class="btn btn-link"><span>Resend code(26s)</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Verification email sent Popup end--> 
+
+<!--Your email has been verified Popup Start-->
+<div class="modal blurOverlayBg" data-modal="emailVerifiedPopup">
+  <div class="popupBox popupBg">
+    <div class="popupBoxClose"><em class="icon-close"></em></div>
+    <div class="emailVerifiedPopupBox">
+      <figure><img class="img-responsive" src="assets/images/email-verified.svg" alt="email-verified"/></figure>
+      <div class="subHeading">Your email has been verified</div>
+      <p>Thank you for verifying your email address</p>
+      <div class="btnBox">
+        <button class="btn btn-secondary"><span>Done</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Your email has been verified Popup end--> 
+
+<!--Change Password Popup Start-->
+<div class="modal blurOverlayBg" data-modal="changePasswordPopup">
+  <div class="popupBox popupBg">
+    <div class="popupBoxClose"><em class="icon-close"></em></div>
+    <div class="changePasswordPopupBox">
+      <div class="formBox">
+        <div class="subHeading">Change Password</div>
+        <p>Changing your password will sign you out on all the other devices</p>
+        <form>
+          <div class="form-group withShape">
+            <label>Current Password*</label>
+            <input class="form-control" type="password" placeholder="Enter your Password">
+            <div class="inputPassword icon-password"></div>
+          </div>
+          <div class="form-group">
+            <div class="forgotPasswordLink popup" data-modal-trigger="forgotPasswordPopup"><span>Forgot Password?</span></div>
+          </div>
+          <div class="form-group withShape">
+            <label>New Password</label>
+            <input class="form-control" type="password" placeholder="Enter New Password">
+            <div class="inputPassword icon-password"></div>
+          </div>
+          <div class="form-group withShape">
+            <label>Confirm New Password</label>
+            <input class="form-control" type="password" placeholder="Confirm New Password">
+            <div class="inputPassword icon-password"></div>
+          </div>
+          <br/>
+          <div class="btnBox">
+            <button class="btn btn-secondary"><span>Change Password</span></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Change Password Popup end--> 
+
+<!--Reset Password Popup Start-->
+<div class="modal blurOverlayBg" data-modal="forgotPasswordPopup">
+  <div class="popupBox popupBg">
+    <div class="popupBoxClose"><em class="icon-close"></em></div>
+    <div class="passwordResetPopupBox">
+      <figure><img class="img-responsive" src="assets/images/email-send.svg" alt="email-send"/></figure>
+      <div class="subHeading">Password reset link has been sent</div>
+      <p>Please check your inbox michelleotaiza@gmail.com</p>
+      <div class="btnBox">
+        <button class="btn btn-secondary"><span>Dismiss</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Reset Password Popup end--> 
+
+<!--Two-Step Verification Popup Start-->
+<div class="modal blurOverlayBg" data-modal="twoStepVerificationPopup">
+  <div class="popupBox popupBg">
+    <div class="popupBoxClose"><em class="icon-close"></em></div>
+    <div class="twoStepVerificationPopupBox">
+      <figure><img class="img-responsive" src="assets/images/two-step-verification.svg" alt="two-step-verification"/></figure>
+      <div class="subHeading">Two-Step Verification via Email</div>
+      <p>Please enter the code sent to  michelleotaiza@gmail.com</p>
+      <form method="get" data-group-name="digits" data-autosubmit="false" autocomplete="off">
+        <div class="otpInputBox">
+          <input type="text" id="digit-1" name="digit-1" data-next="digit-2" />
+          <input type="text" id="digit-2" name="digit-2" data-next="digit-3" data-previous="digit-1" />
+          <input type="text" id="digit-3" name="digit-3" data-next="digit-4" data-previous="digit-2" />
+          <input type="text" id="digit-4" name="digit-4" data-next="digit-5" data-previous="digit-3" />
+          <input type="text" id="digit-5" name="digit-5" data-next="digit-6" data-previous="digit-4" />
+          <input type="text" id="digit-6" name="digit-6" data-previous="digit-5" />
+        </div>
+      </form>
+      <div class="btnBox">
+        <button class="btn btn-secondary"><span>Next</span></button>
+      </div>
+      <span>Resend code (26s)</span> </div>
+  </div>
+</div>
+<!--Two-Step Verification Popup end--> 
+
+<!--Two-Factor Authentication Popup Start-->
+<div class="modal blurOverlayBg" data-modal="twoFactorAuthenticationPopup">
+  <div class="popupBox popupBg">
+    <div class="popupBoxClose"><em class="icon-close"></em></div>
+    <div class="twoFactorAuthenticationPopupBox">
+      <div class="subHeading">Two-Factor Authentication</div>
+      <p>To enable two-factor authentication (2FA), scan this QR code with an app like Authy or Google Authenticator.You will be required 2FA for all future logins, tips/rains, and withdrawals.</p>
+      <figure><img class="img-responsive" src="assets/images/authentication-qr-code.png" alt="authentication-qr-code"/></figure>
+      <form>
+        <div class="form-group withShape">
+          <label>Your secret key</label>
+          <input class="form-control" type="password" placeholder="" value="8lc$CfCjtRqgA+ztOt[Qnk#^mIi]cl" id="Your-secret-key">
+          <div class="inputPassword icon-password"></div>
+          <div class="inputValueCopy icon-key-copy"></div>
+        </div>
+        <div class="authenticatorDiv"><em class="icon-info-octagon"></em>Write down this code, never real it to others .You can use it to regain access to you account if there is no access to the authenticator app.</div>
+        <div class="form-group withShape">
+          <label>Authentication code*</label>
+          <input class="form-control" type="password" placeholder="" value="" id="authentication-code">
+          <div class="inputPassword icon-password"></div>
+          <div class="inputValueCopy icon-key-copy"></div>
+        </div>
+        <br/>
+        <div class="btnBox">
+          <button class="btn btn-secondary"><span>Enable</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!--Two-Factor Authentication Popup end-->

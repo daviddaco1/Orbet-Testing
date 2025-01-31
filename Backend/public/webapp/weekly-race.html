@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Weekly Race</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no" />
+<link rel="stylesheet" href="assets/fonts/fonts.css" type="text/css"/>
+<link rel="stylesheet" href="assets/fonts/icomoon.css" type="text/css"/>
+<link rel="stylesheet" href="assets/css/owl.carousel.min.css" type="text/css"/>
+<link rel="stylesheet" href="assets/css/global.css" type="text/css"/>
+<link rel="stylesheet" href="assets/css/weekly-race.css" type="text/css"/>
+</head>
+<body>
+<div class="layoutBox">
+  <div class="layoutBg"><img class="img-responsive" src="assets/images/orbet-bg.png" alt="orbet-bg"/></div>
+  <div class="loadPartial" data-page="include/sideBar.html"></div>
+  <div class="container">
+    <div class="loadPartial" data-page="include/header.html"></div>
+    <div class="weeklySection">
+      <div class="pageHeadingCenter">
+        <h2>Weekly Race</h2>
+        <figure><img class="img-responsive" src="assets/images/top-shape-line.svg" alt="top-shape-line"/></figure>
+      </div>
+      <div class="weeklyRaceBox">
+        <div class="timerBox" id="countdown">
+          <ul>
+            <li><strong class="days"></strong><span>Days</span></li>
+            <li><strong class="hours"></strong><span>Hours</span></li>
+            <li><strong class="minutes"></strong><span>Minutes</span></li>
+            <li><strong class="seconds"></strong><span>Seconds</span></li>
+          </ul>
+        </div>
+        <div class="priceBox">
+          <figure><img class="img-responsive" src="assets/images/price-left-line.svg" alt="top-shape-line"/></figure>
+          <strong>$100,000</strong>
+          <figure><img class="img-responsive" src="assets/images/price-right-line.svg" alt="top-shape-line"/></figure>
+        </div>
+        <p>Place bets to climb the ranks and make your way into the top 20 positions to win your share of the prize pool! When the race ends, prizes will be instantly added to your VIP rewards in the equivalent BTC value!</p>
+        <div class="formBox">
+          <form>
+            <div class="weeklyInputGroupBox">
+              <div class="form-group withShape">
+                <label>Your position</label>
+                <input class="form-control" type="text" placeholder="Wager to join the race">
+              </div>
+              <div class="form-group withShape withIcon">
+                <label>Total Wagered</label>
+                <em class="icon icon-dollar"><span class="path1"></span><span class="path2"></span></em>
+                <input class="form-control" type="text" placeholder="" value="$0.00">
+              </div>
+              <div class="form-group withShape withIcon">
+                <label>Current prize</label>
+                <em class="icon icon-bitcoin-currency"></em>
+                <input class="form-control" type="text" placeholder="" value="$0.00">
+              </div>
+            </div>
+            <div class="btnBox">
+              <button class="btn btn-info"><span>Learn More</span></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="loadPartial" data-page="include/footer.html"></div>
+  </div>
+  <div class="bottomLineBase">
+    <figure><img class="img-responsive" src="assets/images/left-bottom-corner.svg" alt="left-bottom-corner"> <img class="img-responsive" src="assets/images/right-bottom-corner.svg" alt="right-bottom-corner"></figure>
+  </div>
+</div>
+<div class="loadPartial" data-page="include/global-popup.html"></div>
+<script src="assets/js/jquery-3.7.1.min.js"></script> 
+<script src="assets/js/select-dropdown.js"></script> 
+<script src="assets/js/owl.carousel.min.js"></script> 
+<script src="assets/js/global-function.js"></script> 
+<script src="assets/js/timer-script.js"></script>
+</body>
+</html>

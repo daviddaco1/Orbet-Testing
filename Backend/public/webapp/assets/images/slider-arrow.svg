@@ -1,0 +1,19 @@
+<svg width="464" height="464" viewBox="0 0 464 464" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g style="mix-blend-mode:screen" filter="url(#filter0_f_2373_14032)">
+<circle cx="232" cy="232" r="27" />
+</g>
+<path d="M213.114 221.165L202 231.721L213.114 242.835" stroke="#00E0FF"/>
+<path d="M216.782 231.585C216.782 233.994 214.829 235.947 212.419 235.947C210.01 235.947 208.057 233.994 208.057 231.585C208.057 229.176 210.01 227.223 212.419 227.223C214.829 227.223 216.782 229.176 216.782 231.585Z" stroke="#00E0FF"/>
+<path d="M216.587 232.28H227.701L231.175 226.723H245.762L249.235 232.28H261.044" stroke="url(#paint0_linear_2373_14032)"/>
+<defs>
+<filter id="filter0_f_2373_14032" x="0.399994" y="0.399994" width="463.2" height="463.2" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="102.3" result="effect1_foregroundBlur_2373_14032"/>
+</filter>
+<linearGradient id="paint0_linear_2373_14032" x1="215.893" y1="232.974" x2="261.738" y2="232.28" gradientUnits="userSpaceOnUse">
+<stop stop-color="#00E0FF"/>
+<stop offset="1" stop-color="#00E0FF" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>

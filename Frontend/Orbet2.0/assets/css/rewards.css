@@ -1,0 +1,183 @@
+.rewardsModal {
+    background-image: url(../images/rewards/reward-bg.svg);
+    height: 688px;
+    width: 505px;
+    position: absolute;
+    right: 180px;
+    padding: 11px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.rewardsModal .rewards-list {
+    overflow: auto hidden;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 9px;
+}
+.rewardBox {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    border-radius: 10px;
+    background: #7e7e7e10;
+    padding: 8px 15px;
+    align-items: center;
+    gap: 25px;
+}
+.rewardBox .rewardBox_img {
+    width: 80px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.rewardBox .rewardBox_type .rewardBox_type-name {
+    color: var(--white-color);
+    font-family: var(--yapari-font);
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.rewardBox .rewardBox_type .rewardBox_type-status {
+    color: rgba(255, 255, 255, 0.50);
+    font-family: var(--gotham-font);
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+.rewardBox .rewardBox_action {
+    margin-left: auto;
+}
+.rewardBox .rewardBox_action .rewardBox_action-btn {
+    width: 150px;
+    height: 50px;
+    position: relative;
+}
+.rewardBox .rewardBox_action .rewardBox_action-btn::before,
+.rewardBox .rewardBox_action .rewardBox_action-btn::after {
+    position: absolute;
+    content: '';
+    display: block;
+    height: 100%;
+    width: 50px;
+    top: 0;
+}
+.rewardBox .rewardBox_action .rewardBox_action-btn::before {
+    background-image: url(../images/rewards/btn-left-border.svg);
+    background-repeat: no-repeat;
+    background-position: top left;
+    left: 0;
+}
+
+.rewardBox .rewardBox_action .rewardBox_action-btn::after {
+    background-image: url(../images/rewards/btn-right-border.svg);
+    background-repeat: no-repeat;
+    background-position: top right;
+    right: 0;
+}
+.rewardBox .rewardBox_action .rewardBox_action-btn .rewardBox_action-btnBox {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rewardBox .rewardBox_action .rewardBox_action-btn .rewardBox_action-btnBox {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rewardBox .rewardBox_action .rewardBox_action-btn .rewardBox_action-btnBox::before,
+.rewardBox .rewardBox_action .rewardBox_action-btn .rewardBox_action-btnBox::after {
+    position: absolute;
+    content: '';
+    display: block;
+    height: 1px;
+    width: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.rewardBox .rewardBox_action .rewardBox_action-btn .rewardBox_action-btnBox::before {
+    background-image: url(../images/rewards/btn-top-border.svg);
+    background-repeat: no-repeat;
+    background-position: top left;
+    top: 0;
+}
+
+.rewardBox .rewardBox_action .rewardBox_action-btn .rewardBox_action-btnBox::after {
+    background-image: url(../images/rewards/btn-top-border.svg);
+    background-repeat: no-repeat;
+    background-position: top right;
+    bottom: 0;
+}
+.rewardBox .rewardBox_action .rewardBox_action-btn .rewardBox_action-btnBox span {
+    border-radius: 3.245px;
+    background: linear-gradient(179deg, rgba(0, 224, 255, 0.60) -19.49%, rgba(12, 187, 211, 0.60) 39.77%, rgba(125, 231, 245, 0.60) 80.07%, rgba(137, 235, 249, 0.60) 84.2%);
+    backdrop-filter: blur(7.665217876434326px);
+    width: 135px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white-color);
+    text-align: center;
+    font-family: var(--gotham-font);
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.rewardBox.disabledReward {
+    background-color: transparent;
+}
+.rewardBox.disabledReward .rewardBox_type-name {
+    opacity: 0.3;
+}
+.rewardBox.disabledReward .rewardBox_action-btn::before {
+    background-image: url(../images/rewards/btn-left-border-d.svg);
+}
+
+.rewardBox.disabledReward .rewardBox_action-btn::after {
+    background-image: url(../images/rewards/btn-right-border-d.svg);
+}
+.rewardBox.disabledReward .rewardBox_action-btn .rewardBox_action-btnBox::before {
+    background-image: url(../images/rewards/btn-top-border-d.svg);
+}
+
+.rewardBox.disabledReward .rewardBox_action-btn .rewardBox_action-btnBox::after {
+    background-image: url(../images/rewards/btn-top-border-d.svg);
+}
+.rewardBox.disabledReward .rewardBox_action-btn .rewardBox_action-btnBox span {
+    background: linear-gradient(179deg, rgba(113, 113, 113, 0.60) -19.49%, rgba(148, 148, 148, 0.60) 84.2%);
+}
+
+.rewardsModal .rewardsPath {
+    margin-top: 20px;
+}
+.rewardsModal .rewardsPath .rewardPathLine {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 12px;
+}
+.rewardsModal .rewardsPath .rewardPathLine .centerline {
+    margin-top: 4px;
+}
+.rewardsModal .rewardsPath .rewardPathOption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.rewardsModal .rewardsPath .rewardPathOption .rewardPathBtn {
+    color: var(--primary-color);
+    text-shadow: 0px 0px 28px rgba(0, 224, 255, 0.50);
+    font-family: var(--yapari-font);
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 20px;
+}

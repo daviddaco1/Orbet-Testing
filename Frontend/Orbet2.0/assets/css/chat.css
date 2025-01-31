@@ -1,0 +1,229 @@
+.widget-bg {
+    position: absolute;
+    right: 0px;
+    background-color: rgba(0, 0, 0, 0.30);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(33px);
+    width: 360px;
+    border-radius: 8px;
+}
+.widgetHeading {
+    display: flex;
+    align-items: center;
+    height: 62px;
+    padding: 15px;
+    gap: 25px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.widgetHeading .backBtn {
+    line-height: 0px;
+}
+.widgetHeading .backBtn button {
+    border: 0px;
+    padding: 0px;
+    background-color: transparent;
+    outline: none;
+}
+.widgetHeading .widgetName {
+    display: flex;
+    gap: 10px;
+}
+.widgetHeading .widgetName .txt {
+    font-size: 20px;
+    font-family: var(--yapari-font);
+    color: var(--white-color);
+}
+.chatConversion {
+    padding: 15px;
+    width: 100%;
+}
+.chatConversion-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+.chatConversion-box .cb-avatar {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0px;
+}
+.chatBox {
+    margin-top: 12px;
+}
+.chatConversion-box .cb-body p { 
+    font-size: 16px;
+    font-family: var(--gotham-font);
+    color: var(--white-color);
+    line-height: 30px;
+}
+.chatConversion-box .cb-body p span { 
+    font-weight: 500;
+}
+.betShared {
+    border-radius: 8px;
+    border: 1px solid var(--skyBlue-color);
+    margin-top: 10px;
+    padding: 15px 12px;
+}
+.betShared .chatBox {
+    margin-top: 0px;
+}
+.betShared .chatBox .cb-body p {
+    color: var(--skyBlue-color);
+}
+.betShared .chatBox .cb-body p span {
+    color: var(--white-color);
+}
+.betShared .betOption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+.betShared .betOption .tokenAmt {
+    color: var(--ultraGreen-color);
+}
+.type-vip .vipBadge {
+    background-image: url(../images/avatar/bedge-vip-bg.svg);
+    background-repeat: no-repeat;
+    width: 46px;
+    height: 14px;
+    display: flex;
+    font-size: 10px;
+    font-weight: 700;
+    font-family: var(--gotham-font);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    margin-top: -5px;
+}
+.type-vip .cb-avatar {
+    width: 25px;
+    height: 25px;
+}
+.type-vip .chatConversion-box .cb-body p {
+    line-height: 20px;
+}
+.bot-Amtoffer {
+    padding: 32px 15px 32px 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.bot-Amtoffer .unlockTitle {
+    font-size: 16px;
+    font-family: var(--yapari-font);
+    font-weight: 500;
+    color: var(--white-color);
+    margin-bottom: 20px;
+    line-height: 20px;
+    text-transform: uppercase;
+}
+.bot-Amtoffer .rangeSlider {
+    width: 100%;
+    border-radius: 12px;
+    background: rgba(255,255,255, 0.03);
+    backdrop-filter: blur(20.410526275634766px);
+    height: 8px;
+    overflow: hidden;
+}
+.bot-Amtoffer .rangeSlider .rangeFill {
+    background: var(--skyBlue-color);
+    height: 100%;
+    border-radius: 12px;
+}
+.bot-Amtoffer .rangleAmt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;  
+  margin-top: 10px;
+}
+.bot-Amtoffer .rangleAmt .fillAmt {
+    font-size: 16px;
+    font-weight: 400;
+    font-family: var(--gotham-font);
+    color: var(--skyBlue-color);
+}
+
+.bot-Amtoffer .rangleAmt .TotalAmt {
+    font-size: 16px;
+    font-weight: 400;
+    font-family: var(--gotham-font);
+    color: var(--white-color);
+}
+.chat-input-box {
+    padding: 24px 14px 17px 17px;
+    display: block;
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.chat-input-box .inputBox-wrapper {
+    position: relative;
+}
+.inputBox-wrapper .message-input {
+    border-radius: 10px;
+    height: 71px;
+    background-color: #7e7e7e12;
+    position: relative;
+}
+.inputBox-wrapper .message-input:focus-visible {
+    outline: 1px solid var(--skyBlue-color);
+}
+.inputBox-wrapper .message-input .input-paceholder {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffffff6b;
+    font-family: var(--gotham-font);
+    font-size: 16px;
+    font-weight: 400;
+    z-index: 1;
+}
+.inputBox-wrapper .input-personalize {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.inputBox-wrapper .input-personalize button {
+    background-color: transparent;
+    border: 0px;
+    outline: none;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.bot-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.bot-options .botCount {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: var(--gotham-font);
+    color: #ffffff65;
+}
+.bot-options .botRules a {
+    font-size: 16px;
+    font-weight: 400;
+    font-family: var(--gotham-font);
+    color: #ffffff2a;
+    transition: all 0.2s ease-in;
+}
+.bot-options .botRules a:hover {
+    text-decoration: underline;
+    color: #ffffff4d;
+}

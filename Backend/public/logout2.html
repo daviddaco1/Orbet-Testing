@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout</title>
+</head>
+<body>
+    <h2>Redirecting to login</h2>
+    <script>
+        // Limpiar el localStorage
+        localStorage.removeItem("authToken");
+        localStorage.clear();  // Limpia todo el almacenamiento local
+        // Redirigir al inicio de sesión
+        window.location.href = "/webapp/login.html";
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+.bonusSection{margin-top:2rem;width:100%}
+.bonusHeading{display:flex;position:relative;width:100%;align-items:center;justify-content:center}
+.bonusHeading figure{position:relative;width:650px;display:flex;align-items:center;justify-content:center}
+.bonusHeading h2{font-family:var(--yapari-font);font-size:1.8rem;color:var(--white-color);text-transform:uppercase;font-weight:400;display:block;white-space:nowrap;position:absolute;left:0;top:0;width:100%;text-align:center}
+.bonusBox{padding:0 40px;margin-top:3rem;display:flex;gap:30px}
+.bonusBox .bonusItem{width:100%;height:calc(100vh - 240px);position:relative;transform:skewX(-10deg);cursor:pointer;overflow:hidden;display:flex}
+.bonusBox .bonusItem::before{content:"";height:100%;position:absolute;background:linear-gradient(145deg,#168394 0%,#ffffff00 40%);width:100%;pointer-events:none}
+.bonusBox .bonusItem::after{content:'';width:100%;height:100%;position:absolute;border-radius:10px;box-shadow:inset 10px 10px 180px #00000052;top:2px;left:2px;pointer-events:none}
+.bonusBox .bonusItem:before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;border-radius:10px;background:#479db130;backdrop-filter:blur(51.04999923706055px);z-index:-1}
+.bonusBox .bonusItem .bonusItemDetails{transform:skewX(10deg);width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px}
+.bonusBox .bonusItem .bonusItemDetails .bonusTitleBox{display:flex;align-items:center;justify-content:center;color:var(--white-color);font-size:1.2rem;font-weight:400;position:relative;right:-1rem}
+.bonusBox .bonusItem .bonusItemDetails figure{width:150px;position:relative;right:-1rem}
+.bonusBox .bonusItem .bonusItemDetails .priceBox{font-family:var(--yapari-font);font-size:2.3rem;color:var(--primary-color);font-weight:600;text-transform:uppercase;position:relative;right:1rem}
+.bonusBox .bonusItem .bonusItemDetails .bonusBorder{position:relative;right:1.1rem}
+.bonusBox .bonusItem .bonusItemDetails p{margin-top:-10px;font-size:.8rem;line-height:20px;color:#b0b3b3;text-align:center;padding:0 1rem;position:relative;right:2rem}
+.bonusBox .bonusItem .bonusItemDetails .btn{position:relative;right:1rem;width:70%}

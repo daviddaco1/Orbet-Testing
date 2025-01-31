@@ -1,0 +1,56 @@
+.todayRewardSection{margin-top:1rem;width:100%}
+.pageHeadingCenter{margin-top:36px}
+.todayRewardSliderBox{padding:0;width:100%;min-height:calc(100vh - 360px);display:flex;align-items:center}
+.swiper-container{padding:0 80px;margin:0 auto;height:425px;width:100%;max-width:1133px}
+.swiper-slide{display:flex;align-items:center;justify-content:center;box-sizing:border-box;opacity:0}
+.swiper-slide .cradBox{height:100%;width:100%;display:flex;align-items:center;position:relative}
+.swiper-slide .cradBox .dateBox{position:absolute;top:-42px;left:0;width:100%;text-align:center;font-size:1.4rem;color:var(--primary-color);font-weight:500}
+.swiper-slide .cradBox .rewardCircleBox{margin-top:8%;width:100%;height:auto;border-radius:400px;display:flex;align-items:center;position:relative}
+.swiper-slide .cradBox .rewardCircleBox .ringBox{width:100%;height:100%;position:absolute;left:0;top:0;background:url(../images/rewards/ring.png) no-repeat;background-size:100%;border:0;animation:rotate-animation 10s infinite linear}
+@keyframes rotate-animation {
+0%{transform:rotate(0deg)}
+50%{transform:rotate(180deg)}
+100%{transform:rotate(360deg)}
+}
+.swiper-slide .cradBox .rewardCircleBox figure{padding:28%;display:flex;align-items:center;justify-content:center;position:relative}
+.swiper-slide .cradBox .rewardCircleBox figure img{margin-top:10%;width:100%}
+.swiper-slide.swiper-slide-prev{opacity:1}
+.swiper-slide.swiper-slide-next{opacity:1}
+.swiper-slide.swiper-slide-active{opacity:1;position:relative}
+.swiper-slide.swiper-slide-active:after{content:'';position:absolute;bottom:0;left:0;width:100%;background:url(../images/rewards/reward-bootom-base.png) no-repeat center bottom;background-size:70%;height:60px;z-index:1}
+.swiper-slide.swiper-slide-active .cradBox .rewardCircleBox .ringBox{background:url(../images/rewards/ring-center.png) no-repeat;background-size:100%;border:0}
+.swiper-slide.swiper-slide-active .cradBox .rewardCircleBox figure{padding:10%}
+.swiper-slide.swiper-slide-prev	.cradBox{padding-right:24%;align-items:end}
+.swiper-slide.swiper-slide-next	.cradBox{padding-left:24%;align-items:baseline}
+.swiper-slide.swiper-slide-active .cradBox .dateBox{font-size:1rem;display:none}
+.swiper-slide.swiper-slide-prev .cradBox .dateBox{font-size:1.3rem}
+.swiper-slide.swiper-slide-next .cradBox .dateBox{font-size:1.3rem}
+.swiper-slide.swiper-slide-next .cradBox .rewardCircleBox{margin-top:25%}
+.swiper-slide.swiper-slide-next + .swiper-slide{opacity:1}
+.swiper-slide.swiper-slide-next + .swiper-slide	.cradBox{padding-left:24%;align-items:baseline}
+.swiper-slide.swiper-slide-next + .swiper-slide .cradBox .dateBox{font-size:1.6rem}
+.swiper-slide.swiper-slide-next + .swiper-slide .cradBox .rewardCircleBox{margin-top:105%}
+.swiper-slide:has(+ .swiper-slide-prev){opacity:1}
+.swiper-slide:has(+ .swiper-slide-prev) .cradBox{padding-right:24%;align-items:baseline}
+.swiper-slide:has(+ .swiper-slide-prev) .cradBox .dateBox{font-size:1.6rem}
+.swiper-slide:has(+ .swiper-slide-prev) .cradBox .rewardCircleBox{margin-top:-12%}
+.swiper-button-next,.swiper-button-prev{width:60px;height:30px;display:flex;align-items:center;justify-content:center;background:none}
+.swiper-button-prev::after,.swiper-button-next::after{content:'';width:100%;height:100%;background:url(../images/slider-arrow.svg) no-repeat center center;display:flex;align-items:center;justify-content:center}
+.swiper-button-next::after{transform:rotate(180deg)}
+.rewardPathWrp{padding:0 7rem 1.5rem;margin:20px 0;position:relative;display:flex;align-items:center;justify-content:center}
+.rewardValueBox{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;width:100%}
+.rewardValueBox .rewardValuePath{padding-top:40px;width:33.3%;position:relative;flex:none}
+.rewardValueBox .rewardValuePath::before{content:"";background:url(../images/reward-line-with-dot.svg) no-repeat left top;width:200px;height:15px;display:block;position:absolute;top:0;left:0}
+.rewardValueBox .rewardValuePath h4{font-size:.9rem;text-transform:uppercase;color:var(--white-color);font-family:var(--nasalization-font)}
+.rewardValueBox .rewardValuePath p{margin-top:10px;font-size:.7rem;color:#fff;line-height:1rem}
+.rewardValueBox .rewardBoxValue{display:flex;flex-flow:column;align-items:center;gap:1rem;width:30%;flex:none}
+.rewardValueBox .rewardBoxValue .rewardBoxAmt{margin-bottom:10px;color:var(--primary-color);font-size:2.4rem;text-transform:uppercase;font-weight:500;font-family:var(--nasalization-font)}
+.rewardValueBox .rewardLavelAmt{position:relative;padding-top:40px;width:33.3%;flex:none}
+.rewardValueBox .rewardLavelAmt::before{content:"";background:url(../images/reward-line-with-dot.svg) no-repeat left top;transform:rotate(-180deg);width:200px;height:15px;display:block;position:absolute;top:0;right:0}
+.rewardValueBox .rewardLavelAmt .cometLbl{font-size:.9rem;text-align:right;text-transform:uppercase;color:var(--primary-color);font-family:var(--nasalization-font)}
+.rewardValueBox .rewardLavelAmt .lvlProgress{position:relative;width:80%;float:right}
+.rewardValueBox .rewardLavelAmt .lvlProgress .progressBar{margin:10px 0;height:12px;width:100%;display:block;border-radius:8px;background:#56565638;backdrop-filter:blur(18px);overflow:hidden}
+.rewardValueBox .rewardLavelAmt .lvlProgress .progressBar span{background-color:var(--primary-color);height:100%;display:block;border-radius:8px;overflow:hidden}
+.rewardValueBox .rewardLavelAmt .lvlProgress .progressAmtValue{display:flex;justify-content:space-between}
+.rewardValueBox .rewardLavelAmt .lvlProgress .progressAmtValue .initalAmt{font-size:.7rem;color:var(--primary-color)}
+.rewardValueBox .rewardLavelAmt .lvlProgress .progressAmtValue .totalAmt{font-size:.7rem;color:var(--white-color)}

@@ -1,0 +1,13 @@
+.depositSection{width:100%;position:relative;height:calc(100vh - 95px);display:flex;align-items:center;justify-content:center}
+.depositSection .leftLineBase{top:0;left:0;height:100%}
+.depositSection .rightLineBase{top:0;right:0;height:100%}
+.initDepositSec{height:100%;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;}
+.initDepositSec .initDepostiBox{display:flex;align-items:center;justify-content:center;flex-direction:column;height:100%}
+.initDepositSec .initDepostiBox figure{height:190px}
+.initDepositSec .initDepostiBox figure img{display:block}
+.initDepositSec .initDepostiBox h2{font-family:var(--yapari-font);color:var(--white-color);font-size:3rem;font-weight:500;white-space:nowrap;text-transform:uppercase;margin-top:30px;line-height:3rem}
+.initDepositSec .initDepostiBox .completeText{color:var(--white-color);font-family:var(--gotham-font);font-size:1.1rem;font-weight:400;text-transform:uppercase;margin-top:20px}
+.initDepositSec .initDepostiBox .inputGroupBox{margin-top:40px;display:flex;align-items:center;justify-content:center}
+.videoHolder{ width:320px;height:320px;display:inline-block;-webkit-mask-image:url(../images/ellipse.png);mask-image:url(../images/ellipse.png);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:100%;mask-size:100%;overflow:hidden}
+.videoHolder::after{content:'';position:absolute;left:0;top:0;width:100%;height:100%;background:#19A2B4;/*mix-blend-mode:hue*/mix-blend-mode: color;}
+.videoHolder video{position:relative;width:100%;height:100%;}

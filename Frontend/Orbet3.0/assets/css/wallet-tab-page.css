@@ -1,0 +1,93 @@
+.walletSection{margin-top:1rem;width:100%;position:relative}
+.walletSection .headingImgBox{position:absolute;top:-25px;left:-38px;z-index:1;width:160px}
+.actionItems ul li{width:calc(20% - 4px)}
+.walletSectionBox{padding-top:20px;margin-bottom:15px;width:100%;height:calc(100vh - 222px);overflow:hidden}
+.verifyLevelHeading{margin:30px 0 0 80px;display:flex;align-items:center;justify-content:space-between;position:relative}
+.verifyLevelHeading h2{font-family:var(--yapari-font);font-size:1.6rem;color:var(--white-color);text-transform:uppercase;font-weight:400;display:flex;white-space:nowrap;align-items:baseline;gap:10px}
+.verifyLevelHeading h2 span{margin-top:.5rem;display:block;font-size:.8rem;color:var(--primary-color);text-transform:none}
+.verifyLevelSliderBox{padding:0 80px;margin-top:65px;height:calc(100vh - 410px);display:flex;align-items:center}
+.verifyLevelItemBox{height:200px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;position:relative;cursor:pointer}
+.verifyLevelItemBox::before{content:'';background:linear-gradient(to bottom,#00E0FF 1px,transparent 1px) 0 0,linear-gradient(to right,#00E0FF 1px,transparent 1px) 0 100%,linear-gradient(to left,#00E0FF 1px,transparent 1px) 100% 0,linear-gradient(to top,#00E0FF 1px,transparent 1px) 100% 100%;background-repeat:no-repeat;background-size:0 0;position:absolute;top:0;right:0;bottom:0;left:0;transition:background-size .2s cubic-bezier(0.455,0.03,0.515,0.955)}
+.verifyLevelItemBox::after{content:'';background:linear-gradient(to right,#00E0FF 1px,transparent 1px) 0 0,linear-gradient(to bottom,#00E0FF 1px,transparent 1px) 0 0,linear-gradient(to left,#00E0FF 1px,transparent 1px) 100% 0,linear-gradient(to bottom,#00E0FF 1px,transparent 1px) 100% 0,linear-gradient(to left,#00E0FF 1px,transparent 1px) 100% 100%,linear-gradient(to top,#00E0FF 1px,transparent 1px) 100% 100%,linear-gradient(to right,#00E0FF 1px,transparent 1px) 0 100%,linear-gradient(to top,#00E0FF 1px,transparent 1px) 0 100%;background-repeat:no-repeat;background-size:25px 25px;position:absolute;top:0;right:0;bottom:0;left:0;transition:background-size .2s cubic-bezier(0.455,0.03,0.515,0.955)}
+.verifyLevelItemBox:hover::before{background-size:100% 100%}
+.verifyLevelItemBox:hover::after{background-size:50px 50px}
+.verifyLevelItemBox .box{display:flex;justify-content:center;align-items:center;flex-direction:column;gap:8px;width:100%;height:100%}
+.verifyLevelItemBox .box span{color:#646f71;display:block;font-size:.8rem}
+.verifyLevelItemBox .box em{font-size:3rem}
+.verifyLevelItemBox .box strong{margin-top:.5rem;display:block;font-size:1rem;font-weight:400;color:var(--primary-color);text-transform:uppercase}
+.verifyLevelItemBox .box::before{content:'';position:absolute;top:8px;right:8px;bottom:8px;left:8px;transition:all .2s cubic-bezier(0.455,0.03,0.515,0.955);background:rgba(255,255,255,0.03)}
+.verifyLevelItemBox:hover .box::before{top:15px;right:15px;bottom:15px;left:15px}
+
+.currencyWithdrawSection{display:block}
+.currencyWithdrawBox{display:flex;gap:6rem;justify-content:space-between}
+.currencyWithdrawDetails{display:flex;flex-direction:column;gap:30px;width:60%}
+.currencyWithdrawInfoBox{padding:35px 50px;width:100%;position:relative;display:flex;flex-direction:column}
+.currencyWithdrawInfoBox:before,.currencyWithdrawInfoBox:after{content:'';position:absolute;inset:0;clip-path:polygon(25px 0px,calc(100% - 25px) 0px,100% 25px,100% calc(100% - 25px),calc(100% - 25px) 100%,25px 100%,0px calc(100% - 25px),0px 25px);z-index:-1;opacity:.4;backdrop-filter:blur(33px);-webkit-backdrop-filter:blur(33px);background:#00e0ff4d;pointer-events:none}
+.currencyWithdrawInfoBox:after{background:#000;inset:1px;clip-path:polygon(25px 0px,calc(100% - 25px) 0px,100% 25px,100% calc(100% - 25px),calc(100% - 25px) 100%,25px 100%,0px calc(100% - 25px),0px 25px)}
+.currencyWithdrawInfoBox .leftLine{position:absolute;left:-2px;top:0;width:3px;height:100%;display:flex;align-items:center;justify-content:center}
+.currencyWithdrawInfoBox .rightLine{position:absolute;right:-2px;top:0;width:3px;height:100%;display:flex;align-items:center;justify-content:center}
+.currencyInfoBox{display:flex;flex-direction:column;gap:10px}
+.currencyInfoBox .currencyInfoItem{min-height:35px;display:flex;align-items:center;justify-content:space-between}
+.currencyInfoBox .currencyInfoItem .selectBox{display:flex;align-items:center;gap:10px}
+.currencyInfoBox .currencyInfoItem .bitcoinTextUpdate{color:#2d3538;font-weight:600}
+.currencyInfoBox .currencyInfoItem .primaryTextColor span{color:var(--primary-color)}
+.currencyInfoBox .currencyInfoItem .selectDropdown{width:auto;min-height:inherit}
+.currencyInfoBox .currencyInfoItem .selectDropdown > span{border-radius:0;background:none}
+.currencyInfoBox .currencyInfoItem .selectDropdown > span > span{font-weight:600}
+.currencyInfoBox .currencyInfoItem .selectDropdown ul{top:25px}
+.currencyInfoBox .currencyInfoItem .selectDropdown ul li a{padding:5px 12px;font-weight:600}
+.currencyInfoBox span{font-size:.9rem;line-height:20px;color:var(--white-color)}
+.currencyInfoBox strong{font-size:.9rem;line-height:20px;color:var(--primary-color);font-weight:600}
+.currencyInfoBox p{margin-top:1rem;font-size:.8rem;line-height:20px;color:#b0b3b3}
+.currencyInfoBox .copyCodeBox{display:flex;align-items:center;justify-content:space-between}
+.currencyInfoBox .copyCodeBox em{margin-right:3rem;font-size:1.2rem}
+.bitcoinBigVideoBox{display:inline-block;-webkit-mask-image:url(../images/ellipse.png);mask-image:url(../images/ellipse.png);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:100%;mask-size:100%}
+.bitcoinBigVideoBox .videoHolder{width:400px;height:432px;overflow:hidden}
+.bitcoinBigVideoBox .videoHolder video{position:relative;width:100%;height:100%;top:4px;scale:1.15;left:-5px}
+.qrCodeBox{padding-left:5rem;display:flex;align-items:center;justify-content:space-between;gap:30px}
+.qrCodeBox .qrCodeImgBox{height:100px;width:100px}
+.qrCodeBox figcaption{padding:30px 60px;position:relative;box-shadow:0 15px 40px #0000001a;align-items:center}
+.qrCodeBox figcaption::before,.qrCodeBox figcaption::after{content:"";position:absolute;inset:1px;z-index:-1;clip-path:polygon(30px 0,100% 0,100% 110px,0 340%,0 30px);opacity:.4;backdrop-filter:blur(33px);-webkit-backdrop-filter:blur(33px);background:#000;border-radius:8px}
+.qrCodeBox figcaption::before{inset:0;background:#00e0ff4f}
+.qrCodeBox figcaption span{color:var(--white-color);font-size:.8rem;text-align:center;display:block}
+.qrCodeBox figcaption strong{margin-top:15px;font-family:var(--yapari-font);color:var(--primary-color);font-size:1.3rem;font-weight:400;line-height:1.6rem;text-align:center;display:block;text-transform:uppercase}
+.redeemCouponSection{height:100%;display:flex;align-items:center;justify-content:center}
+.redeemCouponSection .redeemCouponBox{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:30px;height:100%}
+.redeemCouponSection .redeemCouponBox figure{height:150px}
+.redeemCouponSection .redeemCouponBox .forYouText{color:var(--primary-color);font-size:1rem;font-weight:300;text-transform:uppercase}
+.redeemCouponSection .redeemCouponBox h2{font-family:var(--yapari-font);color:var(--white-color);font-size:3rem;font-weight:400;white-space:nowrap;text-transform:uppercase}
+.redeemCouponSection .redeemCouponBox .inputGroupBox{margin-top:30px;display:flex;align-items:center;justify-content:center}
+.redeemCouponSection .redeemCouponBox .inputGroupBox .form-control{width:280px;text-align:center;height:50px;border-radius:8px;background:#ffffff08;border:#00e0ff21 solid 1px;color:#fff}
+.redeemCouponSection .redeemCouponBox .inputGroupBox .btn span{padding:9px 15px;width:120px}
+.applyReferralCodeSection{height:100%;display:flex;align-items:center;justify-content:center}
+.applyReferralCodeSection .applyReferralCodeBox{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:30px;height:100%}
+.applyReferralVideoBox{display:inline-block;-webkit-mask-image:url(../images/ellipse.png);mask-image:url(../images/ellipse.png);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:100%;mask-size:100%}
+.applyReferralVideoBox .videoHolder{width:160px;height:160px;overflow:hidden}
+.applyReferralVideoBox .videoHolder video{position:relative;width:100%;height:100%;top:0;scale:1.2;left:0}
+.applyReferralCodeSection .applyReferralCodeBox .forYouText{color:var(--primary-color);font-size:1rem;font-weight:300;text-transform:uppercase}
+.applyReferralCodeSection .applyReferralCodeBox h2{font-family:var(--yapari-font);color:var(--white-color);font-size:3rem;font-weight:400;white-space:nowrap;text-transform:uppercase}
+.applyReferralCodeSection .applyReferralCodeBox .inputGroupBox{margin-top:30px;display:flex;align-items:center;justify-content:center}
+.applyReferralCodeSection .applyReferralCodeBox .inputGroupBox .form-control{width:280px;text-align:center;height:50px;border-radius:8px;background:#ffffff08;border:#00e0ff21 solid 1px;color:#fff}
+.applyReferralCodeSection .applyReferralCodeBox .inputGroupBox .btn span{padding:9px 15px;width:120px}
+.currencyWithdrawFormSection{display:block}
+.currencyWithdrawFormBox{padding:0 10px;display:flex;gap:6rem;justify-content:space-between}
+.currencyWithdrawFormBox form{margin-top:3rem;display:flex;flex-wrap:wrap}
+.currencyWithdrawFormBox .form-group{width:100%}
+.currencyWithdrawFormBox .form-group.withShape:before{z-index:2}
+.currencyWithdrawFormBox .form-group .form-control{background:none;color:var(--white-color)}
+.currencyWithdrawFormBox .form-group:nth-child(1),.currencyWithdrawFormBox .form-group:nth-child(2){width:48%}
+.currencyWithdrawFormBox .form-group:nth-child(1){margin-right:4%}
+.currencyWithdrawFormBox .selectDropdown{width:100%;min-height:inherit}
+.currencyWithdrawFormBox .selectDropdown > span{padding:0 15px;display:block;width:100%;height:40px;outline:none;background:none;backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);border:1px solid var(--primary-color);color:#858586;font-size:.8rem!important;font-weight:400;border-radius:0;line-height:40px;text-transform:uppercase}
+.currencyWithdrawFormBox .selectDropdown.open ul{margin-top:0;top:28px!important}
+.currencyWithdrawFormBox .selectDropdown > span > span{font-size:.8rem}
+.currencyWithdrawFormBox .selectDropdown ul li a{width:100%}
+.currencyWithdrawFormBox .selectDropdown ul li a:hover span{color:var(--primary-color)}
+.currencyWithdrawFormBox ul{margin-top:10px;display:flex;flex-direction:column;gap:5px}
+.currencyWithdrawFormBox ul li{font-size:.8rem;display:flex;align-items:center;gap:10px}
+.currencyWithdrawFormBox ul li em{color:var(--primary-color);font-size:.9rem}
+.currencyWithdrawFormBox .convertCurrencyValue{position:absolute;top:38px;right:30px;font-size:.8rem;color:#858586}
+.currencyWithdrawFormBox .maxAmoutBox{padding:0 10px;position:absolute;top:38px;right:35px;font-size:.6rem;color:var(--white-color);background:var(--primary-color);border-radius:4px}
+.currencyWithdrawFormBox .inputValueRefresh{padding:10px;position:absolute;top:28px;right:1px;font-size:.7rem;color:var(--white-color);z-index:1;cursor:pointer}
+
+

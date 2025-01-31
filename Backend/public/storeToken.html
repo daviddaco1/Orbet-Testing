@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prepass</title>
+</head>
+
+<body>
+    <h2 id="status">loading...</h2>
+    <script>
+        (function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token'); // Extrae el token de la URL
+            const statusTest = document.getElementById("status");
+
+            if (localStorage.getItem("authToken")) {
+                console.log("Account linked");
+
+                if (window.opener && window.opener.location.href.includes("settings.html")) {
+
+                    if (typeof window.opener.redirectToDashboard === 'function') {
+                        try {
+                            window.opener.onFinishLink(true, null);
+                        } catch (e) {
+                            console.log("Dashboard redirection failed:", e);
+                        }
+                    }
+
+                    statusTest.innerText = "Account Linked";
+                    return; // Este return ahora es válido porque está dentro de una función
+                }
+            }
+
+            if (token) {
+                localStorage.setItem("authToken", token);
+                statusTest.innerText = "Session Started";
+
+                if (window.opener && typeof window.opener.redirectToDashboard === 'function') {
+                    try {
+                        window.opener.redirectToDashboard();
+                    } catch (e) {
+                        console.log("Dashboard redirection failed:", e);
+                    }
+                } else {
+                    alert("Dashboard unavailable, redirecting...");
+                    window.location.href = "/webapp/dashboard2";
+                }
+                window.close();
+            } else {
+                alert("Authentication error. Please try again.");
+                window.close();
+            }
+        })(); // Llamada inmediata a la función
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+.appSearchBox{display:flex;align-items:center;border-radius:13px;border:1px solid var(--primary-color-dark);background:#073a4121}
+.appSearchBox .form-control{background:none;border:0;width:280px;color:#838788;font-size:.9rem;border-radius:10px 0 0 10px;backdrop-filter:none}
+.appSearchBox em{padding:14px;font-size:.9rem;background:none;cursor:pointer}
+.onlineGamesSection{margin:3rem 0 0;width:100%}
+.onlineGamesBox{padding:1.5rem 0 1rem;display:flex;gap:1.28rem;flex-wrap:wrap;height:calc(100vh - 210px);overflow:hidden;overflow-y:auto}
+.onlineGamesBox .gameItem{display:flex;width:calc(16.6% - 16.6px);max-width:120.94px;background:url(../images/border.svg) no-repeat left top;background-size:contain;position:relative;transition:.5s;top:0;cursor:pointer}
+.onlineGamesBox .gameItem::after{content:'';position:absolute;top:0;left:0;width:99%;height:99%;border-radius:26px 15px;transition:.5s}
+.onlineGamesBox .gameItem a{padding:.4rem;border-radius:2.4rem 1.6rem 2.4rem 1.7rem;overflow:hidden}
+.onlineGamesBox .gameItem img{float:left}
+.onlineGamesBox .gameItem:hover{background:url(../images/border-hover.svg) no-repeat left top;background-size:contain;top:-10px;transition:.5s}
+.onlineGamesBox .gameItem:hover::after{box-shadow:0 4px 10px -1px #00E0FF,0 -2px 5px -2px #00E0FF;transition:.5s}

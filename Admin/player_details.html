@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Management Admin</title>
+
+  <link rel="icon" href="img/mini_logo.png" type="image/png" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <!-- themefy CSS -->
+  <link rel="stylesheet" href="vendors/themefy_icon/themify-icons.css" />
+  <!-- select2 CSS -->
+  <link rel="stylesheet" href="vendors/niceselect/css/nice-select.css" />
+  <!-- owl carousel CSS -->
+  <link rel="stylesheet" href="vendors/owl_carousel/css/owl.carousel.css" />
+  <!-- gijgo css -->
+  <link rel="stylesheet" href="vendors/gijgo/gijgo.min.css" />
+  <!-- font awesome CSS -->
+  <link rel="stylesheet" href="vendors/font_awesome/css/all.min.css" />
+  <link rel="stylesheet" href="vendors/tagsinput/tagsinput.css" />
+
+  <!-- date picker -->
+  <link rel="stylesheet" href="vendors/datepicker/date-picker.css" />
+
+  <link rel="stylesheet" href="vendors/vectormap-home/vectormap-2.0.2.css" />
+
+  <!-- scrollabe  -->
+  <link rel="stylesheet" href="vendors/scroll/scrollable.css" />
+  <!-- datatable CSS -->
+  <link rel="stylesheet" href="vendors/datatable/css/jquery.dataTables.min.css" />
+  <link rel="stylesheet" href="vendors/datatable/css/responsive.dataTables.min.css" />
+  <link rel="stylesheet" href="vendors/datatable/css/buttons.dataTables.min.css" />
+  <!-- text editor css -->
+  <link rel="stylesheet" href="vendors/text_editor/summernote-bs4.css" />
+  <!-- morris css -->
+  <link rel="stylesheet" href="vendors/morris/morris.css" />
+  <!-- metarial icon css -->
+  <link rel="stylesheet" href="vendors/material_icon/material-icons.css" />
+
+  <!-- menu css  -->
+  <link rel="stylesheet" href="css/metisMenu.css" />
+  <!-- style CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/colors/default.css" id="colorSkinCSS" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"
+    integrity="sha512-7IDZ+mHVoc7nSziUi72L5rGojJDtveVWHOjb+Eu8QSnguy5FitNnFyEoLoL3v1u18DNm4E30elDfkhZvVADw6Q=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+  <script src="js/socket_mgr.js"></script>
+</head>
+
+<body class="crm_body_bg">
+  <!-- main content part here -->
+
+  <div id="sidebar-container"></div>
+  <!-- Aquí se cargará el sidebar -->
+  <script src="js/sidebar.js"></script>
+  <section class="main_content dashboard_part large_header_bg">
+    <!-- menu  -->
+    <div class="container-fluid g-0">
+      <div class="row">
+        <div class="col-lg-12 p-0">
+          <div class="header_iner d-flex justify-content-between align-items-center">
+            <div class="sidebar_icon d-lg-none">
+              <i class="ti-menu"></i>
+            </div>
+            <div class="line_icon open_miniSide d-none d-lg-block">
+              <img src="img/line_img.png" alt="" />
+            </div>
+            <div class="serach_field-area d-flex align-items-center">
+              <div class="search_inner">
+                <form action="#">
+                  <div class="search_field">
+                    <input type="text" placeholder="Search" />
+                  </div>
+                  <button type="submit">
+                    <img src="img/icon/icon_search.svg" alt="" />
+                  </button>
+                </form>
+              </div>
+            </div>
+            <div class="header_right d-flex justify-content-between align-items-center">
+              <div class="header_notification_warp d-flex align-items-center">
+                <li>
+                  <a class="bell_notification_clicker" href="#">
+                    <img src="img/icon/bell.svg" alt="" />
+                    <span>2</span>
+                  </a>
+                  <!-- Menu_NOtification_Wrap  -->
+                  <div class="Menu_NOtification_Wrap">
+                    <div class="notification_Header">
+                      <h4>Notifications</h4>
+                    </div>
+                    <div class="Notification_body">
+                      <!-- single_notify  -->
+                      <div class="single_notify d-flex align-items-center">
+                        <div class="notify_thumb">
+                          <a href="#"><img src="img/staf/2.png" alt="" /></a>
+                        </div>
+                        <div class="notify_content">
+                          <a href="#">
+                            <h5>Cool Marketing</h5>
+                          </a>
+                          <p>Lorem ipsum dolor sit amet</p>
+                        </div>
+                      </div>
+                      <!-- single_notify  -->
+                      <div class="single_notify d-flex align-items-center">
+                        <div class="notify_thumb">
+                          <a href="#"><img src="img/staf/4.png" alt="" /></a>
+                        </div>
+                        <div class="notify_content">
+                          <a href="#">
+                            <h5>Awesome packages</h5>
+                          </a>
+                          <p>Lorem ipsum dolor sit amet</p>
+                        </div>
+                      </div>
+                      <!-- single_notify  -->
+                      <div class="single_notify d-flex align-items-center">
+                        <div class="notify_thumb">
+                          <a href="#"><img src="img/staf/3.png" alt="" /></a>
+                        </div>
+                        <div class="notify_content">
+                          <a href="#">
+                            <h5>what a packages</h5>
+                          </a>
+                          <p>Lorem ipsum dolor sit amet</p>
+                        </div>
+                      </div>
+                      <!-- single_notify  -->
+                      <div class="single_notify d-flex align-items-center">
+                        <div class="notify_thumb">
+                          <a href="#"><img src="img/staf/2.png" alt="" /></a>
+                        </div>
+                        <div class="notify_content">
+                          <a href="#">
+                            <h5>Cool Marketing</h5>
+                          </a>
+                          <p>Lorem ipsum dolor sit amet</p>
+                        </div>
+                      </div>
+                      <!-- single_notify  -->
+                      <div class="single_notify d-flex align-items-center">
+                        <div class="notify_thumb">
+                          <a href="#"><img src="img/staf/4.png" alt="" /></a>
+                        </div>
+                        <div class="notify_content">
+                          <a href="#">
+                            <h5>Awesome packages</h5>
+                          </a>
+                          <p>Lorem ipsum dolor sit amet</p>
+                        </div>
+                      </div>
+                      <!-- single_notify  -->
+                      <div class="single_notify d-flex align-items-center">
+                        <div class="notify_thumb">
+                          <a href="#"><img src="img/staf/3.png" alt="" /></a>
+                        </div>
+                        <div class="notify_content">
+                          <a href="#">
+                            <h5>what a packages</h5>
+                          </a>
+                          <p>Lorem ipsum dolor sit amet</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="nofity_footer">
+                      <div class="submit_button text-center pt_20">
+                        <a href="#" class="btn_1">See More</a>
+                      </div>
+                    </div>
+                  </div>
+                  <!--/ Menu_NOtification_Wrap  -->
+                </li>
+                <li>
+                  <a class="CHATBOX_open" href="#">
+                    <img src="img/icon/msg.svg" alt="" /> <span>2</span>
+                  </a>
+                </li>
+              </div>
+              <div class="profile_info">
+                <img src="img/client_img.png" alt="#" />
+                <div class="profile_info_iner">
+                  <div class="profile_author_name">
+                    <p>Neurologist</p>
+                    <h5>Dr. Robar Smith</h5>
+                  </div>
+                  <div class="profile_info_details">
+                    <a href="#">My Profile </a>
+                    <a href="#">Settings</a>
+                    <a href="#">Log Out </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/ menu  -->
+    <div class="main_content_iner overly_inner">
+      <div class="container-fluid p-0">
+        <!-- page title  -->
+        <div class="row">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-12">
+                <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                  <div class="page_title_left d-flex align-items-center">
+                    <h3 class="f_s_25 f_w_700 dark_text mr_30">Player Tab</h3>
+                    <ol class="breadcrumb page_bradcam mb-0">
+                      <li class="breadcrumb-item">
+                        <a href="index.html">Home</a>
+                      </li>
+                      <li class="breadcrumb-item active">Player details</li>
+                    </ol>
+                  </div>
+                  <div class="page_title_right">
+                    <div class="page_date_button d-flex align-items-center">
+                      <img src="img/icon/calender_icon.svg" alt="" />
+                      August 1, 2020 - August 31, 2020
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/ menu  -->
+            <div class="row">
+
+              <!-- Main Content -->
+              <div class="col-lg-9">
+                <!-- Accounts -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Accounts</h4>
+                    <div class="QA_section">
+                      <div class="QA_table mb_30">
+                        <div class="table-responsive" style="max-height: 400px;">
+                          <table class="table table-bordered">
+                            <thead class="thead-dark">
+                              <tr>
+                                <th>ID</th>
+                                <th>Currency</th>
+                                <th>Balance</th>
+                                <th>Deposit sum</th>
+                                <th>Cashouts sum</th>
+                                <th>Pending cashouts sum</th>
+                                <th>Chargebacks sum</th>
+                                <th>Unreceived deposits sum</th>
+                                <th>Refunds sum</th>
+                                <th>Reversals sum</th>
+                                <th>Affiliate payments sum</th>
+                                <th>Avg bet</th>
+                                <th>Gifts sum</th>
+                                <th>Spent in casino</th>
+                                <th>Bonuses</th>
+                                <th>Bonus Ratio</th>
+                              </tr>
+                            </thead>
+                            <tbody id="accounts-table-body">
+                              <!-- Usuarios -->
+                            </tbody>
+                          </table>
+                        </div>
+                        <a href="change_balance.html" class="btn btn-secondary me-2">Change
+                          Balance</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Approx Average Bonus Ratio -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">Approx Average Bonus Ratio</h4>
+                    <span id="avg-bonus-ratio" class="h5 mb-0">0.00%</span>
+                  </div>
+                </div>
+
+                <!-- Comp Point Account -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Comp Point Account</h4>
+                    <div class="QA_section">
+                      <div class="QA_table mb_30">
+                        <table class="table table-bordered">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">ID</th>
+                              <th scope="col">History</th>
+                              <th scope="col">Account Type</th>
+                              <th scope="col">Points</th>
+                              <th scope="col">Micropoints</th>
+                            </tr>
+                          </thead>
+                          <tbody id="comp-points-table-body">
+                            <!-- Datos llenados desde JS -->
+                          </tbody>
+                        </table>
+                        <div class="d-flex justify-content-start mt-2">
+                          <a href="#" class="btn btn-secondary me-2">Change Balance</a>
+                          <a href="#" class="btn btn-secondary">Exchange Comp Points</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Issued Bonuses -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h5 class="mb-4 d-flex justify-content-between align-items-center">
+                      <span>Issued Bonuses</span>
+                      <div>
+                        <a href="#" class="mx-2" id="openIssuancePolicy">Issuance Policy</a>
+                        <a href="#" class="mx-2" id="openIssueBonus">Issue Bonus</a>
+                        <a href="#" class="mx-2" id="openIssuePersonalBonus">Issue Personal
+                          Bonus</a>
+                        <a href="#" class="mx-2" id="openIssueDSLBonus">Issues DSL Bonus</a>
+                        <a href="#" class="mx-2" id="openIssueDSLCashoutCancelBonus">Issues DSL
+                          Cashout Cancel Bonus</a>
+                      </div>
+                    </h5>
+                    <div class="QA_section">
+                      <div class="QA_table mb_30">
+                        <div class="table-responsive" style="max-height: 400px;">
+                          <table class="table table-bordered">
+                            <thead class="thead-dark">
+                              <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Issued At</th>
+                                <th scope="col">Bonus</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Strategy</th>
+                                <th scope="col">Stage</th>
+                                <th scope="col">Amount Locked</th>
+                                <th scope="col">Wager</th>
+                                <th scope="col">Expiry Date</th>
+                              </tr>
+                            </thead>
+                            <tbody id="bonuses-table-body">
+                              <!-- Datos de bonos -->
+                            </tbody>
+                          </table>
+                          <div>
+                            <a href="issued_bonuses.html" class="btn btn-secondary me-2">All
+                              bonus Issues</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Issued Empty Bonuses -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Issued Empty Bonuses</h4>
+                    <div class="QA_section">
+                      <div class="QA_table mb_30">
+                        <table class="table table-bordered">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">ID</th>
+                              <th scope="col">Issued At</th>
+                            </tr>
+                          </thead>
+                          <tbody id="empty-bonuses-table-body">
+                            <!-- Bonos vacíos -->
+                          </tbody>
+                        </table>
+                        <div>
+                          <a href="#" id="all-bonuses-link" class="btn btn-secondary me-2">All Empty bonus Issues</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Issued Freespins -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h5 class="mb-4 d-flex justify-content-between align-items-center">
+                      <span>Issued Freespins</span>
+                      <div>
+                        <a href="#" class="mx-2">Issue Freespin Bonus</a>
+                      </div>
+                    </h5>
+                    <div class="mb-3 d-flex align-items-center">
+                      <label for="sourceType" class="form-label me-2">Source Type</label>
+                      <select id="sourceType" class="form-select" style="width: auto;">
+                        <option value="dsl">DSL</option>
+                        <option value="api">API</option>
+                        <option value="referral_system">Referral System</option>
+                      </select>
+                      <button class="btn btn-dark ms-2">Filter</button>
+                    </div>
+                    <div class="QA_section">
+                      <div class="QA_table mb_30">
+                        <div class="table-responsive" style="max-height: 400px;">
+                          <table class="table table-bordered">
+                            <thead class="thead-dark">
+                              <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Issued At</th>
+                                <th scope="col">Freespins Bonus</th>
+                                <th scope="col">Strategy</th>
+                                <th scope="col">Stage</th>
+                                <th scope="col">Win amount</th>
+                                <th scope="col">Activate until</th>
+                                <th scope="col">Expiry date</th>
+                              </tr>
+                            </thead>
+                            <tbody id="user-table-body">
+                              <!-- Datos de freespins -->
+                            </tbody>
+                          </table>
+                          <div>
+                            <a href="#" id="all-bonuses-link" class="btn btn-secondary me-2">All
+                              Freespins Issues</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Latest Payments -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Latest Payments</h4>
+                    <div class="QA_section">
+                      <div class="QA_table mb_30">
+                        <div class="table-responsive" style="max-height: 400px;">
+                          <table class="table table-bordered">
+                            <thead class="thead-dark">
+                              <tr>
+                                <th scope="col">Action</th>
+                                <th scope="col">Source</th>
+                                <th scope="col">Account</th>
+                                <th scope="col">Source of approval</th>
+                                <th scope="col">Manual</th>
+                                <th scope="col">Return type</th>
+                                <th scope="col">Comments</th>
+                                <th scope="col">Sumsub pmv</th>
+                                <th scope="col">Success</th>
+                                <th scope="col">Created At</th>
+                                <th scope="col">Finished At</th>
+                                <th scope="col">Amount</th>
+                              </tr>
+                            </thead>
+                            <tbody id="latest-payments-table-body">
+                              <!-- Datos de pagos recientes -->
+                            </tbody>
+                          </table>
+                        </div>
+                        <div>
+                          <a href="#" id="all-payments-link" class="btn btn-secondary me-2">All Payments</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- BIN-info -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">BIN-info</h4>
+                    <div class="QA_section">
+                      <div class="QA_table mb_30">
+                        <div class="table-responsive" style="max-height: 400px;">
+                          <table class="table table-bordered">
+                            <thead class="thead-dark">
+                              <tr>
+                                <th scope="col">Currency</th>
+                                <th scope="col">System</th>
+                                <th scope="col">Account</th>
+                                <th scope="col">Bank Name</th>
+                                <th scope="col">Bank Country</th>
+                                <th scope="col">Stage</th>
+                                <th scope="col">Card type</th>
+                              </tr>
+                            </thead>
+                            <tbody id="bin-info-table-body">
+                              <!-- Datos de BIN-info -->
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Payment systems debts -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Payment systems debts</h4>
+                    <div class="QA_section">
+                      <div class="QA_table mb_30">
+                        <div class="table-responsive" style="max-height: 400px;">
+                          <table class="table table-bordered">
+                            <thead class="thead-dark">
+                              <tr>
+                                <th scope="col">Created At</th>
+                                <th scope="col">Update At</th>
+                                <th scope="col">System Name</th>
+                                <th scope="col">Account in system</th>
+                                <th scope="col">Payment account</th>
+                                <th scope="col">Currency</th>
+                                <th scope="col">Debit</th>
+                                <th scope="col">Verified</th>
+                                <th scope="col">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody id="payment-systems-table-body">
+                              <!-- Datos de usuarios -->
+                            </tbody>
+                          </table>
+                        </div>
+                        <a href="#" class="btn btn-secondary me-2">All Payment system Debts</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Net total -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Net total</h4>
+                    <div class="QA_section">
+                      <div class="QA_table mb_30">
+                        <div class="table-responsive" style="max-height: 400px;">
+                          <table class="table table-bordered">
+                            <thead class="thead-dark">
+                              <tr>
+                                <th scope="col">Currency</th>
+                                <th scope="col">Total Bets</th>
+                                <th scope="col">Total Wins</th>
+                                <th scope="col">Bonuses</th>
+                                <th scope="col">Net Total</th>
+                                <th scope="col">Payout</th>
+                              </tr>
+                            </thead>
+                            <tbody id="net-total-table-body">
+                              <!-- Datos de usuarios -->
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Latest Events -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Latest Events</h4>
+                    <div class="QA_section">
+                      <div class="QA_table mb_30">
+                        <div class="table-responsive" style="max-height: 400px;">
+                          <table class="table table-bordered">
+                            <thead class="thead-dark">
+                              <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Event type</th>
+                                <th scope="col">IP</th>
+                                <th scope="col">County</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Coordinates</th>
+                              </tr>
+                            </thead>
+                            <tbody id="latest-events-table-body">
+                              <!-- Datos de eventos -->
+                            </tbody>
+                          </table>
+                          <a href="#" class="btn btn-secondary me-2">All Events</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Tournament Participations -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Tournament Participations</h4>
+                    <div class="QA_section">
+                      <div class="QA_table mb_30">
+                        <div class="table-responsive" style="max-height: 400px;">
+                          <table class="table table-bordered">
+                            <thead class="thead-dark">
+                              <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Currency</th>
+                                <th scope="col">Tournament Bets</th>
+                                <th scope="col">Points</th>
+                                <th scope="col">Game Category</th>
+                                <th scope="col">Award Place</th>
+                                <th scope="col">Confirmation Required</th>
+                                <th scope="col">End At</th>
+                              </tr>
+                            </thead>
+                            <tbody id="tournament-participations-table-body">
+                              <!-- Participaciones -->
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Documents -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Documents</h4>
+                    <div class="QA_section">
+                      <div class="QA_table mb_30">
+                        <div class="table-responsive" style="max-height: 400px;">
+                          <table class="table table-bordered">
+                            <thead class="thead-dark">
+                              <tr>
+                                <th scope="col">Preview</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Created At</th>
+                                <th scope="col">Update At</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody id="documents-table-body">
+                              <!-- Usuarios -->
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Comments -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4" id="comments-count-title">Comments</h4>
+                    <div class="QA_section">
+                      <div class="QA_table mb_30">
+                        <div id="comments-list">
+                          <!-- Aquí se generarán los comentarios -->
+                        </div>
+                        <p id="comments-count">Showing ${user.comments.length} comments</p>
+                        <div class="mb-3">
+                          <textarea id="new-comment" class="form-control" rows="3"
+                            placeholder="Add your comment here..."></textarea>
+                        </div>
+                        <button class="btn btn-primary" onclick="addComment()">Add
+                          Comment</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Sidebar -->
+              <div class="col-lg-3">
+                <!-- Status -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Status</h4>
+                    <form id="filterForm">
+                      <div class="filter_group mb-3">
+                        <span id="currentStatus" class="badge bg-info text-dark">Loading...</span>
+                        <!-- Estado actual -->
+                      </div>
+                      <div class="dropdown">
+                        <button type="button" id="statusButton" class="btn btn-secondary dropdown-toggle w-100"
+                          data-bs-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                          Activate
+                        </button>
+                        <div class="dropdown-menu w-100" id="currencyDropdownMenu" aria-labelledby="currencyDropdown">
+                          <a class="dropdown-item" href="#" data-status="suspended">Suspend</a>
+                          <a class="dropdown-item" href="#" data-status="active">Activate</a>
+                          <a class="dropdown-item" href="#" data-status="disabled">Disable</a>
+                        </div>
+                      </div>
+                    </form>
+                    <button class="btn btn-link rounded-pill mb-3" id="openModalBtn">Mark
+                      as suspicious</button>
+                  </div>
+                </div>
+                <!-- Player Locks -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Player Locks</h4>
+
+                    <div class="QA_section">
+                      <div class="QA_table mb_30">
+                        <table class="table table-bordered">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">CS Reason</th>
+                              <th scope="col">Comment</th>
+                            </tr>
+                          </thead>
+                          <tbody id="cs-locks-table-body">
+                            <!-- Usuarios -->
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    <div class="QA_section">
+                      <div class="QA_table mb_30">
+                        <table class="table table-bordered">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">SB Reason</th>
+                              <th scope="col">Comment</th>
+                            </tr>
+                          </thead>
+                          <tbody id="sb-locks-table-body">
+                            <!-- Usuarios -->
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Tags -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">Tags</h4>
+                    <h5 class="mb-0">
+                      <button class="btn btn-link mb-3 collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Edit</button>
+                    </h5>
+                  </div>
+                  <div class="card">
+                    <div class="collapse" id="collapseOne" data-parent="#accordion" style="">
+                      <div class="card-body">
+                        <!-- Campo de texto para seleccionar tags -->
+                        <div class="input-group mb-2">
+                          <input type="text" id="tagInput" class="form-control" placeholder="Write a tag" />
+                          <button class="btn btn-primary" id="addTagButton">Save</button>
+                        </div>
+                        <!-- Lista para mostrar los tags anadidos -->
+                        <div id="tagList" class="mb-2"></div>
+                        <!-- Lista de sugerencias -->
+                        <ul id="suggestions" class="list-group" style="display:none;"></ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Groups -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">Groups</h4>
+                  </div>
+                  <div class="card-body">
+                    <!-- Contenedor para los grupos -->
+                    <div id="groupList" class="mb-2"></div>
+                    <!-- Input para añadir nuevos grupos -->
+                    <div class="input-group mb-2">
+                      <input type="text" id="groupInput" class="form-control" placeholder="Write a group" />
+                      <button class="btn btn-primary" id="addGroupButton">Save</button>
+                    </div>
+                    <!-- Lista de sugerencias -->
+                    <ul id="groupSuggestions" class="list-group" style="display:none;"></ul>
+                  </div>
+                </div>
+                <!-- Groups -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Groups</h4>
+                    <div class="list-group">
+                      <a href="#" class="list-group-item list-group-item-action btn btn-link rounded-pill mb-3">Account
+                        Limits</a>
+                      <a href="#" class="list-group-item list-group-item-action btn btn-link rounded-pill mb-3">Changes
+                        History</a>
+                      <a href="#" class="list-group-item list-group-item-action btn btn-link rounded-pill mb-3">User
+                        Sessions</a>
+                      <a href="#" class="list-group-item list-group-item-action btn btn-link rounded-pill mb-3">Comments
+                        (0)</a>
+                      <a href="#"
+                        class="list-group-item list-group-item-action btn btn-link rounded-pill mb-3">Suspicions</a>
+                      <a href="#"
+                        class="list-group-item list-group-item-action btn btn-link rounded-pill mb-3">Referrals</a>
+                    </div>
+                  </div>
+                </div>
+                <!-- Games Links -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Games Links</h4>
+                    <div class="list-group">
+                      <a href="#" class="list-group-item list-group-item-action btn btn-link rounded-pill mb-3">Games
+                        Stats</a>
+                      <a href="#" class="list-group-item list-group-item-action btn btn-link rounded-pill mb-3">Player's
+                        Games</a>
+                    </div>
+                  </div>
+                </div>
+                <!-- Player Info -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Player Info</h4>
+                    <div class="QA_section">
+                      <div class="QA_table mb_30">
+                        <table class="table table-bordered">
+                          <p class="bg-dark ps-3 pe-3 pt-2 pb-2 rounded mb-0" style="display: inline-block;">
+                            daviddaco1998@gmail.com</p>
+                          <tbody id="user-table-body">
+                            <tr>
+                              <td>Full Name</td>
+                              <td class="user-info" data-key="fullName"></td>
+                            </tr>
+                            <tr>
+                              <td>Current Sign in Country</td>
+                              <td class="user-info" data-key="currentCountry"></td>
+                            </tr>
+                            <tr>
+                              <td>Current sign in at</td>
+                              <td class="user-info" data-key="signInAt"></td>
+                            </tr>
+                            <tr>
+                              <td>Current sign in ip</td>
+                              <td class="user-info" data-key="signInIp"></td>
+                            </tr>
+                            <tr>
+                              <td>Created at</td>
+                              <td class="user-info" data-key="createdAt"></td>
+                            </tr>
+                            <tr>
+                              <td>Created In</td>
+                              <td class="user-info" data-key="createdIn"></td>
+                            </tr>
+                            <tr>
+                              <td>Confirmed at</td>
+                              <td class="user-info" data-key="confirmedAt"></td>
+                            </tr>
+                            <tr>
+                              <td>Two factor auth enabled</td>
+                              <td>
+                                <p class="bg-dark ps-3 pe-3 pt-2 pb-2 rounded mb-0 user-info" data-key="twoFactorAuth">
+                                </p>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Terms accepted at</td>
+                              <td class="user-info" data-key="termsAcceptedAt"></td>
+                            </tr>
+                            <!-- Agrega más filas aquí si es necesario -->
+                          </tbody>
+                        </table>
+                        <button href="#" class="btn btn-link mb-3">Edit</button>
+                        <button href="#" class="btn btn-link mb-3">CSV</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Player Extra -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Player Extra</h4>
+                    <div class="QA_section">
+                      <div class="QA_table mb_30">
+                        <table class="table table-bordered">
+                          <p class="bg-dark ps-3 pe-3 pt-2 pb-2 rounded mb-0" style="display: inline-block;">
+                            daviddaco1998@gmail.com</p>
+                          <tbody id="user-extra-table-body">
+                            <tr>
+                              <td>App</td>
+                              <td class="user-extra-info" data-key="app"></td>
+                            </tr>
+                            <tr>
+                              <td>Person</td>
+                              <td class="user-extra-info" data-key="person"></td>
+                            </tr>
+                            <tr>
+                              <td>Customerio</td>
+                              <td class="user-extra-info" data-key="customerio"></td>
+                            </tr>
+                            <tr>
+                              <td>Google Analytics</td>
+                              <td class="user-extra-info" data-key="googleAnalytics"></td>
+                            </tr>
+                            <tr>
+                              <td>Last Tracked Country</td>
+                              <td class="user-extra-info" data-key="lastTrackedCountry">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Last Tracked Country Region</td>
+                              <td class="user-extra-info" data-key="lastTrackedCountryRegion"></td>
+                            </tr>
+                            <tr>
+                              <td>Psp Trusted Level</td>
+                              <td class="user-extra-info" data-key="pspTrustedLevel"></td>
+                            </tr>
+                            <!-- Agrega más filas aquí si es necesario -->
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Player Ad Args -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Player Ad Args</h4>
+                    <div class="QA_section">
+                      <div class="QA_table mb_30">
+                        <table class="table table-bordered">
+                          <tbody id="user-ad-args-table-body">
+                            <tr>
+                              <td>Ga</td>
+                              <td class="user-ad-arg" data-key="ga"></td>
+                            </tr>
+                            <tr>
+                              <td>UTM SOURCE</td>
+                              <td class="user-ad-arg" data-key="utmSource"></td>
+                            </tr>
+                            <tr>
+                              <td>UTM MEDIUM</td>
+                              <td class="user-ad-arg" data-key="utmMedium"></td>
+                            </tr>
+                            <tr>
+                              <td>UTM CAMPAIGN</td>
+                              <td class="user-ad-arg" data-key="utmCampaign"></td>
+                            </tr>
+                            <tr>
+                              <td>UTM CONTENT</td>
+                              <td class="user-ad-arg" data-key="utmContent"></td>
+                            </tr>
+                            <tr>
+                              <td>UTM TERM</td>
+                              <td class="user-ad-arg" data-key="utmTerm"></td>
+                            </tr>
+                            <tr>
+                              <td>S TAG AFFILIATE</td>
+                              <td class="user-ad-arg" data-key="stagAffiliate"></td>
+                            </tr>
+                            <tr>
+                              <td>S TAG VISIT</td>
+                              <td class="user-ad-arg" data-key="stagVisit"></td>
+                            </tr>
+                            <tr>
+                              <td>BTAG</td>
+                              <td class="user-ad-arg" data-key="btag"></td>
+                            </tr>
+                            <tr>
+                              <td>BTAG NET REFER</td>
+                              <td class="user-ad-arg" data-key="btagNetRefer"></td>
+                            </tr>
+                            <tr>
+                              <td>QTAG</td>
+                              <td class="user-ad-arg" data-key="qtag"></td>
+                            </tr>
+                            <tr>
+                              <td>Ref Code</td>
+                              <td class="user-ad-arg" data-key="refCode"></td>
+                            </tr>
+                            <!-- Agrega más filas aquí si es necesario -->
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Player Details -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Player Details</h4>
+                    <div class="QA_section">
+                      <div class="QA_table mb_30">
+                        <table class="table table-bordered">
+                          <tbody id="user-details-table-body">
+                            <tr>
+                              <td>Personal ID number</td>
+                              <td class="user-detail" data-key="personalIdNumber"></td>
+                            </tr>
+                            <tr>
+                              <td>First name</td>
+                              <td class="user-detail" data-key="firstName"></td>
+                            </tr>
+                            <tr>
+                              <td>Last Name</td>
+                              <td class="user-detail" data-key="lastName"></td>
+                            </tr>
+                            <tr>
+                              <td>Nickname</td>
+                              <td class="user-detail" data-key="nickname"></td>
+                            </tr>
+                            <tr>
+                              <td>Date of Birth</td>
+                              <td class="user-detail" data-key="dateOfBirth"></td>
+                            </tr>
+                            <tr>
+                              <td>Gender</td>
+                              <td class="user-detail" data-key="gender"></td>
+                            </tr>
+                            <tr>
+                              <td>Country</td>
+                              <td class="user-detail" data-key="country"></td>
+                            </tr>
+                            <tr>
+                              <td>City</td>
+                              <td class="user-detail" data-key="city"></td>
+                            </tr>
+                            <tr>
+                              <td>Address</td>
+                              <td class="user-detail" data-key="address"></td>
+                            </tr>
+                            <tr>
+                              <td>Postal code</td>
+                              <td class="user-detail" data-key="postalCode"></td>
+                            </tr>
+                            <tr>
+                              <td>Receive Email Promos</td>
+                              <td>
+                                <p class="bg-dark ps-3 pe-3 pt-2 pb-2 rounded mb-0" style="display: inline-block;"
+                                  id="emailPromos"></p>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Receive SMS Promos</td>
+                              <td>
+                                <p class="bg-dark ps-3 pe-3 pt-2 pb-2 rounded mb-0" style="display: inline-block;"
+                                  id="smsPromos"></p>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Security Question</td>
+                              <td class="user-detail" data-key="securityQuestion"></td>
+                            </tr>
+                            <tr>
+                              <td>Security Answer</td>
+                              <td class="user-detail" data-key="securityAnswer"></td>
+                            </tr>
+                            <tr>
+                              <td>State</td>
+                              <td class="user-detail" data-key="state"></td>
+                            </tr>
+                            <tr>
+                              <td>Mobile phone</td>
+                              <td class="user-detail" data-key="mobilePhone"></td>
+                            </tr>
+                            <!-- Agrega más filas aquí si es necesario -->
+                          </tbody>
+                        </table>
+                        <button href="#" class="btn btn-link mb-3">Edit</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Phones -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Phones</h4>
+                    <div class="QA_section">
+                      <div class="QA_list mb_30">
+                        <ul class="white_card_body typography" id="phone-list">
+                          <!-- La lista de teléfonos se generará aquí -->
+                        </ul>
+                        <a href="#" class="btn btn-link d-block mb-2" id="verify-phone">Verify
+                          Phone</a>
+                        <a href="#" class="btn btn-link d-block mb-2" id="edit-phone">Edit
+                          Phone</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Affiliate profiles -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Affiliate Profiles</h4>
+                    <div class="QA_section">
+                      <div class="QA_list mb_30">
+                        <ul class="white_card_body typography">
+                          <li style="white-space: nowrap;">
+                            <i class="fa fa-caret-right txt-secondary m-r-10"></i><a href="#"
+                              class="btn btn-link mb-2 ">Create Rev share
+                              profile</a>
+                          </li>
+                          <li style="white-space: nowrap;">
+                            <i class="fa fa-caret-right txt-secondary m-r-10"></i><a href="#"
+                              class="btn btn-link mb-2">Create CPA
+                              Profile</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Duplications V2 -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Duplications V2</h4>
+                    <p>Enter reason UUID to link user to persisted reason.</p>
+                    <input type="text" class="form-control" name="inputTextReason" id="inputTextReason" placeholder="">
+                    <button type="button" class="btn btn-dark mb-3" id="submitReasonBtn">Submit
+                      Reason</button>
+
+                    <p>Enter ID of duplicated user.</p>
+                    <input type="text" class="form-control" name="inputTextUserId" id="inputTextUserId" placeholder="">
+                    <button type="button" class="btn btn-dark mb-3" id="submitUserIdBtn">Submit User
+                      ID</button>
+                  </div>
+                </div>
+                <!-- Used payment accounts -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Used Payment Accounts</h4>
+                  </div>
+                </div>
+                <!-- Used Addresses -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Used Addresses</h4>
+                    <div class="QA_section">
+                      <div class="QA_table mb_30">
+                        <h5 class="mb-4">Coinspaid</h5>
+                        <table class="table table-bordered" style="margin-bottom: 0;">
+                          <tbody id="address-table-body">
+                            <!-- La lista de direcciones se generará aquí -->
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Manual Stag assignment -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Manual Stag Assignment</h4>
+                    <p>Affiliate URL</p>
+                    <input type="text" class="form-control" id="affiliateUrlInput" placeholder="Enter affiliate URL">
+                    <button type="button" class="btn btn-dark mb-3" id="assignStagButton">Assign Stag</button>
+                    <div id="assignResponse" class="mt-2"></div>
+                  </div>
+                </div>
+                <!-- Used IPs -->
+                <div class="white_card mb_30 shadow p-4">
+                  <div class="white_card_body">
+                    <h4 class="mb-4">Used IPs</h4>
+                    <div class="QA_section">
+                      <div class="QA_list mb_30">
+                        <ul class="white_card_body typography" id="ip-list">
+                          <!-- La lista de IPs se generará aquí -->
+                        </ul>
+                      </div>
+                    </div>
+                    <a href="#" class="btn btn-link mb-2">All Used IPs</a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div> <!-- End Row -->
+      </div>
+    </div>
+    <!-- footer part -->
+    <div class="footer_part">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="footer_iner text-center">
+              <p>
+                2020 © Influence - Designed by
+                <a href="#"> <i class="ti-heart"></i> </a><a href="#"> Dashboard</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- main content part end -->
+
+  <div id="alertContainer"></div>
+
+  <div id="back-top" style="display: none">
+    <a title="Go to Top" href="#">
+      <i class="ti-angle-up"></i>
+    </a>
+  </div>
+
+  <!-- modal suspiscion -->
+  <div id="suspicionModal" class="suspicion-modal">
+    <div class="suspicion-modal-content">
+      <span class="suspicion-modal-close">&times;</span>
+      <h2>Register suspicion</h2>
+      <textarea id="suspicionComment" class="suspicion-textarea" placeholder="Describe the suspicion..."></textarea>
+      <div class="suspicion-modal-actions">
+        <button id="cancelBtn" class="suspicion-modal-button suspicion-modal-cancel">
+          Cancel
+        </button>
+        <button id="confirmBtn" class="suspicion-modal-button suspicion-modal-confirm">
+          Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Issuance Policy -->
+  <div id="modalIssuancePolicy" class="modal" style="display: none">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modalIssuancePolicy')">&times;</span>
+      <h2>Issuance Policy</h2>
+      <label>
+        <input type="checkbox" id="autoIssuingBonuses" checked />
+        Auto issuing bonuses
+      </label>
+      <br />
+      <button id="updateIssuancePolicy" class="btn btn-primary">
+        Update
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal Issue Bonus -->
+  <div id="modalIssueBonus" class="modal" style="display: none">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modalIssueBonus')">&times;</span>
+      <h2>Issue Bonus</h2>
+      <label for="bonusSelect">BONUS:*</label>
+      <select id="bonusSelect">
+        <!-- Options go here -->
+      </select>
+      <br />
+      <label for="paymentSelect">PAYMENT:*</label>
+      <select id="paymentSelect">
+        <!-- Options go here -->
+      </select>
+      <br />
+      <label for="emailTemplate">EMAIL TEMPLATE:</label>
+      <input type="text" id="emailTemplate" />
+      <br />
+      <label for="comment">COMMENT:*</label>
+      <textarea id="comment" rows="5"></textarea>
+      <br />
+      <button id="issueBonus" class="btn btn-primary">New bonus issue</button>
+    </div>
+  </div>
+
+  <!-- Modal Issue Personal Bonus To Player -->
+  <div id="modalIssuePersonalBonus" class="modal" style="display: none">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modalIssuePersonalBonus')">&times;</span>
+      <h2>Issue Personal Bonus To Player</h2>
+      <label for="personalBonusSelect">BONUS:*</label>
+      <select id="personalBonusSelect">
+        <!-- Options go here -->
+      </select>
+      <br />
+      <label for="currencySelect">CURRENCY:*</label>
+      <select id="currencySelect">
+        <!-- Options go here -->
+      </select>
+      <br />
+      <label for="amount">AMOUNT:*</label>
+      <input type="text" id="amount" />
+      <br />
+      <label for="wagerMultiplier">WAGER MULTIPLIER:*</label>
+      <input type="text" id="wagerMultiplier" />
+      <br />
+      <label for="personalEmailTemplate">EMAIL TEMPLATE:</label>
+      <input type="text" id="personalEmailTemplate" />
+      <br />
+      <label for="validUntil">VALID UNTIL:*</label>
+      <input type="date" id="validUntil" />
+      <br />
+      <label for="activatableUntil">ACTIVATABLE UNTIL:</label>
+      <input type="date" id="activatableUntil" />
+      <br />
+      <label for="personalComment">COMMENT:*</label>
+      <textarea id="personalComment" rows="5"></textarea>
+      <br />
+      <button id="issuePersonalBonus" class="btn btn-primary">
+        New bonus issue
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal Issue DSL Bonus To Player -->
+  <div id="modalIssueDSLBonus" class="modal" style="display: none">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modalIssueDSLBonus')">&times;</span>
+      <h2>Issue DSL Bonus To Player</h2>
+      <label for="dslBonusGroupSelect">DSL BONUS GROUP:*</label>
+      <select id="dslBonusGroupSelect">
+        <!-- Options go here -->
+      </select>
+      <br />
+      <label for="accountSelect">ACCOUNT:*</label>
+      <select id="accountSelect">
+        <!-- Options go here -->
+      </select>
+      <br />
+      <label for="dslPaymentSelect">PAYMENT:*</label>
+      <select id="dslPaymentSelect">
+        <!-- Options go here -->
+      </select>
+      <br />
+      <label for="dslComment">COMMENT:*</label>
+      <textarea id="dslComment" rows="5"></textarea>
+      <br />
+      <label>Check Conditions?</label>
+      <br />
+      <input type="radio" id="ignoreConditions" name="checkConditions" value="ignore" checked />
+      IGNORE BONUS CONDITIONS
+      <br />
+      <input type="radio" id="checkConditions" name="checkConditions" value="check" />
+      CHECK BONUS CONDITIONS
+      <br />
+      <button id="issueDSLBonus" class="btn btn-primary">
+        New bonus issue
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal Issue DSL Cashout Cancel Bonus -->
+  <div id="modalIssueDSLCashoutCancelBonus" class="modal" style="display: none">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modalIssueDSLCashoutCancelBonus')">&times;</span>
+      <h2>Issue DSL Cashout Cancel Bonus To Player</h2>
+      <label for="dslBonusGroupSelectCancel">DSL BONUS GROUP:*</label>
+      <select id="dslBonusGroupSelectCancel">
+        <!-- Options go here -->
+      </select>
+      <br />
+      <label for="cashoutCancellationSelect">CASHOUT CANCELATION:*</label>
+      <select id="cashoutCancellationSelect">
+        <!-- Options go here -->
+      </select>
+      <br />
+      <label for="cashoutSelect">CASHOUT:*</label>
+      <select id="cashoutSelect">
+        <!-- Options go here -->
+      </select>
+      <br />
+      <label for="percentCanceledCashout">PERCENT OF CANCELED CASHOUT:*</label>
+      <input type="text" id="percentCanceledCashout" />
+      <br />
+      <label for="amountCanceledCashout">AMOUNT OF CANCELED CASHOUT:*</label>
+      <input type="text" id="amountCanceledCashout" />
+      <br />
+      <label for="dslCancelComment">COMMENT:*</label>
+      <textarea id="dslCancelComment" rows="5"></textarea>
+      <br />
+      <label>Check Conditions?</label>
+      <br />
+      <input type="radio" id="ignoreConditionsCancel" name="checkConditionsCancel" value="ignore" checked />
+      IGNORE BONUS CONDITIONS
+      <br />
+      <input type="radio" id="checkConditionsCancel" name="checkConditionsCancel" value="check" />
+      CHECK BONUS CONDITIONS
+      <br />
+      <button id="issueDSLCashoutCancelBonus" class="btn btn-primary">
+        New bonus issue
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div id="loadingOverlay" class="loading-overlay" style="display: none">
+    <div class="loader--roller green_loder mb_30">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+
+  <!-- footer  -->
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <!-- popper js -->
+  <script src="js/popper.min.js"></script>
+  <!-- bootstarp js -->
+  <script src="js/bootstrap.min.js"></script>
+  <!-- sidebar menu  -->
+  <script src="js/metisMenu.js"></script>
+  <!-- waypoints js -->
+  <script src="vendors/count_up/jquery.waypoints.min.js"></script>
+  <!-- waypoints js -->
+  <script src="vendors/chartlist/Chart.min.js"></script>
+  <!-- counterup js -->
+  <script src="vendors/count_up/jquery.counterup.min.js"></script>
+
+  <!-- nice select -->
+  <script src="vendors/niceselect/js/jquery.nice-select.min.js"></script>
+  <!-- owl carousel -->
+  <script src="vendors/owl_carousel/js/owl.carousel.min.js"></script>
+
+  <!-- responsive table -->
+  <script src="vendors/datatable/js/jquery.dataTables.min.js"></script>
+  <script src="vendors/datatable/js/dataTables.responsive.min.js"></script>
+  <script src="vendors/datatable/js/dataTables.buttons.min.js"></script>
+  <script src="vendors/datatable/js/buttons.flash.min.js"></script>
+  <script src="vendors/datatable/js/jszip.min.js"></script>
+  <script src="vendors/datatable/js/pdfmake.min.js"></script>
+  <script src="vendors/datatable/js/vfs_fonts.js"></script>
+  <script src="vendors/datatable/js/buttons.html5.min.js"></script>
+  <script src="vendors/datatable/js/buttons.print.min.js"></script>
+
+  <!-- datepicker  -->
+  <script src="vendors/datepicker/datepicker.js"></script>
+  <script src="vendors/datepicker/datepicker.en.js"></script>
+  <script src="vendors/datepicker/datepicker.custom.js"></script>
+
+  <script src="js/chart.min.js"></script>
+  <script src="vendors/chartjs/roundedBar.min.js"></script>
+
+  <!-- progressbar js -->
+  <script src="vendors/progressbar/jquery.barfiller.js"></script>
+  <!-- tag input -->
+  <script src="vendors/tagsinput/tagsinput.js"></script>
+  <!-- text editor js -->
+
+  <script src="js/player_details.js"></script>
+  <script src="js/custom.js"></script>
+</body>
+
+</html>

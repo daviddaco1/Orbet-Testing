@@ -1,0 +1,68 @@
+.affiliateProgramSection{margin-top:1rem;width:100%}
+.affiliateProgramBox{padding-top:20px;margin-bottom:15px;width:100%;height:calc(100vh - 222px);overflow:hidden}
+.depositBox{padding:0 40px;margin-top:2rem;display:flex;align-items:center;gap:30px;height:calc(100vh - 335px)}
+.depositBox .depositItem{padding:20px 0;width:100%;height:100%;max-height:440px;position:relative;transform:skewX(-10deg);cursor:pointer;overflow:hidden;display:flex;transition:.5s}
+.depositBox .depositItem::before{content:"";height:100%;position:absolute;background:linear-gradient(145deg,#168394 0%,#ffffff00 40%);width:100%;pointer-events:none}
+.depositBox .depositItem::after{content:'';width:100%;height:100%;position:absolute;border-radius:10px;box-shadow:inset 10px 10px 180px #00000052;top:2px;left:2px;pointer-events:none}
+.depositBox .depositItem:before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;border-radius:10px;background:#479db130;backdrop-filter:blur(52px);-webkit-backdrop-filter:blur(52px);z-index:-1}
+.depositBox .depositItem .depositItemDetails{transform:skewX(10deg);width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px}
+.depositBox .depositItem .depositItemDetails .depositTitleBox{display:flex;align-items:center;justify-content:center;color:var(--white-color);font-size:1rem;font-weight:300;position:relative;right:-1rem}
+.depositBox .depositItem .depositItemDetails figure{width:150px;position:relative;right:-1rem}
+.depositBox .depositItem .depositItemDetails .priceBox{font-family:var(--yapari-font);font-size:1.8rem;color:var(--primary-color);font-weight:600;text-transform:uppercase;position:relative;right:-1rem}
+.depositBox .depositItem .depositItemDetails .depositBorder{position:relative;right:1.1rem}
+.depositBox .depositItem .depositItemDetails p{margin-top:-10px;font-size:.8rem;line-height:20px;color:#b0b3b3;text-align:center;padding:0 1rem;position:relative;right:2rem}
+.depositBox .depositItem:hover{background:url(../images/shadow.png) no-repeat center center;background-size:contain;transition:.5s}
+.allCampaignsTableBox{margin:2rem 1px 0;overflow:hidden;border-radius:16px;box-shadow:-1px -1px 0 0 #1d3d41;background:#ffffff08;backdrop-filter:blur(90px);-webkit-backdrop-filter:blur(90px)}
+.allCampaignsTableBox .tableBox{max-height:calc(100vh - 360px)}
+.allCampaignsTableBox .tableBox table{margin-top:1rem}
+.allCampaignsTableBox .tableBox table tr th{border:0}
+.allCampaignsTableBox .tableBox table tr td{border:0}
+.allCampaignsTableBox .tableBox table tr td a{color:#A1A1A1}
+.allCampaignsTableBox .tableBox table tbody tr{position:relative}
+.allCampaignsTableBox .tableBox table tbody tr + tr:after{content:'';background:linear-gradient(275deg,#b4b9b900 0%,#b4b9b9 50%,#b4b9b900 100%);width:calc(100% - 40px);height:.8px;position:absolute;top:0;left:20px}
+.allCampaignsTableBox .tableBox table thead.sticky{background:linear-gradient(90deg,#132426 0%,#1d2e30 52%,#122e33 100%);z-index:1}
+.tableBox table tr th:nth-child(1){width:25%}
+.tableBox table tr th:nth-child(3){width:20%}
+.tableBox table tr td span{display:inline-flex}
+.tableBox table tr td span + span{margin-left:2rem}
+.couponClaimedSection{padding:0 18px;display:flex;gap:40px}
+.couponClaimedSection .Item{padding:30px 40px;display:flex;flex-direction:column;gap:15px;width:calc(50% - 20px);align-items:center;justify-content:center;position:relative}
+.couponClaimedSection .Item:after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;border-radius:5px 5px 0 0;box-shadow:0 -1px 0 1px #00e0ff14;transform:skewX(-15deg);background:linear-gradient(174deg,#1f1f1f30 0%,#1f1f1f00 100%)}
+.couponClaimedSection .Item span{color:var(--white-color);font-size:1rem;font-weight:300}
+.couponClaimedSection .Item strong{font-family:var(--yapari-font);color:var(--primary-color);font-size:2rem;font-weight:500}
+.couponClaimedTableBox{max-height:calc(100vh - 385px)}
+.couponClaimedTableBox table tr th{border:0}
+.couponClaimedTableBox table tr td{border:0}
+.couponClaimedTableBox table tr td em{margin-right:10px;color:var(--primary-color)}
+.couponClaimedTableBox table tr td .btn-claimLink{float:right}
+.couponClaimedTableBox table tbody tr{position:relative}
+.couponClaimedTableBox table tbody tr + tr:after{content:'';background:linear-gradient(275deg,#00e0ff00 0%,#00e0ff 50%,#00e0ff00 100%);width:calc(100% - 40px);height:.8px;position:absolute;top:0;left:20px}
+.referralsSectionBox{display:flex;align-items:center;justify-content:space-between}
+.referralsSection{padding:50px;width:60%;height:calc(100vh - 290px);position:relative;display:flex;flex-direction:column}
+.referralsSection:before,.referralsSection:after{content:'';position:absolute;inset:0;clip-path:polygon(25px 0px,calc(100% - 25px) 0px,100% 25px,100% calc(100% - 25px),calc(100% - 25px) 100%,25px 100%,0px calc(100% - 25px),0px 25px);z-index:-1;opacity:.4;backdrop-filter:blur(32.599998474121094px);background:#00e0ff4d;pointer-events:none}
+.referralsSection:after{background:#000;inset:1px;clip-path:polygon(25px 0px,calc(100% - 25px) 0px,100% 25px,100% calc(100% - 25px),calc(100% - 25px) 100%,25px 100%,0px calc(100% - 25px),0px 25px)}
+.referralsSection .leftLine{position:absolute;left:-2px;top:0;width:3px;height:100%;display:flex;align-items:center;justify-content:center}
+.referralsSection .rightLine{position:absolute;right:-2px;top:0;width:3px;height:100%;display:flex;align-items:center;justify-content:center}
+.referralsSection .pointerLine{position:absolute;right:-115px;top:2%;width:115px;height:100%;display:flex;align-items:center;justify-content:center}
+.referralsSection h2{font-family:var(--yapari-font);color:var(--primary-color);font-size:1.4rem;font-weight:400;white-space:nowrap}
+.referralsSection p{margin-top:1.2rem;font-size:.8rem;line-height:20px;color:var(--white-color)}
+.referralsSectionBox .rightBox{padding:15px;width:25%}
+.referralsSectionBox .rightBox img{width:100%}
+.checkBoxGroup{margin-top:35px;display:flex;gap:25px}
+.checkBoxGroup label{font-size:.8rem}
+.checkBoxGroup .checkBoxItem input[type=checkbox]{background:url(../images/checkbox.svg) no-repeat left top;border:0}
+.checkBoxGroup .checkBoxItem input[type=checkbox]:checked{background:url(../images/checkbox.svg) no-repeat left top;border:0}
+.checkBoxGroup .checkBoxItem input[type=checkbox]:before{border:solid #0b333a}
+.checkBoxGroup .checkBoxItem input[type=checkbox]:checked::before{border:solid #00E0FF;border-width:0 2px 2px 0}
+.referralsSection .formBox .form-group{margin:20px auto 0;max-width:300px}
+.referralsSection .formBox .form-group .form-control{text-align:center;color:#fff}
+
+
+
+
+
+
+
+
+
+

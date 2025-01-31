@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Orbet</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"
+        integrity="sha512-7IDZ+mHVoc7nSziUi72L5rGojJDtveVWHOjb+Eu8QSnguy5FitNnFyEoLoL3v1u18DNm4E30elDfkhZvVADw6Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+<body>
+    <!-- Video Background -->
+    <video class="bg-video" autoplay muted loop>
+        <source src="orbet_ship.mp4" type="video/mp4">
+        Tu navegador no soporta la reproducción de videos.
+    </video>
+
+    <img src="refe/Login.png" class="fullRefe d-none" alt="">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <img src="images/logo_orbet.png" class="w-100" alt="">
+        <div id="profileInfoSidebar">
+
+        </div>
+        <hr>
+        <a href="#" class="active"><img src="images/Icono_sideDummy.png" alt=""> Home</a>
+        <a href="#"><img src="images/Icono_sideDummy.png" alt=""> Favorites</a>
+        <a href="#"><img src="images/Icono_sideDummy.png" alt=""> Releases</a>
+        <a href="#"><img src="images/Icono_sideDummy.png" alt=""> Challenges</a>
+        <a href="#"><img src="images/Icono_sideDummy.png" alt=""> Promotions</a>
+        <hr>
+        <a href="#"><img src="images/Icono_sideDummy.png" alt=""> $100k Weekly Race</a>
+        <hr>
+    </div>
+
+    <!-- Top Information -->
+    <div class="top-info d-none">
+        <div class="wallet">$3,547.02</div>
+        <button class="btn btn-outline-light">Wallet</button>
+    </div>
+
+    <!-- Login Panel -->
+    <div class="login-panel">
+        <div class="login-card login-card-reg">
+            
+            <div class="row">
+                <div class="col-12 col-lg-7 d-none d-lg-block">
+                    <img src="images/astronauta.png" class="w-100 object-fit" alt="">
+                </div>
+                <div class="col-12 col-lg-5 p-5">
+                    <h3 class="text-center mb-4">Register in Orbet</h3>
+
+                    <form>
+                        <div class="form-group">
+                            <label for="InputEmail">Email <span>*</span></label>
+                            <input type="email" class="form-control" id="InputEmail" placeholder="Type your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="usernameInput">Username <span>*</span></label>
+                            <input type="email" class="form-control" id="usernameInput" placeholder="user123">
+                        </div>
+                        <div class="form-group">
+                            <label for="InputName">Name <span>*</span></label>
+                            <input type="email" class="form-control" id="InputName" placeholder="Jhon Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password <span>*</span></label>
+                            <input type="password" class="form-control" id="password" placeholder="************">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword2">Repeat your password <span>*</span></label>
+                            <input type="password" class="form-control" id="inputPassword2" placeholder="************">
+                        </div>
+
+                        <button type="button" class="btn btn-primary btn-block" id="registerBtn">Continue</button>
+                    </form>
+                    <div class="mt-3 text-center">
+                        <img src="images/separator.png" alt="">
+                        <div class="d-flex justify-content-center mt-2">
+                            <a href="../auth/facebook" class="btn  mx-1 btn-social-login"><img src="images/fb-icon.png" alt=""></a>
+                            <a href="../auth/google" class="btn  mx-1 btn-social-login"><img src="images/google-icon.png" alt=""></a>
+                            <a href="#" class="btn  mx-1 btn-social-login"><img src="images/discord-icon.png" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-center">
+                        <span>¿Have you an account? <a href="login.html" class="text-light">login!</a></span>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Font Awesome for Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="socket-mgr.js"></script>
+    <script src="regmgr.js"></script>
+</body>
+</html>

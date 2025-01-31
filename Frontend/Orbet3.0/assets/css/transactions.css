@@ -1,0 +1,10 @@
+.sectionHeading{display:flex;align-items:center;justify-content:space-between;position:relative}
+.transactionsSection{margin-top:3rem;width:100%}
+.transactionsBox{padding-top:20px;margin-bottom:15px;width:100%;height:calc(100vh - 300px);overflow:hidden;overflow-y:auto}
+.transactionsDataSection{display:none;flex-direction:column}
+.transactionsDataSection.active{display:flex}
+.tableBox{max-height:calc(100vh - 365px);}
+.tableBox table tr th:nth-child(1){width:35%}
+.tableBox table tr th:nth-child(3){width:20%}
+.tableBox table tr td span{display:inline-flex}
+.tableBox table tr td span + span{margin-left:2rem}

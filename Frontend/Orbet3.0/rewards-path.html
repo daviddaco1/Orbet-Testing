@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Rewards Path</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no" />
+<link rel="stylesheet" href="assets/fonts/fonts.css" type="text/css"/>
+<link rel="stylesheet" href="assets/fonts/icomoon.css" type="text/css"/>
+<link rel="stylesheet" href="assets/css/owl.carousel.min.css" type="text/css"/>
+<link rel="stylesheet" href="assets/css/global.css" type="text/css"/>
+<link rel="stylesheet" href="assets/css/rewards-path.css" type="text/css"/>
+</head>
+<body>
+<div class="layoutBox">
+  <div class="layoutBg"><img class="img-responsive" src="assets/images/support-bg.png" alt="support-bg"/></div>
+  <div class="loadPartial" data-page="include/sideBar.html"></div>
+  <div class="container">
+    <div class="loadPartial" data-page="include/header.html"></div>
+    <div class="rewardsSection">
+      <div class="pageHeadingCenter">
+        <h2>Rewards Path</h2>
+        <figure><img class="img-responsive" src="assets/images/top-shape-line.svg" alt="top-shape-line"/></figure>
+      </div>
+      <div class="rewardsBox">
+        <div class="rewardsItem">
+          <div class="rewardsItemDetails">
+            <figure><img class="img-responsive" src="assets/images/game-box1.png" alt="game-box"/></figure>
+            <div class="rewardsTitleBox">Today’s Reward</div>
+            <div class="priceBox">503,76</div>
+            <button class="btn btn-info"><span>Open Box</span></button>
+            <div class="bonusBorder"><img class="img-responsive" src="assets/images/bonus-border-line.svg" alt="bonus-border-line"/></div>
+            <p>This is lorem ipsum dolor et same et ipsum dolor et same et valahar morghulis</p>
+          </div>
+        </div>
+        <div class="rewardsDetailsSection">
+          <div class="rewardsInfoBox">
+            <div class="rewardsClaimedBox">
+              <ul>
+                <li><span>Pending</span><strong>None</strong></li>
+                <li><span>Total claimed</span><strong class="price">$158.906.09</strong></li>
+              </ul>
+            </div>
+            <div class="yourRewardPath"><strong>Your reward path</strong>
+              <p>This is lorem ipsum dolor et same et ipsum dolor et same et valahar morghulis. This is lorem ipsum dolor et same et ipsum dolor et same.</p>
+            </div>
+          </div>
+          <div class="rewardSliderBox">
+            <div class="owl-carousel owl-theme owlSlider" id="rewardsSlider">
+              <div class="item">
+                <div class="rewardItemBox">
+                  <figure><img class="img-responsive" src="assets/images/game-box1.png" alt="game-box"/></figure>
+                  <p>July 14</p>
+                  <h2>$503.76</h2>
+                </div>
+              </div>
+              <div class="item">
+                <div class="rewardItemBox">
+                  <figure><img class="img-responsive" src="assets/images/game-box1.png" alt="game-box"/></figure>
+                  <p>July 15</p>
+                  <h2>$655.76</h2>
+                </div>
+              </div>
+              <div class="item">
+                <div class="rewardItemBox">
+                  <figure><img class="img-responsive" src="assets/images/game-box2.png" alt="game-box"/></figure>
+                  <p>Today</p>
+                  <h2>$654.76</h2>
+                </div>
+              </div>
+              <div class="item">
+                <div class="rewardItemBox">
+                  <figure><img class="img-responsive" src="assets/images/game-box1.png" alt="game-box"/></figure>
+                  <p>July 17</p>
+                  <h2>$432.87</h2>
+                </div>
+              </div>
+              <div class="item">
+                <div class="rewardItemBox">
+                  <figure><img class="img-responsive" src="assets/images/game-box1.png" alt="game-box"/></figure>
+                  <p>July 14</p>
+                  <h2>$503.76</h2>
+                </div>
+              </div>
+              <div class="item">
+                <div class="rewardItemBox">
+                  <figure><img class="img-responsive" src="assets/images/game-box1.png" alt="game-box"/></figure>
+                  <p>July 15</p>
+                  <h2>$655.76</h2>
+                </div>
+              </div>
+              <div class="item">
+                <div class="rewardItemBox">
+                  <figure><img class="img-responsive" src="assets/images/game-box2.png" alt="game-box"/></figure>
+                  <p>Today</p>
+                  <h2>$654.76</h2>
+                </div>
+              </div>
+              <div class="item">
+                <div class="rewardItemBox">
+                  <figure><img class="img-responsive" src="assets/images/game-box1.png" alt="game-box"/></figure>
+                  <p>July 17</p>
+                  <h2>$432.87</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="loadPartial" data-page="include/footer.html"></div>
+  </div>
+</div>
+<div class="loadPartial" data-page="include/global-popup.html"></div>
+<script src="assets/js/jquery-3.7.1.min.js"></script> 
+<script src="assets/js/owl.carousel.min.js"></script> 
+<script src="assets/js/global-function.js"></script> 
+<script>
+$(document).ready(function(){
+	$('#rewardsSlider').owlCarousel({
+		margin:30,
+		loop:true,
+		items:4,
+		dots:false,
+		nav:true,
+        responsive:{
+        0:{items:1,},
+        767:{},
+        1023:{}
+		}
+	});
+});	
+	
+</script>
+</body>
+</html>

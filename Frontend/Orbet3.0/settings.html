@@ -1,0 +1,391 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Settings</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no" />
+<link rel="stylesheet" href="assets/fonts/fonts.css" type="text/css"/>
+<link rel="stylesheet" href="assets/fonts/icomoon.css" type="text/css"/>
+<link rel="stylesheet" href="assets/css/global.css" type="text/css"/>
+<link rel="stylesheet" href="assets/css/settings.css" type="text/css"/>
+</head>
+<body>
+<div class="layoutBox">
+  <div class="layoutBg"><img class="img-responsive" src="assets/images/support-bg.png" alt="support-bg"/></div>
+  <div class="loadPartial" data-page="include/sideBar.html"></div>
+  <div class="container">
+    <div class="loadPartial" data-page="include/header.html"></div>
+    <div class="settingsSection">
+      <div class="pageHeading">
+        <h2>Settings
+          <figure><img class="img-responsive" src="assets/images/top-line.svg" alt="top-line"/></figure>
+        </h2>
+      </div>
+      <div class="settingsBox tabContent">
+        <section class="userInformationSection" id="accountItem"> <strong>User information</strong>
+          <div class="accountsDetails">
+            <div class="accItem">
+              <figure><img class="img-responsive profilePic" src="assets/images/profile.jpeg" alt="profile"/>
+                <div class="tag"><img class="img-responsive" src="assets/images/profile-vip-tag.svg" alt="profile-vip-tag"/></div>
+              </figure>
+              <figcaption> <strong>Migryon Rumza</strong> <span>COMET RANK</span> </figcaption>
+              <em class="icon-edit"></em> </div>
+            <div class="accItem">
+              <ul>
+                <li><span>Join Date</span> <strong>6.19.2024</strong></li>
+                <li><span>Total Bets</span> <strong>0</strong></li>
+                <li><span>Total Wagered</span> <strong>$0.00</strong></li>
+              </ul>
+            </div>
+          </div>
+          <label>Email</label>
+          <div class="form-group">
+            <input class="form-control" type="text" placeholder="" value="michellotaiza@gmal.com">
+            <button class="btn btn-secondary popup" data-modal-trigger="verificationEmailPopup"><span>Verify</span></button>
+          </div>
+        </section>
+        <section class="accountVerificationSection" id="verifyItem">
+          <h2>Account Verification</h2>
+          <div class="accountVerificationBox">
+            <div class="leftBox">
+              <div class="itemBox withInputBox">
+                <div class="itemInfo">
+                  <input type="radio" name="Verification" value="Email Verification" id="Email Verification" />
+                  <label for="Email Verification">Email Verification
+                    <tag class="requestedTag">Requested</tag>
+                    <span>Verify your email to receive important communication</span></label>
+                </div>
+                <input class="form-control" type="text" placeholder="" value="michellotaiza@gmal.com">
+                <!-- <button class="btn btn-secondary">Verify Now</button>-->
+                <button class="btn btn-secondary popup" data-modal-trigger="emailVerifiedPopup">Verify Now</button>
+              </div>
+              <div class="itemBox">
+                <div class="itemInfo">
+                  <input type="radio" name="Verification" value="Level 1 KYC:Basic Information" id="Level 1 KYC:Basic Information" />
+                  <label for="Level 1 KYC:Basic Information">Level 1 KYC: Basic Information
+                    <tag class="requestedTag">Requested</tag>
+                    <span>Fill in your details  for us to get to know you better.</span></label>
+                </div>
+                <button class="btn btn-secondary popup" data-modal-trigger="twoStepVerificationPopup">Verify Now</button>
+              </div>
+              <div class="itemBox">
+                <div class="itemInfo">
+                  <input type="radio" name="Verification" value="Level 2 KYC: Identity Information" id="Level 2 KYC: Identity Information" />
+                  <label for="Level 2 KYC: Identity Information">Level 2 KYC: Identity Information
+                    <tag class="incompleteTag">Incomplete</tag>
+                    <span>Upload a copy of your ID</span></label>
+                </div>
+                <button class="btn btn-secondary popup" data-modal-trigger="twoStepVerificationPopup">Verify Now</button>
+              </div>
+            </div>
+            <div class="rightBox">
+              <figure><img class="img-responsive" src="assets/images/users.svg" alt="users"/></figure>
+              <strong>Need Help?</strong>
+              <p>Have questions or concerns regarding your shuffle account? Our experts are here to help!</p>
+              <button class="btn btn-secondary">Chat with us</button>
+            </div>
+          </div>
+        </section>
+        <section class="changePasswordSection" id="securityItem">
+          <h2>Change Password</h2>
+          <div class="changePasswordBox">
+            <div class="itemBox">
+              <h3>Change Password</h3>
+              <span>Last Charged</span>
+              <div class="changePasswordDiv popup" data-modal-trigger="changePasswordPopup"><strong><img class="img-responsive" src="assets/images/lock-icon.svg" alt="lock"/> Change Password</strong> </div>
+            </div>
+            <div class="itemBox">
+              <h3>Two-Factor Authentication</h3>
+              <span>Enhance your security by utilizing 2-factor verification using an authenticator app for all future logins,withdrawals, and tipping</span>
+              <div class="twoFactorAuthentication"><strong><img class="img-responsive" src="assets/images/disabled-icon.svg" alt="disabled"/> Disabled</strong>
+                <button class="popup btn btn-secondary" data-modal-trigger="twoFactorAuthenticationPopup">Verify Now</button>
+              </div>
+            </div>
+            <div class="itemBox">
+              <h3>Linked Accounts</h3>
+              <span>Last Charged</span>
+              <div class="linkAccounts"><strong><img class="img-responsive" src="assets/images/google.svg" alt="google"/>Google</strong>
+                <div class="linkAccountText"> <strong>Link Account</strong>
+                  <div class="radioToggle">
+                    <label class="switch" for="Google">
+                      <input type="checkbox" id="Google" hidden="">
+                      <span class="slider round"></span> </label>
+                  </div>
+                </div>
+              </div>
+              <div class="linkAccounts"><strong><img class="img-responsive" src="assets/images/line-icon.svg" alt="line"/>Line</strong>
+                <div class="linkAccountText"> <strong>Link Account</strong>
+                  <div class="radioToggle">
+                    <label class="switch" for="Line">
+                      <input type="checkbox" id="Line" hidden="">
+                      <span class="slider round"></span> </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="preferencesSection" id="preferencesItem">
+          <h2>Preferences</h2>
+          <div class="preferencesBox">
+            <div class="listItem currencyItem">
+              <div class="selectBox">
+                <select class="form-select selectDropdown" placeholder="Select Currency">
+                  <option value="USD" data-image="assets/images/dollar.svg">USD</option>
+                  <option value="USDT" data-image="assets/images/usdt-currency.svg">USDT</option>
+                  <option value="DOGE" data-image="assets/images/doge-currency.svg">DOGE</option>
+                  <option value="BITCOIN" data-image="assets/images/bitcoin-currency.svg">BITCOIN</option>
+                  <option value="LITECOIN" data-image="assets/images/litecoin-currency.svg">LITECOIN</option>
+                </select>
+              </div>
+              <div class="currencyInfoBox"> <strong>Currency</strong>
+                <p>Balances will be displayed in your selected currency</p>
+              </div>
+            </div>
+            <div class="listItem oddsPreferenceItem">
+              <div class="oddsPreferenceInfoBox"> <strong>Odds Preference</strong>
+                <p>Odds for sports betting will be displayed in this format</p>
+              </div>
+              <div class="selectBox">
+                <select class="form-select selectDropdown" placeholder="Select Numbers">
+                  <option value="Binary">Binary</option>
+                  <option value="Decimal">Decimal</option>
+                  <option value="Octal">Octal</option>
+                  <option value="Hexadecimal">Hexadecimal</option>
+                </select>
+              </div>
+            </div>
+            <div class="listItem toggleListItem">
+              <div class="radioToggle">
+                <label class="switch" for="PrivateMode">
+                  <input type="checkbox" id="PrivateMode" hidden="">
+                  <span class="slider round"></span> </label>
+              </div>
+              <div class="toggleInfoBox"> <strong>Private Mode</strong>
+                <p>Other users won’t be able to view your wins, losses and wagered statistics</p>
+              </div>
+            </div>
+            <div class="listItem toggleListItem">
+              <div class="radioToggle">
+                <label class="switch" for="EmailMarketing">
+                  <input type="checkbox" id="EmailMarketing" hidden="" checked>
+                  <span class="slider round"></span> </label>
+              </div>
+              <div class="toggleInfoBox"> <strong>Email marketing</strong>
+                <p>Receive notifications for offers and promotions. Critical information regarding your account will always be sent</p>
+              </div>
+            </div>
+            <div class="listItem toggleListItem">
+              <div class="radioToggle">
+                <label class="switch" for="StreamerMode">
+                  <input type="checkbox" id="StreamerMode" hidden="">
+                  <span class="slider round"></span> </label>
+              </div>
+              <div class="toggleInfoBox"> <strong>Streamer Mode</strong>
+                <p>Sensitive information will not be displayed</p>
+              </div>
+            </div>
+            <div class="listItem toggleListItem">
+              <div class="radioToggle">
+                <label class="switch" for="HideZeroBalances">
+                  <input type="checkbox" id="HideZeroBalances" hidden="">
+                  <span class="slider round"></span> </label>
+              </div>
+              <div class="toggleInfoBox"> <strong>Hide zero balances</strong>
+                <p>Wallets with zero balance are hidden from view</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="sessionsSection" id="sessionsItem">
+          <div class="sessionsBox">
+            <div class="radioToggle">
+              <label class="switch" for="DisplayLoggedOutSessions">
+                <input type="checkbox" id="DisplayLoggedOutSessions" hidden="">
+                <span class="slider round"></span> </label>
+            </div>
+            <strong>Display Logged Out Sessions</strong>
+            <button class="btn btn-secondary">Log out of all other sessions <em class="icon-logout-sessions"></em></button>
+          </div>
+          <div class="tableBox sessionsTableBox">
+            <table>
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Near</th>
+                  <th>IP Address</th>
+                  <th>Last Used</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span><em class="icon-windows"></em> Windows (Edge)</span></td>
+                  <td>EE.UU ,  Alaska</td>
+                  <td>181.208.80.119</td>
+                  <td>Online</td>
+                  <td>Current Session</td>
+                </tr>
+                <tr>
+                  <td><span><em class="icon-ipad"></em> Ipad</span></td>
+                  <td>EE.UU ,  Alaska</td>
+                  <td>181.208.80.119</td>
+                  <td>Online</td>
+                  <td>Current Session</td>
+                </tr>
+                <tr>
+                  <td><span><em class="icon-mobile"></em> Mobile</span></td>
+                  <td>EE.UU ,  Alaska</td>
+                  <td>181.208.80.119</td>
+                  <td>Online</td>
+                  <td>Current Session</td>
+                </tr>
+                <tr>
+                  <td><span><em class="icon-windows"></em> Windows (Edge)</span></td>
+                  <td>EE.UU ,  Alaska</td>
+                  <td>181.208.80.119</td>
+                  <td>Online</td>
+                  <td>Current Session</td>
+                </tr>
+                <tr>
+                  <td><span><em class="icon-ipad"></em> Ipad</span></td>
+                  <td>EE.UU ,  Alaska</td>
+                  <td>181.208.80.119</td>
+                  <td>Online</td>
+                  <td>Current Session</td>
+                </tr>
+                <tr>
+                  <td><span><em class="icon-mobile"></em> Mobile</span></td>
+                  <td>EE.UU ,  Alaska</td>
+                  <td>181.208.80.119</td>
+                  <td>Online</td>
+                  <td>Current Session</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section class="ignoredUsersSection" id="ignoredUsersItem">
+          <h2>Ignored Users</h2>
+          <p>You won’t see their messages in chat</p>
+          <div class="tableBox ignoredUsersTableBox">
+            <table>
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>-</td>
+                  <td>Nothing here</td>
+                </tr>
+                <tr>
+                  <td>-</td>
+                  <td>Nothing here</td>
+                </tr>
+                <tr>
+                  <td>-</td>
+                  <td>Nothing here</td>
+                </tr>
+                <tr>
+                  <td>-</td>
+                  <td>Nothing here</td>
+                </tr>
+                <tr>
+                  <td>-</td>
+                  <td>Nothing here</td>
+                </tr>
+                <tr>
+                  <td>-</td>
+                  <td>Nothing here</td>
+                </tr>
+                <tr>
+                  <td>-</td>
+                  <td>Nothing here</td>
+                </tr>
+                <tr>
+                  <td>-</td>
+                  <td>Nothing here</td>
+                </tr>
+                <tr>
+                  <td>-</td>
+                  <td>Nothing here</td>
+                </tr>
+                <tr>
+                  <td>-</td>
+                  <td>Nothing here</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="tab actionItems">
+      <ul>
+        <li data-tab="#accountItem"><span>Account</span></li>
+        <li data-tab="#verifyItem"><span>Verify</span></li>
+        <li data-tab="#securityItem"><span>Security</span></li>
+        <li data-tab="#preferencesItem"><span>Preferences</span></li>
+        <li data-tab="#sessionsItem"><span>Sessions</span></li>
+        <li data-tab="#ignoredUsersItem"><span>Ignored Users</span></li>
+      </ul>
+    </div>
+    <div class="loadPartial" data-page="include/footer.html"></div>
+  </div>
+  <div class="bottomLineBase">
+    <figure><img class="img-responsive" src="assets/images/left-bottom-corner.svg" alt="left-bottom-corner"/> <img class="img-responsive" src="assets/images/right-bottom-corner.svg" alt="right-bottom-corner"/></figure>
+  </div>
+</div>
+<div class="loadPartial" data-page="include/support-popup.html"></div>
+<div class="loadPartial" data-page="include/global-popup.html"></div>
+<script src="assets/js/jquery-3.7.1.min.js"></script> 
+<script src="assets/js/select-dropdown.js"></script> 
+<script src="assets/js/global-function.js"></script> 
+<script>
+	
+$(document).ready(function () {
+
+/*Password show and hide function*/
+    $(document).on('click', ".inputPassword", function () {
+        var passwordInput = $($(this).siblings("input"));
+        var icon = $(this);
+        if (passwordInput.attr("type") == "password") {
+            passwordInput.attr("type", "text");
+            icon.removeClass("icon-password").addClass("icon-password-view");
+        } else {
+            passwordInput.attr("type", "password");
+            icon.removeClass("icon-password-view").addClass("icon-password");
+        }
+    });
+/*Password show and hide function*/
+	
+	
+/* Two-Step Verification OTP function*/	
+  $(document).on('keyup', ".otpInputBox input", function(e) {
+    var parent = $($(this).parent());
+    if(e.keyCode === 8 || e.keyCode === 37) {
+				var prev = parent.find('input#' + $(this).data('previous'));
+
+				if(prev.length) {
+					$(prev).select();
+				}
+			} else if((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 65 && e.keyCode <= 90) || (e.keyCode >= 96 && e.keyCode <= 105) || e.keyCode === 39) {
+				var next = parent.find('input#' + $(this).data('next'));
+
+				if(next.length) {
+					$(next).select();
+				} else {
+					if(parent.data('autosubmit')) {
+						parent.submit();
+					}
+				}
+			}
+  })
+	
+})
+</script>
+</body>
+</html>

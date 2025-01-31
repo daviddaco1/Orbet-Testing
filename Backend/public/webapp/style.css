@@ -1,0 +1,192 @@
+@font-face {
+    font-family: "Yapari";
+    src: url("Fonts/Yapari/YapariTrial-Regular.ttf");
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+
+.bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+    filter: blur(5px);
+    transform: scale(2.1) translateX(-6vw) translateY(8vh);
+}
+
+.fullRefe {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100vw;
+    object-fit: cover;
+    z-index: -1;
+    transform: translateX(-50%);
+}
+
+.Yapari{
+    font-family: "Yapari";
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 1rem;
+    color: #fff;
+}
+
+.sidebar h3 {
+    margin-bottom: 1.5rem;
+}
+
+.sidebar a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 1.8rem;
+    padding-left: 7%;
+}
+
+.sidebar a img{
+    height: 1.5rem;
+}
+
+.sidebar .active{
+    color: #00E0FF;
+}
+
+.sidebar hr {
+    color: red;
+    background: rgb(0, 0, 0);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(249, 249, 249, 1) 48%, rgba(0, 0, 0, 0) 100%);
+    height: 1px;
+}
+
+.top-info {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin: 1rem;
+    color: #fff;
+    width: 450px;
+    text-align: center;
+    justify-content: center;
+    transform: translateX(-26%);
+}
+
+.top-info .wallet {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.login-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin-left: 250px;
+}
+
+.login-card {
+    padding: 6rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 650px;
+    color: #fff;
+    backdrop-filter: blur(50px);
+}
+
+.login-card input {
+    background: rgba(255, 255, 255, 0.1);
+    border: solid;
+    color: #fff;
+    border-color: #00E0FF;
+    border-width: 1px;
+}
+
+.login-card input:focus{
+    color: #ffffff;
+    outline: 0;
+    background-color: transparent;
+}
+
+.login-card-reg {
+    max-width: 66% !important;
+    padding: 0;
+}
+
+
+.login-card input::placeholder {
+    color: #bbb;
+}
+
+.login-card .btn-primary {
+    background-color: #00b4d8;
+    border: none;
+}
+
+.login-card .btn-primary:hover {
+    background-color: #0077b6;
+}
+
+div#profileInfoSidebar {
+    width: 100%;
+    height: 305px;
+}
+
+.btn-social-login{
+    border-radius: 41px !important;
+    aspect-ratio: 1;
+    padding-top: 3%;
+    background-color: #00000030;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        z-index: 5;
+        display: none;
+    }
+
+    .sideActive{
+        display: block;
+    }
+
+    .login-panel {
+        margin-left:0;
+    }
+    .login-card {
+        padding: 1.5rem;
+    }
+
+    .top-info {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 1rem;
+        color: #fff;
+        width: 93vw;
+        text-align: center;
+        justify-content: center;
+        transform: translateX(0);
+        display: none;
+    }
+
+    .login-card-reg{
+        max-width: 95% !important;
+    }
+}
